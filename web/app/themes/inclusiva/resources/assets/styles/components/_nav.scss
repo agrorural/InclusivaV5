@@ -1,0 +1,47 @@
+nav {
+  @extend .navbar;
+
+  ul {
+    @extend .navbar-nav;
+
+    li {
+      @extend .nav-item;
+
+      a {
+        @extend .nav-link;
+      }
+    }
+  }
+
+  &#primary_navigation {
+    .navbar-brand {
+      display: block;
+      width: 12rem;
+
+      @include media-breakpoint-up(sm) {
+        width: 15rem;
+        margin-right: 30px;
+      }
+    }
+
+    ul {
+      li {
+        a {
+          font-size: 85%;
+
+          &:not(.dropdown-item) {
+            @include font-family('ubuntu','medium');
+
+            text-transform: uppercase;
+          }
+        }
+
+        &.active {
+          a {
+            color: $primary;
+          }
+        }
+      }
+    }
+  }
+}

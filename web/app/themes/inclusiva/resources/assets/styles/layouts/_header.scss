@@ -1,0 +1,60 @@
+header {
+  &.super-header {
+    background-color: $primary;
+
+    nav {
+      @extend .navbar-dark;
+      @extend .navbar-expand;
+
+      flex-direction: column-reverse;
+      padding: 0;
+
+      @include media-breakpoint-up(sm) {
+        flex-direction: row;
+      }
+
+      ul {
+        font-size: 65%;
+
+        @include media-breakpoint-up(sm) {
+          font-size: 75%;
+        }
+
+        text-transform: uppercase;
+
+        &.right-links {
+          margin-top: 0.5rem;
+
+          @include media-breakpoint-up(sm) {
+            display: flex;
+            margin-left: auto;
+            margin-top: 0;
+          }
+        }
+
+        li {
+          &.pte {
+            a {
+              background-image: url(../images/pte__icon.png);
+              background-position: right center;
+              background-repeat: no-repeat;
+              width: 75px;
+              height: 34px;
+
+              span {
+                @extend .text-hide;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.branding {
+    background-color: $white;
+    margin: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}

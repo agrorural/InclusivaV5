@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'libre_franklinlight';
+  src:
+    url('../fonts/Libre_Franklin-Light.woff2') format('woff2'),
+    url('../fonts/Libre_Franklin-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntubold';
+  src:
+    url('../fonts/Ubuntu-Bold.woff2') format('woff2'),
+    url('../fonts/Ubuntu-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntumedium';
+  src:
+    url('../fonts/Ubuntu-Medium.woff2') format('woff2'),
+    url('../fonts/Ubuntu-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubunturegular';
+  src:
+    url('../fonts/Ubuntu-Regular.woff2') format('woff2'),
+    url('../fonts/Ubuntu-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntulight';
+  src:
+    url('../fonts/Ubuntu-Light.woff2') format('woff2'),
+    url('../fonts/Ubuntu-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-moz-selection {
+  background-color: $lime;
+  color: $gray-800;
+}
+
+::selection {
+  background-color: $lime;
+  color: $gray-800;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include font-family();
+
+  background-color: $gray-100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include font-family('ubuntu', 'light');
+}
+
+.btn:not(.btn-link) {
+  border-radius: 0;
+}
+
+a {
+  transition: color 1s ease;
+}

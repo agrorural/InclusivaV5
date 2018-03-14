@@ -1,0 +1,258 @@
+.home {
+  section {
+    .section-title {
+      position: relative;
+      padding-bottom: 0.5rem;
+      margin-bottom: 3rem;
+
+      &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 0;
+        width: 30px;
+        height: 2px;
+        background-color: transparent;
+      }
+    }
+
+    &#home__slider {
+      background-color: $gray-200;
+    }
+
+    &#who-we-are {
+      padding: 4rem 0 1.5rem;
+      background-color: $white;
+
+      @include media-breakpoint-up(md) {
+        padding: 7.5rem 0 3rem;
+      }
+
+      .section-title {
+        &::after {
+          background-color: $primary;
+        }
+      }
+
+      article {
+        display: flex;
+        justify-content: baseline;
+        align-items: baseline;
+        flex-direction: column;
+
+        @include media-breakpoint-up(md) {
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: row-reverse;
+        }
+
+        aside,
+        .section-content {
+          width: 100%;
+        }
+
+        aside {
+          display: none;
+
+          @include media-breakpoint-up(md) {
+            display: block;
+            width: 50%;
+          }
+
+          img {
+            @extend .img-fluid;
+          }
+        }
+
+        .section-content {
+          @include media-breakpoint-up(md) {
+            width: 40%;
+          }
+
+          nav {
+            @include font-size(12);
+
+            padding: 3rem 0 0;
+            text-transform: uppercase;
+            flex-wrap: nowrap;
+
+            a {
+              padding: 0.5rem 0;
+
+              &::before {
+                content: '';
+                margin: 0 auto 5px;
+                border-top: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-left: 4px solid transparent;
+                display: block;
+                width: 0;
+                height: 0;
+              }
+
+              &.active {
+                color: lighten($primary, 5%);
+                cursor: default;
+
+                &::before {
+                  border-top: 4px solid $black-100;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &#newsfeed {
+      background-color: $primary;
+      padding: 4rem 0 1.5rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 7.5rem 0 3rem;
+      }
+
+      .section-title {
+        color: $yellow-300;
+
+        &::after {
+          background-color: $yellow-300;
+        }
+      }
+
+      .news {
+        article {
+          border: 0 none;
+          border-radius: 0;
+          background-color: transparent;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 1.5rem;
+          align-items: flex-start;
+
+          .entry-img {
+            position: relative;
+            margin-right: 1.5rem;
+            border: 2px solid rgba($white, 0.25);
+
+            span {
+              position: absolute;
+              top: 1rem;
+              right: 1rem;
+
+              .fa-circle {
+                color: rgba($black-200, 0.5);
+              }
+
+              .fa-inverse {
+                color: rgba($white, 0.9);
+              }
+            }
+
+            img {
+              max-width: 15rem;
+            }
+          }
+
+          @include media-breakpoint-up(lg) {
+            flex-direction: column;
+
+            .entry-img {
+              margin-right: 0;
+              margin-bottom: 1.5rem;
+              align-items: baseline;
+
+              img {
+                max-width: 100%;
+              }
+            }
+          }
+
+          .entry-body {
+            padding: 0;
+
+            header {
+              .entry-category {
+                @include font-family('ubuntu','bold');
+                @include font-size(11);
+
+                text-transform: uppercase;
+                display: none;
+
+                a {
+                  color: $yellow-300;
+                }
+
+                @include media-breakpoint-up(sm) {
+                  display: block;
+                }
+              }
+
+              .entry-title {
+                @include font-family('ubuntu','regular');
+                @include font-size(16);
+
+                a {
+                  color: $white;
+                }
+              }
+            }
+
+            .entry-summary {
+              time {
+                @include font-size(11);
+
+                color: rgba($white, 0.75);
+              }
+            }
+          }
+        }
+      }
+
+      .events {
+        article {
+          background-color: $yellow-300;
+
+          .entry-body {
+            header {
+              background-color: darken($yellow-300, 3%);
+              text-align: center;
+              padding: 1.2rem 0;
+
+              .entry-date {
+                @include font-family('ubuntu', 'light');
+                @include font-size(60);
+              }
+            }
+
+            .entry-content {
+              padding: 1.5rem;
+
+              .entry-title {
+                @include font-family('ubuntu','regular');
+                @include font-size(16);
+
+                padding-bottom: 2rem;
+              }
+
+              time {
+                @include font-size(11);
+
+                color: rgba($black-200, 0.85);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &#services {
+      background-color: $yellow-300;
+      padding: 4rem 0 1.5rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 7.5rem 0 3rem;
+      }
+    }
+  }
+}

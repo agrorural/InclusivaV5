@@ -1,0 +1,19 @@
+@mixin text-render() {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+}
+
+@mixin font-family( $font: 'libre_franklin', $variation: 'light' ) {
+  font-family: $font + $variation, Arial, sans-serif;
+
+  @include text-render();
+}
+
+@mixin font-size($sizeValue: 16, $line: $sizeValue * 1.618) {
+  font-size: ($sizeValue * 1) + px;
+  font-size: ($sizeValue / 10) + rem;
+  line-height: ($line * 1) + px;
+  line-height: ($line / 10) + rem;
+}

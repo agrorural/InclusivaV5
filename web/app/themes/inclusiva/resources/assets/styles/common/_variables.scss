@@ -1,0 +1,54 @@
+//
+// Color system
+//
+// stylelint-disable
+//Blacks
+$black-100: #969696;
+$black-200: #555555;
+$black-300: #323232;
+//Grays
+$gray-200: #ebebeb;
+$gray-100: #fafafa;
+//Reds
+$red: #cd0500;
+//Oranges
+$orange-100: #f5d269;
+$orange-200: #f0b405;
+$orange-300: #E66905;
+// Greens
+$green-200: #055a02;
+$green-100: #3c960a;
+$green-light-200: #7daf28;
+$green-light-100: #A0D72D;
+$lime: #D7FF00;
+//Browns
+$brown-100: #c8b49b;
+$brown-200: #8c6437;
+$brown-300: #5f3714;
+$brown-400: #41230a;
+//Yellows
+$yellow-100: #faf5b9;
+$yellow-200: #f5e66e;
+$yellow-300: #f0e11e;
+//Blues
+$blue-100: #1491a0;
+$blue-200: #0f5f69;
+$blue-sky-100: #dcffff;
+$blue-sky-200: #afebeb;
+$blue-sky-300: #3ccdcd;
+//Lavenders
+$lavender-100: #825f87;
+$lavender-200: #370541;
+//Purples
+$purple-100: #b48caf;
+$purple-200: #690a55;
+//Defaults
+$primary: $green-100;
+$secondary: $yellow-300;
+$success: $green-100;
+$info: $blue-sky-300;
+$warning: $orange-300;
+$danger: $red;
+//Headings
+$font-size-base:              1.6rem;
+$line-height-base:            1.618;
