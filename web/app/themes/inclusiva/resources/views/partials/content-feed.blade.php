@@ -14,7 +14,7 @@
       <a href="{{ get_permalink() }}">
         @if ( $format )
         <span class="fa-layers fa-fw fa-lg">
-          <i class="fas fa-circle"></i>
+          <i class="fas fa-circle data-fa-transform="shrink-6""></i>
           @if ( $format == "gallery" )
             <i class="fa-inverse fas fa-camera fa-sm" data-fa-transform="shrink-6"></i>
           @elseif ( $format == "video" )

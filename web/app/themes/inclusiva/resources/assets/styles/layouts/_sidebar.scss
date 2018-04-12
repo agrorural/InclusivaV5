@@ -1,0 +1,33 @@
+.sidebar-primary {
+  .content {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    main {
+      @extend .col-sm-9;
+    }
+
+    aside {
+      @extend .col-sm-3;
+
+      position: sticky;
+    }
+  }
+}
+
+.widget {
+  h3 {
+    @include font-family('ubuntu', 'regular');
+    @include font-size(16);
+
+    position: relative;
+    text-transform: uppercase;
+    padding-bottom: 2rem;
+    margin-bottom: 2.2rem;
+  }
+
+  > p {
+    @include font-size(13);
+  }
+}

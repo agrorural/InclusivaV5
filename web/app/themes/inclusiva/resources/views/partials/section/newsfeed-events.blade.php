@@ -24,10 +24,12 @@
 
           <div class="entry-content">
             <h2 class="entry-title"><a href="{!! $post->guid !!}">{!! $post->post_title !!}</a></h2>
+          </div>
+
+          <div class="entry-summary">
             <time class="entry-date">{!! tribe_get_start_date( $post, false, $format = "g:i a" ) !!} @ {!! tribe_get_venue ( $post->ID ) !!}</time>
           </div>
         </div>
-        {{-- @php (var_dump($post)) --}}
       </article>
     @endforeach
   @else

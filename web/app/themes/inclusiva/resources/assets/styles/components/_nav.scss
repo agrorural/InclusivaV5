@@ -13,14 +13,91 @@ nav {
     }
   }
 
-  &#primary_navigation {
-    .navbar-brand {
-      display: block;
-      width: 12rem;
+  &#footer_navigation {
+    ul {
+      flex-direction: row;
 
-      @include media-breakpoint-up(sm) {
-        width: 15rem;
-        margin-right: 30px;
+      a {
+        display: block;
+        color: $white;
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+
+  &#social_navigation {
+    border-top: 1px solid rgba($white, 0.25);
+
+    ul {
+      @include font-size(16);
+
+      flex-direction: row;
+
+      a {
+        display: block;
+        padding: 0.5rem 1rem;
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &#primary_navigation {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include media-breakpoint-up(xl) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .branding__nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+        }
+
+        @include media-breakpoint-up(xl) {
+          margin-right: 3rem;
+        }
+
+        nav {
+          #minagri {
+            @include media-breakpoint-down(sm) {
+              display: none;
+            }
+
+            img {
+              height: 4.5rem;
+            }
+          }
+
+          #agro_rural {
+            img {
+              height: 5.5rem;
+            }
+          }
+        }
+      }
+
+      .navbar-collapse {
+        width: 100%;
+
+        @include media-breakpoint-up(xl) {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          width: auto;
+        }
       }
     }
 
@@ -33,12 +110,45 @@ nav {
             @include font-family('ubuntu','medium');
 
             text-transform: uppercase;
+            padding-left: 1rem;
+            padding-right: 1rem;
           }
         }
 
         &.active {
           a {
             color: $primary;
+          }
+        }
+      }
+
+      li.megamenu {
+        > .dropdown-menu {
+          min-width: 30rem;
+
+          &.show {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            @include media-breakpoint-down(sm) {
+              flex-wrap: wrap;
+            }
+          }
+
+          > .col-megamenu {
+            display: flex;
+            width: 30rem;
+            border-right: 1px solid $gray-200;
+
+            ul {
+              width: 100%;
+
+              li {
+                width: 100%;
+                display: block;
+              }
+            }
           }
         }
       }

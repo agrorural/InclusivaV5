@@ -13,6 +13,16 @@ use Roots\Sage\Template\BladeProvider;
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+
+    $ajax_params = array(
+      'ajax_url' => admin_url('admin-ajax.php'),
+      'ajax_nonce' => wp_create_nonce('my_nonce'),
+      'upload_dir' => wp_upload_dir(),
+      'is_pt'  => is_page_template(),
+      'term' => get_term( get_field('doc__tipo'), '', ARRAY_A),
+    );
+
+    wp_localize_script('sage/main.js', 'wp', $ajax_params);
 }, 100);
 
 /**
@@ -42,7 +52,11 @@ add_action('after_setup_theme', function () {
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
         'super_navigation_left' => __('Super Navigation Left', 'sage'),
-        'super_navigation_right' => __('Super Navigation Right', 'sage')
+        'super_navigation_right' => __('Super Navigation Right', 'sage'),
+        'social_navigation' => __('Social Navigation', 'sage'),
+        'forms_navigation' => __('Forms Navigation', 'sage'),
+        'footer_navigation' => __('Footer Navigation', 'sage'),
+        'docs_navigation' => __('Docs Navigation', 'sage'),
     ]);
 
     /**
@@ -52,6 +66,8 @@ add_action('after_setup_theme', function () {
     add_theme_support('post-thumbnails');
 
     add_image_size( 'feed-thumb', 190, 120, array( 'left', 'top' ) ); // (cropped)
+    add_image_size( 'featured-thumb', 1270, 530, array( 'left', 'top' ) ); // (cropped)
+    add_image_size( 'card-vertical-thumb', 560, 685, array( 'left', 'top' ) ); // (cropped)
 
     add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
 

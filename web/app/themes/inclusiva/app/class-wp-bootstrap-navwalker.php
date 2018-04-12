@@ -40,6 +40,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param int      $depth  Depth of menu item. Used for padding.
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
+    public $megamenuID;
+    public $counter;
+
+    public function __construct(){
+      $this->megamenuID = 0;
+      $this->counter = 0;
+    }
+
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 				$t = '';
@@ -50,7 +58,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$indent = str_repeat( $t, $depth );
 			// Default class to add to the file.
-			$classes = array( 'dropdown-menu' );
+			$classes = array( 'dropdown-menu dropdown-menu-right' );
 			/**
 			 * Filters the CSS class(es) applied to a menu list element.
 			 *
@@ -77,8 +85,21 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// build a string to use as aria-labelledby.
 				$labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
-			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
-		}
+
+      $output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
+
+      if ( $this->megamenuID != 0 ) {
+        $output .= "{$n}{$indent}<li class=\"col-megamenu\"><ul>{$n}";
+      }
+    }
+    
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
+      if ( $this->megamenuID != 0 ) {
+        $output .= "</ul></li>";
+      }
+
+      $output .= "</ul>";
+    }
 
 		/**
 		 * Starts the element output.
@@ -104,7 +125,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
-			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+      $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+
+      if ($this->megamenuID != 0 && $this->megamenuID != intval($item->menu_item_parent) && $depth == 0) {
+        $this->megamenuID = 0;
+      }
+
+      $column_divider = array_search('column-divider', $classes);
+
+      if ($column_divider !== false) {
+          $output .= "</ul></li><li class=\"col-megamenu\"><ul>\n";
+      }
+
 
 			// Initialize some holder variables to store specially handled item
 			// wrappers and icons.
@@ -117,7 +149,12 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * NOTE: linkmod and icon class arrays are passed by reference and
 			 * are maybe modified before being used later in this function.
 			 */
-			$classes = self::seporate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
+      $classes = self::seporate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
+      
+      // Check is if megamenuID
+      if ( array_search('megamenu', $classes) !== false ) {
+        $this->megamenuID = $item->ID;
+      }
 
 			// Join any icon classes plucked from $classes into a string.
 			$icon_class_string = join( ' ', $icon_classes );

@@ -4,6 +4,7 @@
   <body @php(body_class())>
     @php(do_action('get_header'))
     @include('partials.header')
+    @include('partials.jumbotron')
     <div class="wrap container" role="document">
       <div class="content">
         <main class="main">
@@ -11,7 +12,11 @@
         </main>
         @if (App\display_sidebar())
           <aside class="sidebar">
-            @include('partials.sidebar')
+            @if (is_page_template( 'views/template-documentos.blade.php' ))
+              @include('partials.sidebar.documentos')
+            @else
+              @include('partials.sidebar')
+            @endif
           </aside>
         @endif
       </div>

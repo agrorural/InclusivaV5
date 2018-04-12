@@ -9,6 +9,10 @@
   font-family: $font + $variation, Arial, sans-serif;
 
   @include text-render();
+
+  @if ($font == 'viga') {
+    text-transform: uppercase;
+  }
 }
 
 @mixin font-size($sizeValue: 16, $line: $sizeValue * 1.618) {
@@ -16,4 +20,127 @@
   font-size: ($sizeValue / 10) + rem;
   line-height: ($line * 1) + px;
   line-height: ($line / 10) + rem;
+}
+
+@mixin section-palette($color: $body-bg, $contrast-color: $gray, $isGradient: false) {
+  @if ($isGradient != false) {
+    @include bg-gradient($color 50%, rgba($contrast-color, 0.15) 50%, 45deg);
+  }
+
+  @else {
+    background-color: $color;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: color-yiq($color);
+  }
+
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: color-yiq($color);
+  }
+
+  :-ms-input-placeholder { /* IE 10+ */
+    color: color-yiq($color);
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+    color: color-yiq($color);
+  }
+
+  a:not(.btn-outline-primary):not([data-id]) {
+    color: $contrast-color;
+  }
+
+  p {
+    color: rgba(color-yiq($color), 0.75);
+  }
+
+  .section-title,
+  .entry-summary time,
+  .entry-summary p,
+  .entry-body p,
+  h1,
+  h2,
+  h3,
+  .lead,
+  input,
+  .custom-select {
+    color: color-yiq($color);
+  }
+
+  label {
+    color: $contrast-color;
+  }
+
+  .custom-select {
+    ~ label {
+      color: $contrast-color;
+    }
+  }
+
+  .section-title,
+  .widget h3 {
+    &::after {
+      background-color: $contrast-color;
+    }
+  }
+}
+
+@mixin bg-cover() {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin bg-gradient($from: $black-200, $to: false, $deg: 0deg, $image: false) {
+  background: $from;
+
+  @if ($image != false) {
+    background-image: url($image);
+
+    @if ($to != false) {
+      background-image: url($image), linear-gradient($deg, $from, $to);
+    }
+
+    @else {
+      background-image: url($image), linear-gradient($deg, mix($body-bg, $from, 15%), $from);
+    }
+  }
+
+  @else {
+    @if ($to != false) {
+      background: $from linear-gradient($deg, $from, $to);
+    }
+
+    @else {
+      background: $from linear-gradient($deg, mix($body-bg, $from, 30%), $from);
+    }
+  }
+
+  @include bg-cover();
+}
+
+@mixin bg($color: $black-200, $opacity: false) {
+  background-color: $color;
+
+  @if ($opacity != false) {
+    background-color: rgba($color, $opacity);
+  }
+}
+
+@mixin bg-overlay() {
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::after {
+    background: rgba(36, 55, 66, 0.7);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(36, 55, 66, 0.6) 70%);
+    z-index: 20;
+  }
 }

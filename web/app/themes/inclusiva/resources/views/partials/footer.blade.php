@@ -1,5 +1,7 @@
 <footer class="content-info">
-  <div class="container">
-    @php(dynamic_sidebar('sidebar-footer'))
-  </div>
+  @if(is_front_page())
+    @include('partials.section.footer-pre')
+  @endif
+  @include('partials.section.footer')
+  @include('partials.section.footer-post')
 </footer>

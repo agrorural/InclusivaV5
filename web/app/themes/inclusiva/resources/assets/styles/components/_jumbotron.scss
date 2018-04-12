@@ -1,0 +1,22 @@
+.jumbotron {
+  h1 {
+    @include font-family('viga', 'regular');
+
+    @extend .display-4;
+
+    margin-bottom: 2rem;
+  }
+
+  p {
+    @extend .lead;
+  }
+
+  .template-documentos &,
+  .single-documentos & {
+    @include section-palette($green-100, $yellow-200, true);
+  }
+
+  .direcciones-zonales & {
+    @include section-palette($blue-100, $lime, true);
+  }
+}

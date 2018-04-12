@@ -2,10 +2,13 @@
 // Color system
 //
 // stylelint-disable
+//Whites
+$white-25: rgba(#ffffff, 0.25);
 //Blacks
 $black-100: #969696;
 $black-200: #555555;
 $black-300: #323232;
+$black-25: rgba(#000000, 0.25);
 //Grays
 $gray-200: #ebebeb;
 $gray-100: #fafafa;
@@ -15,12 +18,16 @@ $red: #cd0500;
 $orange-100: #f5d269;
 $orange-200: #f0b405;
 $orange-300: #E66905;
+$orange-agro-rural: #c63;
 // Greens
 $green-200: #055a02;
+$green-agro-rural-200: #007739;
+$green-agro-rural-300: #005425;
 $green-100: #3c960a;
 $green-light-200: #7daf28;
 $green-light-100: #A0D72D;
 $lime: #D7FF00;
+$lime-agro-rural: #b7c72c;
 //Browns
 $brown-100: #c8b49b;
 $brown-200: #8c6437;
@@ -30,6 +37,7 @@ $brown-400: #41230a;
 $yellow-100: #faf5b9;
 $yellow-200: #f5e66e;
 $yellow-300: #f0e11e;
+$yellow-agro-rural: #fc0;
 //Blues
 $blue-100: #1491a0;
 $blue-200: #0f5f69;
@@ -46,9 +54,35 @@ $purple-200: #690a55;
 $primary: $green-100;
 $secondary: $yellow-300;
 $success: $green-100;
-$info: $blue-sky-300;
+$info: $blue-100;
 $warning: $orange-300;
 $danger: $red;
 //Headings
-$font-size-base:              1.6rem;
-$line-height-base:            1.618;
+$font-size-base: 1.6rem;
+$line-height-base: 1.618;
+// Forms
+$input-padding-y: 1.15rem;
+
+$input-bg: transparent;
+$input-border-color: transparent;
+$input-disabled-bg: transparent;
+$custom-select-bg: transparent;
+$custom-select-disabled-bg: transparent;
+$input-padding-x: 0;
+$input-padding-x-sm: 0;
+$input-padding-x-lg: 0;
+$input-focus-border-color: transparent;
+$input-box-shadow: 0 none;
+$input-border-width: 0;
+$input-border-radius: 0;
+$input-border-radius-lg: 0;
+$input-border-radius-sm: 0;
+$input-focus-bg: transparent;
+$input-focus-border-color: transparent;
+$input-focus-width: 0;
+$input-focus-box-shadow: 0 none;
+$custom-select-focus-border-color: transparent;
+$custom-select-focus-box-shadow: 0 none;
+$custom-select-padding-x: 0;
+$custom-select-padding-y: 1.15rem;
+$custom-select-height: 5rem;

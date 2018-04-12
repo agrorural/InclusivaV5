@@ -1,17 +1,33 @@
-  <!-- Swiper -->
+@php
+  $args  = array(
+    'post_type' => 'servicios', 
+    'condiciones' => 'serviagro',
+    'orderby' => 'title',
+	  'order'   => 'ASC',
+    'posts_per_page' => -1,
+  );
+  
+  $services_query = new WP_Query( $args );
+
+@endphp
+
+@if($services_query->have_posts())
   <div id="services__slider" class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
-      <div class="swiper-slide">Slide 10</div>
+      
+
+        @while ($services_query->have_posts()) @php($services_query->the_post())
+      
+          @include('partials.content-carousel')
+      
+        @endwhile
+
     </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
   </div>
+  {!! wp_reset_postdata() !!}
+
+@else
+
+  {{ __('Sorry, no results were found.', 'sage') }}
+
+@endif

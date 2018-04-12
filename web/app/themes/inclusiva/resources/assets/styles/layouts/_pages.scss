@@ -1,0 +1,387 @@
+.page {
+  &.direcciones-zonales {
+    #map {
+      @include section-palette($blue-200, $lime);
+
+      .map__image {
+        @include media-breakpoint-up(md) {
+          text-align: center;
+        }
+      }
+
+      #directions__vector {
+        height: 50rem;
+
+        @include media-breakpoint-up(md) {
+          max-height: 45rem;
+        }
+
+        &__exclude {
+          path {
+            fill: none;
+            stroke: $blue-100;
+            transition: all 1s ease-out;
+          }
+        }
+
+        &__lago {
+          path {
+            fill: $blue-100;
+            stroke: $blue-100;
+            transition: all 1s ease-out;
+          }
+        }
+
+        &__include {
+          [data-class] {
+            path {
+              fill: $blue-sky-300;
+              stroke: $blue-100;
+              transition: all 0.5s ease-out;
+            }
+
+            &:hover,
+            &.active {
+              path {
+                fill: $lime;
+              }
+            }
+          }
+        }
+      }
+
+      [data-id] {
+        @include font-size(12);
+
+        position: absolute;
+        text-transform: uppercase;
+        display: none;
+        color: rgba($white, 0.5);
+        padding-bottom: 1rem;
+        transition: all 0.05s;
+        overflow: hidden;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 0.2rem;
+          width: 3rem;
+        }
+
+        &::before {
+          background-color: rgba($white, 0.1);
+        }
+
+        &::after {
+          background-color: $lime;
+          transform: translateX(-100%);
+          transition: transform 0.2s;
+        }
+
+        &.active,
+        &:hover,
+        &:focus {
+          color: white;
+
+          &::after {
+            transform: translateX(0);
+          }
+        }
+
+        @include media-breakpoint-up(md) {
+          display: block;
+        }
+
+        @include media-breakpoint-only(md) {
+          &.direccion-zonal-amazonas {
+            top: 17%;
+            right: 30%;
+          }
+
+          &.direccion-zonal-ancash {
+            top: 50%;
+            left: 20%;
+          }
+
+          &.direccion-zonal-apurimac {
+            bottom: 24%;
+            right: 6%;
+          }
+
+          &.direccion-zonal-arequipa {
+            bottom: 8%;
+            left: 35%;
+          }
+
+          &.direccion-zonal-ayacucho {
+            bottom: 20%;
+            left: 25%;
+          }
+
+          &.direccion-zonal-cajamarca {
+            top: 25%;
+            right: 38%;
+          }
+
+          &.direccion-zonal-cusco {
+            bottom: 36%;
+            right: 10%;
+          }
+
+          &.direccion-zonal-huancavelica {
+            bottom: 28%;
+            left: 20%;
+          }
+
+          &.direccion-zonal-huanuco {
+            top: 40%;
+            right: 30%;
+          }
+
+          &.direccion-zonal-junin {
+            bottom: 40%;
+            right: 21%;
+          }
+
+          &.direccion-zonal-la-libertad {
+            top: 42%;
+            left: 13%;
+          }
+
+          &.direccion-zonal-lambayeque {
+            top: 34%;
+            left: 8%;
+          }
+
+          &.direccion-zonal-lima {
+            bottom: 36%;
+            left: 25%;
+          }
+
+          &.direccion-zonal-moquegua {
+            bottom: 5%;
+            right: 5%;
+          }
+
+          &.direccion-zonal-pasco {
+            bottom: 45%;
+            right: 35%;
+          }
+
+          &.direccion-zonal-piura {
+            top: 26%;
+            left: 12%;
+          }
+
+          &.direccion-zonal-puno {
+            bottom: 15%;
+            right: 12%;
+          }
+
+          &.direccion-zonal-tacna {
+            bottom: 0%;
+            left: 55%;
+          }
+
+          &.direccion-zonal-tumbes {
+            top: 18%;
+            left: 12%;
+          }
+        }
+
+        @include media-breakpoint-up(lg) {
+          &.direccion-zonal-amazonas {
+            top: 17%;
+            right: 30%;
+          }
+
+          &.direccion-zonal-ancash {
+            top: 50%;
+            left: 20%;
+          }
+
+          &.direccion-zonal-apurimac {
+            bottom: 24%;
+            right: 6%;
+          }
+
+          &.direccion-zonal-arequipa {
+            bottom: 8%;
+            left: 35%;
+          }
+
+          &.direccion-zonal-ayacucho {
+            bottom: 20%;
+            left: 25%;
+          }
+
+          &.direccion-zonal-cajamarca {
+            top: 25%;
+            right: 38%;
+          }
+
+          &.direccion-zonal-cusco {
+            bottom: 36%;
+            right: 10%;
+          }
+
+          &.direccion-zonal-huancavelica {
+            bottom: 28%;
+            left: 20%;
+          }
+
+          &.direccion-zonal-huanuco {
+            top: 40%;
+            right: 30%;
+          }
+
+          &.direccion-zonal-junin {
+            bottom: 40%;
+            right: 21%;
+          }
+
+          &.direccion-zonal-la-libertad {
+            top: 42%;
+            left: 13%;
+          }
+
+          &.direccion-zonal-lambayeque {
+            top: 34%;
+            left: 8%;
+          }
+
+          &.direccion-zonal-lima {
+            bottom: 36%;
+            left: 25%;
+          }
+
+          &.direccion-zonal-moquegua {
+            bottom: 5%;
+            right: 5%;
+          }
+
+          &.direccion-zonal-pasco {
+            bottom: 45%;
+            right: 35%;
+          }
+
+          &.direccion-zonal-piura {
+            top: 26%;
+            left: 12%;
+          }
+
+          &.direccion-zonal-puno {
+            bottom: 15%;
+            right: 12%;
+          }
+
+          &.direccion-zonal-tacna {
+            bottom: 0%;
+            left: 55%;
+          }
+
+          &.direccion-zonal-tumbes {
+            top: 18%;
+            left: 12%;
+          }
+        }
+      }
+
+      .widget {
+        p {
+          display: flex;
+          align-items: center;
+
+          span {
+            @include font-size(30, 30);
+
+            font-weight: bolder;
+            padding-right: 0.5rem;
+          }
+        }
+      }
+    }
+
+    #card_list {
+      @include section-palette($blue-200, $white);
+
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: "";
+        top: 12.5rem;
+        background: $blue-100;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .card {
+        margin-bottom: 3rem;
+        background-color: transparent;
+        overflow: hidden;
+        transition: all 0.3s;
+
+        &:hover {
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+
+          .card-img {
+            transform: scale(1.05);
+            transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+        }
+
+        a {
+          @include bg-overlay();
+
+          &:hover {
+            color: $lime;
+          }
+        }
+
+        .card-image {
+          transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .card-img-overlay {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          top: auto;
+          z-index: 30;
+          text-align: center;
+
+          picture {
+            display: block;
+
+            img {
+              width: 4.8rem;
+            }
+          }
+
+          h5 {
+            @include font-family('ubuntu', 'light');
+            @include font-size(16, 20);
+
+            margin-top: 1.5rem;
+          }
+
+          @include media-breakpoint-up(md) {
+            flex-direction: row;
+            text-align: left;
+
+            h5 {
+              margin-left: 1.5rem;
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

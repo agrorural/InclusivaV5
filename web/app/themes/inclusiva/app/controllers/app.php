@@ -31,6 +31,17 @@ class App extends Controller
         return get_the_title();
     }
 
+    public static function page_template_desc()
+    {
+      while( have_posts() ) : the_post();
+        $the_content = the_content();
+      endwhile; 
+      
+      wp_reset_query();
+
+      return $the_content;
+    }
+
     public static function Banner()
     {
         $data = array(
@@ -41,7 +52,7 @@ class App extends Controller
                 'url' => get_field('banner__url'),
                 'date' => get_field('banner__vig'),
                 'button_title' => get_field('banner__btn_title'),
-                'text' => get_field('banner__txt'),
+                'is_text' => get_field('banner__txt'),
             ]
         );
 

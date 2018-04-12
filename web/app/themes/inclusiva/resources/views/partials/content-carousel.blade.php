@@ -1,9 +1,19 @@
-<div class="swiper-slide">
-    <img src="{{ the_post_thumbnail_url( 'full' ) }}" class="entity-img" />
-    <div class="content">
-      <h3 class="title" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">{{ get_the_title() }}</h3>
-      <span class="caption" data-swiper-parallax="-20%">
-        @php(the_content())
-      </span>
+<article class="swiper-slide card">
+  
+  @if ( has_post_thumbnail() )
+    <img src="{{ the_post_thumbnail_url( 'full' ) }}" class="card-img-top" />
+  @endif
+
+  <div class="card-body entry-body">
+    <header>
+      <h2 class="card-title entry-title">
+        <a href="{{ get_permalink() }}">
+          {{ get_the_title() }}
+        </a>
+      </h2>
+    </header>
+    <div class="entry-summary">
+      @php(the_excerpt())
     </div>
   </div>
+</article>

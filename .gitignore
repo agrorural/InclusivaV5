@@ -15,3 +15,12 @@ web/.htaccess
 # Composer
 vendor/*
 !vendor/.gitkeep
+
+# macOS
+.DS_Store
+web/.DS_Store
+web/app/.DS_Store
+web/app/themes/.DS_Store
+web/app/themes/inclusiva/.DS_Store
+web/app/themes/inclusiva/resources/.DS_Store
+web/app/themes/inclusiva/resources/assets/.DS_Store

@@ -8,6 +8,15 @@
 }
 
 @font-face {
+  font-family: 'vigaregular';
+  src:
+    url('../fonts/Viga-Regular.woff2') format('woff2'),
+    url('../fonts/Viga-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'ubuntubold';
   src:
     url('../fonts/Ubuntu-Bold.woff2') format('woff2'),
@@ -59,8 +68,6 @@ html {
 
 body {
   @include font-family();
-
-  background-color: $gray-100;
 }
 
 h1,
@@ -72,10 +79,155 @@ h6 {
   @include font-family('ubuntu', 'light');
 }
 
-.btn:not(.btn-link) {
-  border-radius: 0;
+a {
+  transition: color 0.3s ease-in;
+  text-decoration: none;
+
+  svg & {
+    cursor: pointer;
+  }
+
+  &.active,
+  article &,
+  address & {
+    display: inline-block;
+    color: inherit;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1px;
+      background: inherit;
+      transition: width 0.3s;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    article &,
+    address & {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &.active {
+    &::after {
+      width: 100%;
+    }
+  }
 }
 
-a {
-  transition: color 1s ease;
+#agro_rural__logo {
+  path,
+  polygon {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    fill: transparent;
+  }
+
+  &.dark {
+    path,
+    polygon {
+      fill: rgba($black, 0.85);
+
+      &.empty {
+        fill: $white;
+      }
+    }
+  }
+
+  &.light {
+    path,
+    polygon {
+      fill: rgba($white, 0.75);
+
+      &.empty {
+        fill: transparent;
+      }
+    }
+  }
+
+  &.color {
+    #leafs {
+      path {
+        &.leaf-1 {
+          fill: $green-agro-rural-200;
+        }
+
+        &.leaf-2 {
+          fill: $lime-agro-rural;
+        }
+
+        &.leaf-3 {
+          fill: $orange-agro-rural;
+        }
+
+        &.leaf-4 {
+          fill: $yellow-agro-rural;
+        }
+      }
+    }
+
+    #base,
+    #letters {
+      path {
+        fill: $green-agro-rural-300;
+      }
+    }
+  }
+}
+
+//Container boxed
+.container-boxed {
+  @extend .container;
+
+  max-width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    max-width: 124rem;
+  }
+}
+
+//section
+.section {
+  padding: 4rem 0 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 7.5rem 0 3rem;
+  }
+
+  .section-title,
+  .widget h3 {
+    &::after {
+      position: absolute;
+      content: "";
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 2px;
+      background-color: transparent;
+    }
+  }
+}
+
+//Forms
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea,
+.custom-select {
+  border-bottom: 1px solid $gray-200;
 }
