@@ -63,6 +63,7 @@ export default {
         },
       },
     };
+  
   let homeSlider = new Swiper(homeSliderSelector, homeSliderOptions);
 
   // Initialize homeSlider

@@ -10,9 +10,14 @@
  * @see https://github.com/webpack-contrib/sass-loader#imports
  */
 @import "~swiper/dist/css/swiper";
+@import "~simplebar/dist/simplebar";
 
 /** Import theme styles */
 @import "common/mixins";
+
+@include theme('theme-green', $green-100, $green-light-200, $orange-200);
+@include theme('theme-blue', $blue-200, $blue-sky-300, $lime);
+
 @import "common/global";
 @import "components/buttons";
 @import "components/comments";
@@ -22,6 +27,10 @@
 @import "components/swiper";
 @import "components/jumbotron";
 @import "components/floating_labels";
+@import "components/blog";
+@import "components/share";
+@import "components/wp-pagenavi";
+@import "components/simplebar";
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";

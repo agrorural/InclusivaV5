@@ -1,0 +1,32 @@
+// WP-Pagenavi
+.wp-pagenavi-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  nav {
+    @extend .justify-content-center;
+
+    span {
+      @extend .nav-link;
+
+      padding: 1rem 1.5rem;
+
+      &.current {
+        margin-top: -1px;
+      }
+
+      &.pages {
+        display: none;
+      }
+    }
+
+    .page,
+    .extend,
+    .last {
+      @extend .d-none;
+      @extend .d-md-block;
+      @extend .d-lg-block;
+      @extend .d-xl-block;
+    }
+  }
+}

@@ -8,6 +8,8 @@ import "./autoload/**/*"
 import Router from './util/Router';
 import common from './routes/common';
 import home from './routes/home';
+import blog from './routes/blog';
+import category from './routes/category';
 import aboutUs from './routes/about';
 import templateDocumentos from './routes/templateDocumentos';
 import templateDirectorios from './routes/templateDirectorios';
@@ -19,6 +21,10 @@ const routes = new Router({
   common,
   // Home page
   home,
+  // Blog page
+  blog,
+  // Category page
+  category,
   // About Us page, note the change from about-us to aboutUs.
   aboutUs,
   // Page Template Documentos

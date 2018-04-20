@@ -13,13 +13,18 @@ use Roots\Sage\Template\BladeProvider;
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
-
+    $dir_grupos = get_terms( array(
+      'taxonomy' => 'grupos',
+      'hide_empty' => true,
+    ) );
+    $dir_grupos_ids = wp_list_pluck( $dir_grupos, 'term_id' );
     $ajax_params = array(
       'ajax_url' => admin_url('admin-ajax.php'),
       'ajax_nonce' => wp_create_nonce('my_nonce'),
       'upload_dir' => wp_upload_dir(),
       'is_pt'  => is_page_template(),
       'term' => get_term( get_field('doc__tipo'), '', ARRAY_A),
+      'dir_grupos_id' => $dir_grupos_ids
     );
 
     wp_localize_script('sage/main.js', 'wp', $ajax_params);
@@ -57,6 +62,7 @@ add_action('after_setup_theme', function () {
         'forms_navigation' => __('Forms Navigation', 'sage'),
         'footer_navigation' => __('Footer Navigation', 'sage'),
         'docs_navigation' => __('Docs Navigation', 'sage'),
+        'categories_navigation' => __('Categories Navigation', 'sage'),
     ]);
 
     /**
@@ -67,6 +73,7 @@ add_action('after_setup_theme', function () {
 
     add_image_size( 'feed-thumb', 190, 120, array( 'left', 'top' ) ); // (cropped)
     add_image_size( 'featured-thumb', 1270, 530, array( 'left', 'top' ) ); // (cropped)
+    add_image_size( 'content-thumb', 720, 420, array( 'left', 'top' ) ); // (cropped)
     add_image_size( 'card-vertical-thumb', 560, 685, array( 'left', 'top' ) ); // (cropped)
 
     add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
@@ -132,6 +139,11 @@ add_action('after_setup_theme', function () {
     sage()->singleton('sage.assets', function () {
         return new JsonManifest(config('assets.manifest'), config('assets.uri'));
     });
+
+    /**
+     * Make theme available for translation
+     */
+    load_theme_textdomain('sage', get_stylesheet_directory() . '/lang');
 
     /**
      * Add Blade to Sage container

@@ -15,7 +15,7 @@
   }
 }
 
-@mixin font-size($sizeValue: 16, $line: $sizeValue * 1.618) {
+@mixin font-size($sizeValue: 16, $line: $sizeValue * $line-height-base) {
   font-size: ($sizeValue * 1) + px;
   font-size: ($sizeValue / 10) + rem;
   line-height: ($line * 1) + px;
@@ -89,34 +89,6 @@
 @mixin bg-cover() {
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-@mixin bg-gradient($from: $black-200, $to: false, $deg: 0deg, $image: false) {
-  background: $from;
-
-  @if ($image != false) {
-    background-image: url($image);
-
-    @if ($to != false) {
-      background-image: url($image), linear-gradient($deg, $from, $to);
-    }
-
-    @else {
-      background-image: url($image), linear-gradient($deg, mix($body-bg, $from, 15%), $from);
-    }
-  }
-
-  @else {
-    @if ($to != false) {
-      background: $from linear-gradient($deg, $from, $to);
-    }
-
-    @else {
-      background: $from linear-gradient($deg, mix($body-bg, $from, 30%), $from);
-    }
-  }
-
-  @include bg-cover();
 }
 
 @mixin bg($color: $black-200, $opacity: false) {

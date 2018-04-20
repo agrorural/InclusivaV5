@@ -18,6 +18,16 @@ add_filter('body_class', function (array $classes) {
         $classes[] = 'sidebar-primary';
     }
 
+    /** Add class if is blog page */
+    if (is_home()) {
+      $classes[] = 'theme-green';
+    }
+
+    /** Add class if is category */
+    if (is_category()) {
+      $classes[] = 'theme-blue';
+    }
+
     /** Clean up class names for custom templates */
     $classes = array_map(function ($class) {
         return preg_replace(['/-blade(-php)?$/', '/^page-template-views/'], '', $class);
@@ -27,10 +37,19 @@ add_filter('body_class', function (array $classes) {
 });
 
 /**
+ * Add custom excerpt length
+ */
+function inclusiva_custom_excerpt_length( $length ) {
+  return 15;
+}
+
+add_filter( 'excerpt_length', __NAMESPACE__.'\\inclusiva_custom_excerpt_length', 999 );
+
+/**
  * Add "… Continued" to the excerpt
  */
 add_filter('excerpt_more', function () {
-    return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
+    return ' &hellip; ';
 });
 
 /**

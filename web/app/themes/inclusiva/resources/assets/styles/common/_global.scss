@@ -79,45 +79,59 @@ h6 {
   @include font-family('ubuntu', 'light');
 }
 
+// Time
+time,
+.entry-category {
+  @include font-size(10);
+
+  color: rgba($black-200, 0.75);
+}
+
+.entry-category {
+  text-transform: uppercase;
+  margin: 0;
+}
+
+// Sharing
+.entry-type {
+  @extend .nav;
+  @extend .justify-content-end;
+  @extend .nav-pills;
+  @extend .nav-justified;
+}
+
+// Pagination
+.pagination {
+  @include font-size(12);
+
+  padding: 0 0 1rem;
+}
+
 a {
   transition: color 0.3s ease-in;
-  text-decoration: none;
 
   svg & {
     cursor: pointer;
   }
 
-  &.active,
-  article &,
-  address & {
-    display: inline-block;
-    color: inherit;
+  .pagination & {
+    @extend .nav-link;
 
-    &::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 1px;
-      background: inherit;
-      transition: width 0.3s;
-    }
+    padding: 1rem 1.5rem;
+  }
+
+  .entry-type & {
+    color: rgba(#fff, 0.5);
   }
 
   &:hover {
-    text-decoration: none;
-
-    article &,
-    address & {
-      &::after {
-        width: 100%;
-      }
+    .wp-pagenavi & {
+      margin-top: -1px;
     }
   }
 
-  &.active {
-    &::after {
-      width: 100%;
-    }
+  .entry-category:not(:hover) & {
+    color: hsla(0, 0%, 30%, 1);
   }
 }
 
@@ -230,4 +244,26 @@ input[type=search]:not(.browser-default),
 textarea.materialize-textarea,
 .custom-select {
   border-bottom: 1px solid $gray-200;
+}
+
+// Hentry
+.entry-img {
+  position: relative;
+  height: 100%;
+
+  .entry-type {
+    position: absolute;
+    top: 1.5rem;
+    right: 1rem;
+  }
+}
+
+.entry-summary {
+  @extend .d-none;
+  @extend .d-sm-block;
+}
+
+// Figures
+figure {
+  margin: 0;
 }

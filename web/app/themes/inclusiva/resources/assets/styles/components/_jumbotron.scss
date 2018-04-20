@@ -4,11 +4,20 @@
 
     @extend .display-4;
 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   p {
     @extend .lead;
+
+    margin-bottom: 3rem;
+  }
+
+  nav,
+  div ul {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    flex-direction: row;
   }
 
   .template-documentos &,
@@ -18,5 +27,10 @@
 
   .direcciones-zonales & {
     @include section-palette($blue-100, $lime, true);
+  }
+
+  .blog &,
+  .category & {
+    padding-bottom: 0;
   }
 }

@@ -83,6 +83,7 @@ export default {
                   objectToSend.vMensaje += '</div>';
                   objectToSend.vMensaje += '</div>';
                   objectToSend.vMensaje += '</article>';
+                  
                   ajaxDocsSearch.find(".wp-pagenavi").addClass('hidden');
                   ajaxDocsSearch.find(".search-result").append(objectToSend.vMensaje);
               } else {

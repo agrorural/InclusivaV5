@@ -1,0 +1,42 @@
+.entry-share {
+  @extend .nav;
+  @extend .nav-justified;
+  @extend .d-lg-none;
+
+  @include font-size(12);
+
+  padding: 0 0 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 45%;
+
+  a {
+    @extend .nav-link;
+    @extend .nav-item;
+
+    color: $white;
+
+    &:hover {
+      &.fb {
+        background-color: $blue-fb;
+      }
+
+      &.tw {
+        background-color: $blue-tw;
+      }
+
+      &.li {
+        background-color: $blue-li;
+      }
+
+      &.wa {
+        background-color: $green-wa;
+      }
+    }
+  }
+
+  article:hover & {
+    @extend .d-flex;
+  }
+}

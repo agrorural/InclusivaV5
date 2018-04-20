@@ -23,6 +23,10 @@ function posts_for_current_contributor() {
   }
 }
 
+/**
+ * Agrega API de Google Maps en ACF
+ */
+
 function my_acf_google_map_api( $api ){
 	
 	$api['key'] = 'AIzaSyDdSKjFYyQMK1yLHdvbblCjR_RHY5A6yUs';
@@ -32,6 +36,20 @@ function my_acf_google_map_api( $api ){
 }
 
 add_filter('acf/fields/google_map/api', __NAMESPACE__ . '\\my_acf_google_map_api');
+
+/**
+ * Cambia el output de WP-Pagenavi
+ */ 
+function wppn_custom_output($html) {
+	$out = '';
+ 
+	$out = str_replace("<div class='wp-pagenavi'>","<nav class='pagination wp-pagenavi'>", $html);
+	$out = str_replace("</div>","</nav>", $out);
+ 
+	return '<div class="wp-pagenavi-container pagination-container">'.$out.'</div>';
+}
+
+add_filter( 'wp_pagenavi', __NAMESPACE__ . '\\wppn_custom_output', 10, 2 );
 
 /**
  * Mostrar sidebar
@@ -141,7 +159,7 @@ function ajax_docs_search_callback(){
                 "permalink"       => get_permalink(),
                 "content"         => get_the_content(),
                 "date"            => get_the_date(),
-                "dir_responsable"        => get_field('rde_link'),
+                "doc_link"        => get_field('rde_link'),
                 "doc_ane__nom"    => get_field('doc_ane__nom'),
                 "doc_ane__desc"   => get_field('doc_ane__desc'),
                 "html"            => ''
@@ -176,67 +194,62 @@ function ajax_dir_search_callback(){
     class objectToSend
     {
         var $action;
-        var $postType;
-        var $postTax;
         var $postTerm;
         var $txtKeyword;
-        var $optPerPage;
-        var $max_num_pages; 
         var $response;
         var $bError;
         var $vMensaje;
-        var $paged;
 
-        function __construct($action, $postType, $postTax, $postTerm, $txtKeyword, $optPerPage, $max_num_pages, $response, $bError, $vMensaje, $paged) {
+        function __construct($action, $postTerm, $txtKeyword, $response, $bError, $vMensaje) {
            $this->action = $action; 
-           $this->postType = $postType; 
-           $this->postTax = $postTax; 
            $this->postTerm = $postTerm; 
            $this->txtKeyword = $txtKeyword; 
-           $this->optPerPage = $optPerPage; 
-           $this->max_num_pages = $max_num_pages; 
            $this->response = $response; 
            $this->bError = $bError; 
            $this->vMensaje = $vMensaje; 
-           $this->paged = $paged; 
           }
     }
 
     $objectToSend = new objectToSend(
       'ajax_dir_search',
-      isset($_GET['postType'])?sanitize_text_field( $_GET['postType'] ) :'',
-      isset($_GET['postTax'])?sanitize_text_field( $_GET['postTax'] ) :'',
       isset($_GET['postTerm'])?sanitize_text_field( $_GET['postTerm'] ) :'', 
       isset($_GET['txtKeyword'])?sanitize_text_field( $_GET['txtKeyword'] ):'', 
-      isset($_GET['optPerPage'])?intval( sanitize_text_field( $_GET['optPerPage'] ) ):10, 
-      isset($_GET['max_num_pages'])?intval( sanitize_text_field( $_GET['max_num_pages'] ) ):0, 
       array(),
       false,
-      '',
-      isset($_GET['paged'])?intval( sanitize_text_field( $_GET['paged'] ) ):1
+      ''
     );
 
     $args = array(
-        "post_type" => $objectToSend->postType,
+        "post_type" => 'directorios',
         'tax_query' => array(
           array(
-            'taxonomy' => $objectToSend->postTax,
-            'field'    => 'slug',
-            'terms'    => $objectToSend->postTerm,
+            'taxonomy' => 'grupos',
+            'field'    => 'term_id',
+            'terms'    => array($objectToSend->postTerm),
           ),
         ),
-        "posts_per_page" => $objectToSend->optPerPage,
+        "posts_per_page" => -1,
         "s" => $objectToSend->txtKeyword,
-        'paged' => $objectToSend->paged,
         'post_status'=> 'publish',
+        'orderby' => 'menu_order title',
+		    'order' => 'ASC',
     );
 
-    $the_docs_query = new WP_Query( $args );
+    
+    $the_dir_query = new WP_Query( $args );
+    
+    $group = "";
+    
     // The Loop
-    if ( $the_docs_query->have_posts() ) {
-        while ( $the_docs_query->have_posts() ) {
-            $the_docs_query->the_post();
+    if ( $the_dir_query->have_posts() ) {
+        while ( $the_dir_query->have_posts() ) {
+            $the_dir_query->the_post();
             
+            $terms = wp_get_object_terms(get_the_ID(), 'grupos');
+            $tempTerm = $terms[0]->name;
+            $loopTerm = $terms[0]->name;
+            $loopSlug = $terms[0]->slug;
+
             $objectToSend->response[] = array(
                 "id"              =>  get_the_ID(),
                 "title"           => get_the_title(),
@@ -248,28 +261,30 @@ function ajax_dir_search_callback(){
                 "dir_resolucion"    => get_field('dir_resolucion'),
                 "dir_situacion"   => get_field('dir_situacion'),
                 "dir_cargo"   => get_field('dir_cargo'),
-                "dir_direccion"   => get_field('dir_direccion'),
-                "dir_telefono"   => get_field('dir_telefono'),
                 "dir_correo"   => get_field('dir_correo'),
                 "dir_cv"   => get_field('dir_cv'),
                 "dir_dji"   => get_field('dir_dji'),
                 "dir_imagen"   => get_field('dir_imagen'),
+                "terms" => $terms,
+                "tempTerm" => $tempTerm,
+                "loopTerm" => $loopTerm,
+                "loopSlug" => $loopSlug,
                 "html"            => ''
             );
         }
+
         $objectToSend->bError = false;
-        $objectToSend->vMensaje = $the_docs_query;
-        $objectToSend->max_num_pages = $the_docs_query->max_num_pages;
+        $objectToSend->vMensaje = $the_dir_query;
         echo json_encode($objectToSend);
         /* Restore original Post Data */
         wp_reset_postdata();
     } else {
         $objectToSend->bError = true;
         $objectToSend->vMensaje = 'No se encontraron resultados';
-        //$objectToSend->vMensaje = $the_docs_query;
-        echo json_encode($objectToSend);
+        $objectToSend->vMensaje = $the_dir_query;
+        //echo json_encode($objectToSend);
         wp_reset_postdata();
     }
-    //var_dump($the_docs_query);
+    //var_dump($the_dir_query);
     wp_die();
 }

@@ -50,16 +50,21 @@ $lavender-200: #370541;
 //Purples
 $purple-100: #b48caf;
 $purple-200: #690a55;
+//Social
+$blue-fb: #3b5999;
+$blue-li: #0077B5;
+$blue-tw: #55acee;
+$green-wa: #25D366;
 //Defaults
 $primary: $green-100;
-$secondary: $yellow-300;
+$secondary: $black-100;
 $success: $green-100;
 $info: $blue-100;
 $warning: $orange-300;
 $danger: $red;
 //Headings
 $font-size-base: 1.6rem;
-$line-height-base: 1.618;
+$line-height-base: 1.313;
 // Forms
 $input-padding-y: 1.15rem;
 
@@ -86,3 +91,170 @@ $custom-select-focus-box-shadow: 0 none;
 $custom-select-padding-x: 0;
 $custom-select-padding-y: 1.15rem;
 $custom-select-height: 5rem;
+
+// Links
+//
+// Style anchor elements.
+$link-decoration: none;
+$link-hover-decoration: none;
+
+@mixin bg-gradient($from: $black-200, $to: false, $deg: 0deg, $image: false) {
+  background: $from;
+
+  @if ($image != false) {
+    background-image: url($image);
+
+    @if ($to != false) {
+      background-image: url($image), linear-gradient($deg, $from, $to);
+    }
+
+    @else {
+      background-image: url($image), linear-gradient($deg, mix($body-bg, $from, 15%), $from);
+    }
+  }
+
+  @else {
+    @if ($to != false) {
+      background: $from linear-gradient($deg, $from, $to);
+    }
+
+    @else {
+      background: $from linear-gradient($deg, mix($body-bg, $from, 30%), $from);
+    }
+  }
+
+  @include bg-cover();
+}
+
+@mixin theme($name: 'theme-default', $primary-color: $primary, $secondary-color: $secondary, $contrast-color: $yellow-200) {
+  $theme-colors: (
+    "primary": $primary-color,
+    "secondary": $secondary-color,
+    "contrast": $contrast-color
+  );
+
+  $primary: map-get($theme-colors, primary);
+  $secondary: map-get($theme-colors, secondary);
+  $contrast: map-get($theme-colors, contrast);
+  $link-color: $primary;
+  $link-hover-color: $secondary;
+
+  .#{$name} {
+    .jumbotron {
+      @include bg-gradient($primary 50%, rgba($secondary, 0.15) 50%, 45deg);
+
+      h1,
+      p {
+        color: color-yiq($primary);
+      }
+
+      hr {
+        border-top: 1px solid rgba($contrast, 0.1);
+      }
+      .pagination-container {
+        .pagination {
+          a:not(.disabled) {
+            color: color-yiq($primary);
+
+            &.active {
+              border-top: 1px solid $contrast;
+            }
+          }
+
+          li{
+            border-top: 1px solid rgba(color-yiq($primary), 0.15);
+
+            &.current-menu-item,
+            &.current-menu-item:hover{
+              border-top: 1px solid $contrast;
+
+              a {
+                color: $contrast;
+              }
+            }
+
+            &:hover {
+              border-top: 1px solid rgba($contrast, 0.75);
+            }
+          }
+        }
+      }
+    }
+
+    .section {
+      background-color: rgba($secondary-color, 0.15);
+      margin-bottom: 3rem;
+      margin-top: -2rem;
+    }
+
+    .entry-share {
+      a {
+        background-color: rgba($primary, 0.75);
+      }
+    }
+
+    .entry-type {
+      .fa-camera,
+      .fa-video,
+      .fa-bookmark {
+        color: $primary;
+      }
+    }
+
+    .entry-title {
+      a {
+        color: $link-color;
+
+        &:hover {
+          color: $link-hover-color;
+        }
+      }
+    }
+
+    .entry-category {
+      a:hover {
+        color: $link-hover-color;
+      }
+    }
+
+    .wp-pagenavi {
+      border-top: 1px solid rgba(color-yiq($contrast), 0.15);
+
+      a {
+        color: rgba(color-yiq($contrast), 0.5);
+
+        &:hover {
+          color: $primary;
+          border-top: 1px solid $primary;
+        }
+      }
+
+      .current {
+        color: $primary;
+        border-top: 1px solid $primary;
+      }
+    }
+
+    .simplebar-scrollbar {
+      &::before {
+        background-color: rgba($contrast, 0.75);
+      }
+
+      &:hover {
+        &::before {
+          background-color: $contrast;
+        }
+      }
+    }
+
+    @each $color, $value in $theme-colors {
+      .btn-#{$color} {
+        @include button-variant($value, $value);
+      }
+
+      .badge-#{$color} {
+        @include badge-variant($value);
+      }
+    }
+  }
+}
