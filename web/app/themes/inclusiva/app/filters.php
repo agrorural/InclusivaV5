@@ -23,6 +23,16 @@ add_filter('body_class', function (array $classes) {
       $classes[] = 'theme-green';
     }
 
+    /** Add class if is directory page */
+    if ( is_page_template( 'views/template-directorios.blade.php' ) ) {
+      $classes[] = 'theme-green';
+    }
+
+    /** Add class if is documents page */
+    if ( is_page_template( 'views/template-documentos.blade.php' ) ) {
+      $classes[] = 'theme-gray';
+    }
+
     /** Add class if is category */
     if (is_category()) {
       $classes[] = 'theme-blue';

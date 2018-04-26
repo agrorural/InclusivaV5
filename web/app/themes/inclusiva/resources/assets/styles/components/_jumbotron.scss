@@ -20,10 +20,10 @@
     flex-direction: row;
   }
 
-  .template-documentos &,
-  .single-documentos & {
-    @include section-palette($green-100, $yellow-200, true);
-  }
+  // .template-documentos &,
+  // .single-documentos & {
+  //   @include section-palette($green-100, $yellow-200, true);
+  // }
 
   .direcciones-zonales & {
     @include section-palette($blue-100, $lime, true);

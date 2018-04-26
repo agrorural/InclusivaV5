@@ -199,6 +199,7 @@ a {
 .container-boxed {
   @extend .container;
 
+  position: relative;
   max-width: 100%;
 
   @include media-breakpoint-up(lg) {
@@ -242,7 +243,7 @@ input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea,
-.custom-select {
+.custom-select:not(.browser-default) {
   border-bottom: 1px solid $gray-200;
 }
 

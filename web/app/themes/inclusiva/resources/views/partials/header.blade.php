@@ -12,16 +12,14 @@
 </header>
 
 <header class="branding">
-  <nav id="primary_navigation" class="navbar navbar-expand-md navbar-light" role="navigation">
     <div class="container">
       <div class="branding__nav">
         <nav class="nav">
-          <a id="minagri" class="navbar-brand" href="http://www.minagri.gob.pe" target="_blank">
-            <img src="@asset('images/minagri__logo.svg')" height="45px" class="img-fluid" alt="Minagri">
+          <a id="minagri" href="http://www.minagri.gob.pe" target="_blank">
+            <img src="@asset('images/minagri__logo.svg')" style="height:45px !important" class="img-fluid" alt="Minagri">
           </a>
-          <a id="agro_rural" class="navbar-brand" href="{{ home_url('/') }}">
-            <svg version="1.1" id="agro_rural__logo" class="color" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 250 91.2" xml:space="preserve" width="150px" height="55px">
+          <a id="agro_rural" href="{{ home_url('/') }}">
+            <svg version="1.1" id="agro_rural__logo" class="color" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 250 91.2" xml:space="preserve" width="150px" height="55px">
               <g id="leafs">
                 <path class="leaf-1" d="M243.7,19.5c-36.5-12.7-76-17.7-135.9,30.9C168.2,0.7,215.5-14.9,243.7,19.5z"/>
                 <path class="leaf-2" d="M243.7,32.3c-36.5-16.1-76-24.9-135.9,18.1C168.2,6.4,215.5-4.7,243.7,32.3z"/>
@@ -75,25 +73,33 @@
             </svg>
           </a>
         </nav>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
       </div>  
-
-      @if (has_nav_menu('primary_navigation'))
-        <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse">
-        
-          {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'depth' => 2, 'container' => '', 'menu_class' => 'navbar-nav mr-auto', 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback', 'walker' => new WP_Bootstrap_Navwalker()]) !!}
-        
-          <div class="my-2 my-lg-0">
-            <button class="btn btn-link"><i class="fas fa-search"></i> <span class="d-block d-sm-none">Buscar</span></button>
-          </div>
-
-        </div>
-      @endif
-
     </div>
-  </nav>
 </header>
+
+<header class="primary-nav">
+    <div class="container-boxed">
+      <div id="primary_navigation">
+        @if (has_nav_menu('primary_navigation'))
+            
+        {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'depth' => 2, 'container' => '', 'menu_class' => 'navbar-nav', 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback', 'walker' => new WP_Bootstrap_Navwalker()]) !!}
+
+        @endif
+        <div class="searchBox">
+          <form class="searchForm">
+            <div class="form-group">
+              <input type="text" class="form-control" id="formSearch">
+              <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
+            </div>
+            <button id="showForm" class="btn btn-link"><i class="fas fa-search"></i></button>
+          </form>
+          <div class="searchResult">
+           <p>Aqui los resultados</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+</header>
+
 

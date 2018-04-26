@@ -293,6 +293,10 @@
     &#featured {
       padding: 0;
 
+      .container-boxed {
+        padding: 0;
+      }
+
       figure {
         margin: 0;
       }

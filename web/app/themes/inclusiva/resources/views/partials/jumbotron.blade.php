@@ -25,6 +25,11 @@
           {!! wp_nav_menu( $categories_navigation ) !!}
         </div>
       @endif
+    
+    @elseif (is_page_template( 'views/template-directorios.blade.php' ))
+      <hr class="my-4">
+      
+      @include('partials.form.dir-filter')
     @endif
   </div>
 </div>

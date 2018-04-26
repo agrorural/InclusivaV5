@@ -7,7 +7,22 @@
 @if ( $the_post_type == "banners" )
   @foreach (App::Banner() as $slide)
     @if ($slide['is_text'])
-      <figure @php(post_class("swiper-slide")) style="background-image:url( {{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }} )">
+      <figure @php(post_class("swiper-slide")) data-test-set="test" style="background-image:url( {{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }} )">
+        <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="entity-img" />
+        <figcaption class="content">
+          <h2 class="title">{{ get_the_title() }}</h2>
+          @if ( $the_post_type == "banners" )
+              <span class="caption">
+                @php(the_content())
+              </span>
+            @else
+              <time class="caption">
+                {{ get_the_date() }}
+              </time>
+            @endif
+        </figcaption>
+      </figure>
+      {{-- <figure @php(post_class("swiper-slide")) style="background-image:url( {{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }} )">
         <picture>
           <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="entity-img" />
         </picture>
@@ -33,7 +48,7 @@
           </div>
           
         </figcaption>
-      </figure>
+      </figure> --}}
     @else
       <figure @php(post_class("swiper-slide"))>
         <picture>

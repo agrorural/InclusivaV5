@@ -5,7 +5,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
-    <div class="search-result"></div>
-    <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
+    <div class="search-result" id="accordion" role="tablist" aria-multiselectable="true"></div>
 @endsection

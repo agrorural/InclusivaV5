@@ -2,9 +2,8 @@ export default {
   init() {
     // JavaScript to be fired on the about us page
     (function($) {
-      // let ajaxDocsSearch = $('.content');
+      let ajaxDirSearch = $('.directorio');
       // let termPath = '';
-      // let customPostTitle = '';
       // let customPostContent = '';
       // let docPath = '/transparencia/documentos/';
     
@@ -17,35 +16,31 @@ export default {
           vMensaje: '',
       };
     
-      objectToSend.postTerm = '132';
+      objectToSend.postTerm = wp.dir_grupos_id;
     
       function listarDirectorio(objectToSend) {
           $.ajax({
               url: wp.ajax_url,
               data: objectToSend,
               beforeSend: function() {
-                // $('#txtKeyword').prop('disabled', true);
-                // $('#optMonth').prop('disabled', true);
-                // $('#optYear').prop('disabled', true);
-                // $('#optPerPage').prop('disabled', true);
-                // $("#btnDocumento").prop('disabled', true).html("<i class='fas fa-circle-notch fa-spin'></i> Filtrando...");
-                // $("#btnLimpiar").prop('disabled', true).html("<i class='fas fa-sync fa-spin'></i> Limpiando...");
+                $('#txtKeyword').prop('disabled', true);
+                $('#optGrupos').prop('disabled', true);
+                $("#btnBuscar").prop('disabled', true).html("<i class='fas fa-circle-notch fa-spin'></i> Filtrando...");
+                $("#btnLimpiar").prop('disabled', true).html("<i class='fas fa-sync fa-spin'></i> Limpiando...");
     
-                // // Preloading
-                // ajaxDocsSearch.find('.preloaded').removeClass('hidden');
-                // ajaxDocsSearch.find('.hentry').addClass('hidden');
+                // Preloading
+                ajaxDirSearch.find('.hentry').addClass('hidden');
+                ajaxDirSearch.find('.preloaded').removeClass('hidden');
               },
               complete: function() {
-                  // $('#txtKeyword').prop('disabled', false);
-                  // $('#optMonth').prop('disabled', false);
-                  // $('#optYear').prop('disabled', false);
-                  // $('#optPerPage').prop('disabled', false);
-                  // $("#btnDocumento").prop('disabled', false).html("<i class='fas fa-filter'></i> Filtrar");
-                  // $("#btnLimpiar").prop('disabled', false).html("<i class='fas fa-sync'></i> Limpiar");
-    
-                  // // Preloading
-                  // ajaxDocsSearch.find('.preloaded').addClass('hidden');
-                  // ajaxDocsSearch.find('.hentry').removeClass('hidden');
+                $('#txtKeyword').prop('disabled', false);
+                $('#optGrupos').prop('disabled', false);
+                $("#btnBuscar").prop('disabled', false).html("<i class='fas fa-filter'></i> Filtrar");
+                $("#btnLimpiar").prop('disabled', false).html("<i class='fas fa-sync'></i> Limpiar");
+  
+                // Preloading
+                ajaxDirSearch.find('.preloaded').addClass('hidden');
+                ajaxDirSearch.find('.hentry').removeClass('hidden');
               },
               success: function(response) {
                 objectToSend = response;
@@ -54,100 +49,67 @@ export default {
                  console.log(objectToSend);
                  /* eslint-disable no-console */
                 
-                // ajaxDocsSearch.find(".search-result").empty();
-                // ajaxDocsSearch.find(".wp-pagenavi").empty();
+                ajaxDirSearch.find(".search-result").empty();
     
-                // let errorMessage = objectToSend.vMensaje;
+                let errorMessage = objectToSend.vMensaje;
     
-              //   if (objectToSend.bError) {
-              //     objectToSend.vMensaje = '';
+                if (objectToSend.bError) {
+                  objectToSend.vMensaje = '';
     
-              //     objectToSend.vMensaje = '<article class="hentry documentos hidden">';
-              //     objectToSend.vMensaje += '<div class="entry-container">';
-              //     objectToSend.vMensaje += '<div class="entry-body">';
-    
-    
-              //     objectToSend.vMensaje += '<h2 class="entry-title">';
-              //     objectToSend.vMensaje += errorMessage;
-              //     objectToSend.vMensaje += '</h2>';
-              //     objectToSend.vMensaje += '<div class="entry-content">';
-              //     objectToSend.vMensaje += '<p>Intente con otros parámetros de búsqueda...</p>';
-              //     objectToSend.vMensaje += '</div>';
+                  objectToSend.vMensaje = '<article class="hentry directorios hidden">';
+                  objectToSend.vMensaje += '<div class="entry-container">';
+                  objectToSend.vMensaje += '<div class="entry-body">';
     
     
-              //     objectToSend.vMensaje += '</div>';
-              //     objectToSend.vMensaje += '</div>';
-              //     objectToSend.vMensaje += '</article>';
-              //     ajaxDocsSearch.find(".wp-pagenavi").addClass('hidden');
-              //     ajaxDocsSearch.find(".search-result").append(objectToSend.vMensaje);
-              // } else {
-              //   for (var i = 0; i < objectToSend.response.length; i++) {
-    
-              //     objectToSend.response[i].html = '';
-              //     objectToSend.response[i].html += '<article class="post-' + objectToSend.response[i].id + ' status-publish hentry tipos-rde documentos hidden">';
-              //     objectToSend.response[i].html += '<div class="entry-container">';
-              //     objectToSend.response[i].html += '<div class="entry-body ">';
-              //     customPostTitle = objectToSend.postTerm === 'directivas' || objectToSend.postTerm === 'pac' ? objectToSend.response[i].doc_ane__nom : customPostTitle = objectToSend.response[i].title;
-              //     customPostContent = objectToSend.postTerm === 'directivas' || objectToSend.postTerm === 'pac' ? objectToSend.response[i].doc_ane__desc : customPostContent = objectToSend.response[i].content;
-    
-              //     objectToSend.response[i].html += '<h2 class="entry-title">';
-              //     objectToSend.response[i].html += '<a href="' + objectToSend.response[i].permalink + '">';
-              //     objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (customPostTitle.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") : customPostTitle;
-              //     objectToSend.response[i].html += '</a>';
-              //     objectToSend.response[i].html += '</h2>';
-    
-              //     objectToSend.response[i].html += '<div class="entry-content">';
-              //     objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (customPostContent.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") : customPostContent;
-              //     objectToSend.response[i].html += '</div>';
+                  objectToSend.vMensaje += '<h2 class="entry-title">';
+                  objectToSend.vMensaje += errorMessage;
+                  objectToSend.vMensaje += '</h2>';
+                  objectToSend.vMensaje += '<div class="entry-content">';
+                  objectToSend.vMensaje += '<p>Intente con otros parámetros de búsqueda...</p>';
+                  objectToSend.vMensaje += '</div>';
     
     
-              //     objectToSend.response[i].html += '<div class="post-meta">';
-              //     objectToSend.response[i].html += '<div class="post-date">';
-              //     objectToSend.response[i].html += '<time class="updated">' + objectToSend.response[i].date + '</time>';
-              //     objectToSend.response[i].html += '</div>';
-              //     objectToSend.response[i].html += '<div class="post-comments">';
+                  objectToSend.vMensaje += '</div>';
+                  objectToSend.vMensaje += '</div>';
+                  objectToSend.vMensaje += '</article>';
+
+                  ajaxDirSearch.find(".search-result").append(objectToSend.vMensaje);
+              } else {
+                for (var i = 0; i < objectToSend.response.length; i++) {
+                  objectToSend.response[i].html = '';
+                  
+                  if( objectToSend.response[i].isOpen === true ) {
+                    objectToSend.response[i].html += '<h3 class="mt-3">';
+                    objectToSend.response[i].html += objectToSend.response[i].loopTerm;
+                    objectToSend.response[i].html += '</h3>';
+                  }
+       
+                  objectToSend.response[i].html += '<article class="post-' + objectToSend.response[i].id + ' status-publish hentry directorios hidden">';
+                  objectToSend.response[i].html += '<div class="media">';
+                  objectToSend.response[i].html += '<img class="mr-3" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="55" heigh="60" />';
+                  objectToSend.response[i].html += '<div class="entry-body media-body">';
+                  objectToSend.response[i].html += '<small>';
+                  objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (objectToSend.response[i].title.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") : objectToSend.response[i].title;
+                  objectToSend.response[i].html += '</small>';
+                  objectToSend.response[i].html += '<h5 class="entry-title">';
+                  objectToSend.response[i].html += objectToSend.response[i].dir_responsable;
+                  objectToSend.response[i].html += '</h5>';
+                  objectToSend.response[i].html += '<li>';
+                  objectToSend.response[i].html += objectToSend.response[i].dir_correo;
+                  objectToSend.response[i].html += '</li>';
+                  objectToSend.response[i].html += '<ul>';
+                  objectToSend.response[i].html += '</ul>';
     
-              //     termPath = objectToSend.postTerm === 'directivas' ? 'rde' :
-              //         objectToSend.postTerm === 'ado' ? 'rde' :
-              //         objectToSend.postTerm === 'lfo' ? 'rde' :
-              //         objectToSend.postTerm === 'pac' ? 'rda' :
-              //         objectToSend.postTerm === 'cds' ? 'rda' :
-              //         objectToSend.postTerm;
-              //     /* eslint-disable no-console */
-              //     //console.log(objectToSend);
-              //     /* eslint-disable no-console */
+                  objectToSend.response[i].html += '</div>';
+                  objectToSend.response[i].html += '</div>';
+                  objectToSend.response[i].html += '</article>';
+
+                  
     
-              //     if (objectToSend.response[i].doc_link === 'Publicado') {
-              //         objectToSend.response[i].html += '<a href="' + wp.upload_dir.baseurl + docPath + termPath.toLowerCase() + '/' + objectToSend.response[i].slug.toUpperCase() + '.PDF" target="_blank"><i class="fa fa-file-pdf-o"></i> Descargar</a>';
-              //     } else {
-              //         objectToSend.response[i].html += 'No disponible';
-              //     }
+                  ajaxDirSearch.find(".search-result").append(objectToSend.response[i].html);
     
-              //     objectToSend.response[i].html += '</div>';
-              //     objectToSend.response[i].html += '</div>';
-              //     objectToSend.response[i].html += '</div>';
-              //     objectToSend.response[i].html += '</div>';
-              //     objectToSend.response[i].html += '</article>';
-    
-    
-              //     ajaxDocsSearch.find(".search-result").append(objectToSend.response[i].html);
-    
-              //     if (ajaxDocsSearch.find(".wp-pagenavi").hasClass('hidden')) {
-              //         ajaxDocsSearch.find(".wp-pagenavi").removeClass('hidden');
-              //     }
-    
-              // }
-    
-              //   for (var j = 1; j <= objectToSend.max_num_pages; j++) {
-              //       var html = '<a href="page/' + j + '" class="page navi nav-link" data-id="' + j + '">' + j + '</a>';
-    
-              //       if (objectToSend.paged === j) {
-              //           html = '<span class="current nav-link active">' + j + '</span>';
-              //       }
-    
-              //         ajaxDocsSearch.find(".wp-pagenavi").append(html);
-              //     }
-              //   }
+                }
+              }
     
                 /* eslint-disable no-console */
                 //console.log(objectToSend.vMensaje);
@@ -163,64 +125,39 @@ export default {
     
       listarDirectorio(objectToSend);
     
-    //   function limpiarDocumentos(objectToSend) {
-    //     ajaxDocsSearch.find('form').trigger("reset");
-    //     objectToSend.txtKeyword = "";
-    //     objectToSend.optMonth = 0;
-    //     objectToSend.optYear = (new Date()).getFullYear();
-    //     objectToSend.optPerPage = 20;
-    //     objectToSend.max_num_pages = 0;
-    //     objectToSend.paged = 1;
+    function limpiarDirectorio(objectToSend) {
+        ajaxDirSearch.find('form').trigger("reset");
+        objectToSend.txtKeyword = "";
+        objectToSend.postTerm = wp.dir_grupos_id;
+        listarDirectorio(objectToSend);
+    }
     
-    //     listarDirectorio(objectToSend);
-    // }
+    $("#txtKeyword").keypress(function(e) {
+        if (e.which === 13) {
+            objectToSend.txtKeyword = $(this).val();    
+            listarDirectorio(objectToSend);
+        }
+    });
     
-    // $("#txtKeyword").keypress(function(e) {
-    //     if (e.which === 13) {
-    //         objectToSend.txtKeyword = $(this).val();
-    //         objectToSend.paged = 1;
+    $("#optGrupos").change(function() {
+        objectToSend.txtKeyword = $("#txtKeyword").val();
+        objectToSend.postTerm = ($("#optGrupos").val() == 0) ? wp.dir_grupos_id : $("#optGrupos").val();
+        
+        listarDirectorio(objectToSend);
+    });
     
-    //         listarDirectorio(objectToSend);
-    //     }
-    // });
     
-    // $("#optMonth").change(function() {
-    //     objectToSend.txtKeyword = $("#txtKeyword").val();
-    //     objectToSend.optMonth = $("#optMonth").val();
-    //     objectToSend.paged = 1;
+    $("#btnBuscar").click(function(e) {
+        e.preventDefault();
     
-    //     listarDirectorio(objectToSend);
-    // });
+        objectToSend.txtKeyword = $("#txtKeyword").val();    
+        listarDirectorio(objectToSend);
+    });
     
-    // $("#optYear").change(function() {
-    //     objectToSend.txtKeyword = $("#txtKeyword").val();
-    //     objectToSend.optYear = $("#optYear").val();
-    //     objectToSend.paged = 1;
-    
-    //     listarDirectorio(objectToSend);
-    // });
-    
-    // $("#optPerPage").change(function() {
-    //     objectToSend.txtKeyword = $("#txtKeyword").val();
-    //     objectToSend.optPerPage = $("#optPerPage").val();
-    //     objectToSend.paged = 1;
-    
-    //     listarDirectorio(objectToSend);
-    // });
-    
-    // $("#btnDocumento").click(function(e) {
-    //     e.preventDefault();
-    
-    //     objectToSend.txtKeyword = $("#txtKeyword").val();
-    //     objectToSend.paged = 1;
-    
-    //     listarDirectorio(objectToSend);
-    // });
-    
-    // $("#btnLimpiar").click(function(e) {
-    //     e.preventDefault();
-    //     limpiarDocumentos(objectToSend);
-    // });
+    $("#btnLimpiar").click(function(e) {
+        e.preventDefault();
+        limpiarDirectorio(objectToSend);
+    });
     
     // $(document).on('click', '.navi', function(e) {
     //     e.preventDefault();

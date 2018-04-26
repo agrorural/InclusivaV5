@@ -198,7 +198,7 @@
     <img class="card-img-top" src="{{$bg}}" alt="Card image cap">
       <div class="card-img-overlay">
         <picture>
-          <img src="{{$flag}}" width="55" alt="Amazonas">
+          <img src="{{$flag['url']}}" width="55" alt="{{$flag['title']}}">
         </picture>
       </div>
       <div class="card-body">

@@ -19,55 +19,135 @@ export default {
       }
   }
 
-  // Params
-  let homeSliderSelector = '#home__slider',
-    homeSliderOptions = {
-      init: false,
-      loop: true,
-      speed: 800,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: true,
-      },
-      slidesPerView: 1,
-      effect: 'cube',
-      // spaceBetween: 10,
-      centeredSlides : true,
-      // effect: 'fade', // 'cube', 'fade', 'coverflow',
-      // coverflowEffect: {
-      //   rotate: 50, // Slide rotate in degrees
-      //   stretch: 0, // Stretch space between slides (in px)
-      //   depth: 100, // Depth offset in px (slides translate in Z axis)
-      //   modifier: 1, // Effect multipler
-      //   slideShadows : true, // Enables slides shadows
-      // },
-      grabCursor: true,
-      pagination: {
-        el: '#home-pagination',
-        // type: 'progressbar',
-      },
-      navigation: {
-        nextEl: '#home-arrow-right',
-        prevEl: '#home-arrow-left',
-      },
-      breakpoints: {
-        767: {
-          slidesPerView: 1,
-          spaceBetween: 0,
-        },
-      },
-      // Events
-      on: {
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-        },
-      },
-    };
+  // // Params
+  // let homeSliderSelector = '#home__slider',
+  //   homeSliderOptions = {
+  //     init: false,
+  //     loop: true,
+  //     speed: 800,
+  //     autoplay: {
+  //       delay: 2500,
+  //       disableOnInteraction: true,
+  //     },
+  //     slidesPerView: 1,
+  //     effect: 'cube',
+  //     // spaceBetween: 10,
+  //     centeredSlides : true,
+  //     // effect: 'fade', // 'cube', 'fade', 'coverflow',
+  //     // coverflowEffect: {
+  //     //   rotate: 50, // Slide rotate in degrees
+  //     //   stretch: 0, // Stretch space between slides (in px)
+  //     //   depth: 100, // Depth offset in px (slides translate in Z axis)
+  //     //   modifier: 1, // Effect multipler
+  //     //   slideShadows : true, // Enables slides shadows
+  //     // },
+  //     grabCursor: true,
+  //     pagination: {
+  //       el: '#home-pagination',
+  //       // type: 'progressbar',
+  //     },
+  //     navigation: {
+  //       nextEl: '#home-arrow-right',
+  //       prevEl: '#home-arrow-left',
+  //     },
+  //     breakpoints: {
+  //       767: {
+  //         slidesPerView: 1,
+  //         spaceBetween: 0,
+  //       },
+  //     },
+  //     // Events
+  //     on: {
+  //       imagesReady: function(){
+  //         this.el.classList.remove('loading');
+  //       },
+  //     },
+  //   };
   
-  let homeSlider = new Swiper(homeSliderSelector, homeSliderOptions);
+  // let homeSlider = new Swiper(homeSliderSelector, homeSliderOptions);
 
-  // Initialize homeSlider
-  homeSlider.init();
+  // // Initialize homeSlider
+  // homeSlider.init();
+
+  var homeSliderSelector = '#home__slider',
+  isMove = false,
+  homeSliderOptions = {
+    init: false,
+    loop: true,
+    speed:800,
+    autoplay:{
+      delay:3000,
+    },
+    effect: 'cube', // 'cube', 'fade', 'coverflow',
+    cubeEffect: {
+      shadow: true,
+      slideShadows: true,
+      shadowOffset: 40,
+      shadowScale: 0.94,
+    },
+    grabCursor: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    // Events
+    on: {
+      init: function(){
+        this.autoplay.stop();
+      },
+      imagesReady: function(){
+        this.el.classList.remove('loading');
+        this.autoplay.start();
+      },
+      touchMove: function(){
+        if (!isMove) {
+          this.el.classList.remove('scale-in');
+          this.el.classList.add('scale-out');
+          isMove = true;
+        }
+      },
+      touchEnd: function(){
+        this.el.classList.remove('scale-out');
+        this.el.classList.add('scale-in');
+        setTimeout(function(){
+          isMove = false;
+        }, 300);
+      },
+      slideChangeTransitionStart: function(){
+        // console.log('slideChangeTransitionStart '+this.activeIndex);
+        if (!isMove) {
+          this.el.classList.remove('scale-in');
+          this.el.classList.add('scale-out');
+        }
+      },
+      slideChangeTransitionEnd: function(){
+        // console.log('slideChangeTransitionEnd '+this.activeIndex);
+        if (!isMove) {
+          this.el.classList.remove('scale-out');
+          this.el.classList.add('scale-in');
+        }
+      },
+      transitionStart: function(){
+        // console.log('transitionStart '+this.activeIndex);
+      },
+      transitionEnd: function(){
+        // console.log('transitionEnd '+this.activeIndex);
+      },
+      slideChange:function(){
+        // console.log('slideChange '+this.activeIndex);
+        // console.log(this);
+      },
+    },
+  },
+  homeSlider = new Swiper(homeSliderSelector, homeSliderOptions);
+
+// Initialize slider
+homeSlider.init();
+
 
   let servicesSliderSelector = '#services__slider',
     servicesSliderOptions = {

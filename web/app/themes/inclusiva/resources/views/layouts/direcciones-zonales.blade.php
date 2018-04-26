@@ -565,6 +565,8 @@
         <div class="row">
           @foreach ( $categories as $category)
             @php
+            $dz_flag = get_field('dz_flag', 'category_' . $category->term_id);
+
               printf( '<div class="col-6 col-sm-4 col-lg-3">
                         <div class="card">
                           <a class="%3$s" href="%1$s">
@@ -581,7 +583,7 @@
                   esc_url( get_category_link( $category->term_id ) ),
                   esc_html( $category->name ),
                   esc_html( $category->slug ),              
-                  esc_html( get_field('dz_flag', 'category_' . $category->term_id) ? get_field('dz_flag', 'category_' . $category->term_id) : App\asset_path('images/card__flag--default.jpg') ) ,                 
+                  esc_html( ($dz_flag) ? $dz_flag['url'] : App\asset_path('images/card__flag--default.jpg') ) ,                 
                   esc_html( get_field('dz_bg', 'category_' . $category->term_id) ? get_field('dz_bg', 'category_' . $category->term_id) : App\asset_path('images/card__bg--vertical--default.jpg') )                  
               );
             @endphp

@@ -8,7 +8,18 @@ function comments_menu_removing() {
       remove_menu_page( 'edit-comments.php' );          //Comments
   }
 }
-
+/**
+ * Crea shortcode [image]
+ */
+function agro_image_shortcode($atts) {
+  $fileName = \App\asset_path('images/' .  $atts['src']);
+  
+  return '<img src="' . $fileName . '" />';
+}
+  
+  add_shortcode('image', __NAMESPACE__ . '\\agro_image_shortcode');
+  
+  add_filter('widget_text', 'do_shortcode');
 /**
  * Imposibilita la lectura de posts que no son suyos al rol Contributor
  */
@@ -249,26 +260,46 @@ function ajax_dir_search_callback(){
             $tempTerm = $terms[0]->name;
             $loopTerm = $terms[0]->name;
             $loopSlug = $terms[0]->slug;
+            $dir_imagen = ( get_field('dir_imagen') ) ? get_field('dir_imagen')['url'] : \App\asset_path('images/avatar--default.jpg');
+            $snt_correo = antispambot( get_field('dir_correo') );
+            $dir_correo = '<a href="mailto:' . $snt_correo . ' ">' . $snt_correo . '</a>';
+
+            if (wp_get_post_parent_id(get_the_ID()) === 0){
+              $parentClass = 'father';
+            }else{
+              $parentClass = 'child';
+            }
+            
+            $isOpen = false;
+            $isClose = false;
+
+            if( $tempTerm !== $group && $group !== ""){
+              $isClose = true;
+            }
+
+            if( $group !== $loopTerm ){
+              $isOpen = true;
+
+              $group = $loopTerm;
+            }
 
             $objectToSend->response[] = array(
                 "id"              =>  get_the_ID(),
                 "title"           => get_the_title(),
                 "slug"            =>  get_post_field( 'post_name', get_post() ),
-                "permalink"       => get_permalink(),
-                "content"         => get_the_content(),
-                "date"            => get_the_date(),
                 "dir_responsable"        => get_field('dir_responsable'),
                 "dir_resolucion"    => get_field('dir_resolucion'),
                 "dir_situacion"   => get_field('dir_situacion'),
                 "dir_cargo"   => get_field('dir_cargo'),
-                "dir_correo"   => get_field('dir_correo'),
+                "dir_correo"   => $dir_correo,
                 "dir_cv"   => get_field('dir_cv'),
                 "dir_dji"   => get_field('dir_dji'),
-                "dir_imagen"   => get_field('dir_imagen'),
-                "terms" => $terms,
-                "tempTerm" => $tempTerm,
-                "loopTerm" => $loopTerm,
+                "dir_imagen"   => $dir_imagen,
+                "isOpen" => $isOpen,
+                "isClose" => $isClose,
                 "loopSlug" => $loopSlug,
+                "loopTerm" => $loopTerm,
+                "parentClass" => $parentClass,
                 "html"            => ''
             );
         }
@@ -281,8 +312,8 @@ function ajax_dir_search_callback(){
     } else {
         $objectToSend->bError = true;
         $objectToSend->vMensaje = 'No se encontraron resultados';
-        $objectToSend->vMensaje = $the_dir_query;
-        //echo json_encode($objectToSend);
+        //$objectToSend->vMensaje = $the_dir_query;
+        echo json_encode($objectToSend);
         wp_reset_postdata();
     }
     //var_dump($the_dir_query);

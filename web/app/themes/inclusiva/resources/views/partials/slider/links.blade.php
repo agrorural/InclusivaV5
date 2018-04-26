@@ -1,7 +1,7 @@
 @php
   $args  = array(
     'post_type' => 'Banners', 
-    'posiciones' => 'Links',
+    'posiciones' => 'Slider Footer',
     'posts_per_page' => -1
   );
   

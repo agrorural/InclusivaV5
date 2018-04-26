@@ -265,12 +265,24 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * kind of linkmod we have we may need different wrapper elements.
 			 */
 			if ( '' !== $linkmod_type ) {
-				// is linkmod, output the required element opener.
-				$item_output .= self::linkmod_element_open( $linkmod_type, $attributes );
+        // Check if item has dropdown-image class
+        $has_featured_image = array_search('dropdown-image', $classes);
+
+        if ($has_featured_image !== false) {
+          $featured_image_url = get_the_post_thumbnail_url( url_to_postid( $item->url ) );
+          // $item_output .= "<img class=\"img-fluid\" alt=\"". $item->title . "\" src=\"" . $featured_image_url . "\"/>";
+          $item_output .= "<div style=\"background-image: url($featured_image_url)\"></div>";
+        }
+        // is linkmod, output the required element opener.
+        $item_output .= self::linkmod_element_open( $linkmod_type, $attributes );
+        
+        
 			} else {
 				// With no link mod type set this must be a standard <a> tag.
-				$item_output .= '<a' . $attributes . '>';
-			}
+        $item_output .= '<a' . $attributes . '>';
+      }
+      
+      
 
 			/**
 			 * Initiate empty icon var, then if we have a string containing any

@@ -43,115 +43,95 @@ nav {
       }
     }
   }
+}
 
-  &#primary_navigation {
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+#primary_navigation {
+  .searchForm {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 1.5rem;
+    top: 0;
 
-      @include media-breakpoint-up(xl) {
-        flex-direction: row;
-        justify-content: space-between;
+    .form-group {
+      width: 0;
+      opacity: 0;
+      margin-bottom: 0;
+      transition: all ease-out 0.3s;
+
+      input,
+      label {
+        color: $white;
       }
 
-      .branding__nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-
-        @include media-breakpoint-down(sm) {
-          width: 100%;
-        }
-
-        @include media-breakpoint-up(xl) {
-          margin-right: 3rem;
-        }
-
-        nav {
-          #minagri {
-            @include media-breakpoint-down(sm) {
-              display: none;
-            }
-
-            img {
-              height: 4.5rem;
-            }
-          }
-
-          #agro_rural {
-            img {
-              height: 5.5rem;
-            }
-          }
-        }
-      }
-
-      .navbar-collapse {
-        width: 100%;
-
-        @include media-breakpoint-up(xl) {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          width: auto;
-        }
+      label {
+        display: none;
       }
     }
 
-    ul {
-      li {
-        a {
-          font-size: 85%;
+    #showForm {
+      color: $white;
+    }
+  }
 
-          &:not(.dropdown-item) {
-            @include font-family('ubuntu','medium');
+  .searchResult {
+    height: 0;
+    opacity: 0;
+    display: none;
+    transition: all ease-in 0.5s;
+  }
+}
 
-            text-transform: uppercase;
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
-        }
+#mega-menu-wrap-primary_navigation #mega-menu-primary_navigation,
+#mega-menu-wrap-primary_navigation .mega-menu-toggle {
+  transition: all ease 0.1s;
+}
 
-        &.active {
-          a {
-            color: $primary;
-          }
-        }
-      }
+#mega-menu-wrap-primary_navigation .mega-menu-toggle .mega-toggle-block-1 .mega-toggle-label {
+  display: none;
+}
 
-      li.megamenu {
-        > .dropdown-menu {
-          min-width: 30rem;
+#mega-menu-wrap-primary_navigation .mega-menu-toggle .mega-toggle-blocks-left .mega-toggle-block {
+  margin-left: 0;
 
-          &.show {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
+  &::after {
+    margin: 0;
+  }
+}
 
-            @include media-breakpoint-down(sm) {
-              flex-wrap: wrap;
-            }
-          }
+.with-searchform {
+  #mega-menu-wrap-primary_navigation #mega-menu-primary_navigation,
+  #mega-menu-wrap-primary_navigation .mega-menu-toggle {
+    visibility: hidden;
+  }
 
-          > .col-megamenu {
-            display: flex;
-            width: 30rem;
-            border-right: 1px solid $gray-200;
+  #primary_navigation {
+    .searchForm {
+      left: 1.5rem;
 
-            ul {
-              width: 100%;
+      .form-group {
+        opacity: 1;
+        width: 100%;
 
-              li {
-                width: 100%;
-                display: block;
-              }
-            }
-          }
+        label {
+          display: block;
         }
       }
+
+      #showForm {
+        color: $yellow-200;
+      }
+    }
+
+    .searchResult {
+      position: absolute;
+      display: block;
+      opacity: 1;
+      z-index: 1000;
+      background: $gray-200;
+      left: 0;
+      right: 0;
+      height: 100%;
     }
   }
 }
