@@ -87,19 +87,25 @@
         @endif
         <div class="searchBox">
           <form class="searchForm">
-            <div class="form-group">
+            <div class="input-group form-group">
               <input type="text" class="form-control" id="formSearch">
               <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
+              <div class="input-group-append">
+                  <select class="selectpicker"  multiple data-actions-box="true">
+                      @foreach(App::postTypeList() as $type)
+                        <option value="{{$type['name']}}">{{$type['label']}}</option>
+                      @endforeach
+                  </select>
+              </div>
             </div>
             <button id="showForm" class="btn btn-link"><i class="fas fa-search"></i></button>
           </form>
-          <div class="searchResult">
-           <p>Aqui los resultados</p>
+          <div class="search-result-container">
+            <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
+            <div class="search-result"></div>
+            <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
           </div>
         </div>
-        
       </div>
     </div>
 </header>
-
-

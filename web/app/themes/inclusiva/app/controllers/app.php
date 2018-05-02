@@ -11,6 +11,11 @@ class App extends Controller
         return get_bloginfo('name');
     }
 
+    public static function image($size)
+    {
+      return ( has_post_thumbnail(get_post()->ID) ) ? get_the_post_thumbnail_url(get_post()->ID, $size) : \App\asset_path('images/content--default.jpg');
+    }
+
     public static function title()
     {
         if (is_home()) {
@@ -97,5 +102,41 @@ class App extends Controller
       $ShareContent .= '</nav>';
 
       return $ShareContent;
+    }
+
+    public static function postTypeList()
+    {
+      $post_types = get_post_types( array('public'   => true), 'names', 'and' ); 
+      $post_type_remove = array('tribe-ea-record', 'banners', 'directorios', 'convocatorias', 'page', 'attachment');
+    
+      if(count(array_intersect($post_types, $post_type_remove)) == count($post_type_remove)){
+        foreach($post_type_remove as $exclude_post_type){
+          unset($post_types[$exclude_post_type]);
+        }
+      }
+
+      $post_type_obj = new \ArrayObject();
+
+      foreach( $post_types  as $post_type ) {
+        switch ($post_type) {
+          case 'post':
+            $post_type_obj->append(array('name' => $post_type, 'label' => 'Noticias'));
+            break;
+          
+          case 'tribe_events':
+            $post_type_obj->append(array('name' => $post_type, 'label' => 'Eventos'));
+            break;
+            
+          case 'producto':
+            $post_type_obj->append(array('name' => $post_type, 'label' => 'Productos'));
+            break;
+          
+          default:
+            $post_type_obj->append(array('name' => $post_type, 'label' => ucfirst($post_type)));
+            break;
+        }
+      }
+
+      return $post_type_obj;
     }
 }

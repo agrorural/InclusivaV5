@@ -38,6 +38,11 @@ add_filter('body_class', function (array $classes) {
       $classes[] = 'theme-blue';
     }
 
+    /** Add class if is is producto post type archive */
+    if (is_post_type_archive('producto') || is_singular('producto')) {
+      $classes[] = 'theme-purple';
+    }
+
     /** Clean up class names for custom templates */
     $classes = array_map(function ($class) {
         return preg_replace(['/-blade(-php)?$/', '/^page-template-views/'], '', $class);

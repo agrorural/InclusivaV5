@@ -326,6 +326,10 @@
         overflow: hidden;
         transition: all 0.3s;
 
+        .card-img {
+          transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         &:hover {
           box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
 
@@ -341,10 +345,6 @@
           &:hover {
             color: $lime;
           }
-        }
-
-        .card-image {
-          transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .card-img-overlay {

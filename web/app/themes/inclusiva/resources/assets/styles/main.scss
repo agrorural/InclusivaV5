@@ -11,6 +11,7 @@
  */
 @import "~swiper/dist/css/swiper";
 @import "~simplebar/dist/simplebar";
+@import "~bootstrap-select/sass/bootstrap-select";
 
 /** Import theme styles */
 @import "common/mixins";
@@ -18,6 +19,7 @@
 @include theme('theme-green', $green-100, $green-light-200, $orange-200);
 @include theme('theme-blue', $blue-200, $blue-sky-300, $lime);
 @include theme('theme-gray', $black-200, $gray-100, $green-light-100);
+@include theme('theme-purple', $purple-200, $purple-100, $orange-200);
 
 @import "common/global";
 @import "components/buttons";
@@ -32,6 +34,7 @@
 @import "components/share";
 @import "components/wp-pagenavi";
 @import "components/simplebar";
+@import "components/bootstrap-select";
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";

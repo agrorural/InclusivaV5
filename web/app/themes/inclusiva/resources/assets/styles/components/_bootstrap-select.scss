@@ -1,0 +1,18 @@
+.bootstrap-select {
+  .dropdown-toggle {
+    padding: $input-padding-y 0;
+    background-color: transparent;
+    border: 0 none;
+
+    .primary-nav & {
+      border-bottom: 1px solid $gray-200;
+    }
+  }
+
+  &.show {
+    .dropdown-toggle {
+      background-color: transparent;
+      border-color: $gray-200;
+    }
+  }
+}

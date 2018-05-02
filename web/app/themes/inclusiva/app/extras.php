@@ -79,7 +79,7 @@ add_filter('sage/display_sidebar', function ($display) {
 });
 
 /**
- * Ajax para busqueda de documentos
+ * Ajax para Omnisearch
  */
 add_action('wp_ajax_ajax_docs_search', __NAMESPACE__ . '\\ajax_docs_search_callback');
 add_action('wp_ajax_nopriv_ajax_docs_search', __NAMESPACE__ . '\\ajax_docs_search_callback');
@@ -190,6 +190,93 @@ function ajax_docs_search_callback(){
         wp_reset_postdata();
     }
     //var_dump($the_docs_query);
+    wp_die();
+}
+
+/**
+ * Ajax para busqueda de documentos
+ */
+add_action('wp_ajax_ajax_omni_search', __NAMESPACE__ . '\\ajax_omni_search_callback');
+add_action('wp_ajax_nopriv_ajax_omni_search', __NAMESPACE__ . '\\ajax_omni_search_callback');
+
+function ajax_omni_search_callback(){
+    header('Content-Type:application/json');
+    
+    class objectToSend
+    {
+        var $action;
+        var $postType;
+        var $txtKeyword;
+        var $optPerPage;
+        var $max_num_pages; 
+        var $response;
+        var $bError;
+        var $vMensaje;
+        var $paged;
+
+        function __construct($action, $postType, $txtKeyword, $optPerPage, $max_num_pages, $response, $bError, $vMensaje, $paged) {
+           $this->action = $action; 
+           $this->postType = $postType; 
+           $this->txtKeyword = $txtKeyword;
+           $this->optPerPage = $optPerPage;
+           $this->max_num_pages = $max_num_pages;
+           $this->response = $response;
+           $this->bError = $bError;
+           $this->vMensaje = $vMensaje;
+           $this->paged = $paged;
+          }
+    }
+
+    $objectToSend = new objectToSend(
+      'ajax_omni_search',
+      explode(',', (isset($_GET['postType'])?sanitize_text_field( $_GET['postType'] ) : '')),
+      isset($_GET['txtKeyword'])?sanitize_text_field( $_GET['txtKeyword'] ):'', 
+      isset($_GET['optPerPage'])?intval( sanitize_text_field( $_GET['optPerPage'] ) ):20, 
+      isset($_GET['max_num_pages'])?intval( sanitize_text_field( $_GET['max_num_pages'] ) ):0, 
+      array(),
+      false,
+      '',
+      isset($_GET['paged'])?intval( sanitize_text_field( $_GET['paged'] ) ):1
+    );
+
+    $args = array(
+        "post_type" => $objectToSend->postType,
+        "posts_per_page" => $objectToSend->optPerPage,
+        "s" => $objectToSend->txtKeyword,
+        'paged' => $objectToSend->paged,
+        'post_status'=> 'publish',
+    );
+
+    $the_omni_search_query = new WP_Query( $args );
+    // The Loop
+    if ( $the_omni_search_query->have_posts() ) {
+        while ( $the_omni_search_query->have_posts() ) {
+            $the_omni_search_query->the_post();
+            
+            $objectToSend->response[] = array(
+                "id"              =>  get_the_ID(),
+                "title"           => get_the_title(),
+                "slug"            =>  get_post_field( 'post_name', get_post() ),
+                "permalink"       => get_permalink(),
+                "excerpt"         => get_the_excerpt(),
+                "date"            => get_the_date(),
+                "html"            => ''
+            );
+        }
+        $objectToSend->bError = false;
+        $objectToSend->vMensaje = $the_omni_search_query;
+        $objectToSend->max_num_pages = $the_omni_search_query->max_num_pages;
+        echo json_encode($objectToSend);
+        /* Restore original Post Data */
+        wp_reset_postdata();
+    } else {
+        $objectToSend->bError = true;
+        $objectToSend->vMensaje = 'No se encontraron resultados';
+        //$objectToSend->vMensaje = $the_omni_search_query;
+        echo json_encode($objectToSend);
+        wp_reset_postdata();
+    }
+    //var_dump($the_omni_search_query);
     wp_die();
 }
 
