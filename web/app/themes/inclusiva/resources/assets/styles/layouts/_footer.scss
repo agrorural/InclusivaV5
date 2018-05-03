@@ -1,6 +1,7 @@
 footer {
   &.content-info {
     background-image: url(../images/footer__bg.jpg);
+    margin-top: 3rem;
 
     @include font-size(13);
     @include bg-cover();

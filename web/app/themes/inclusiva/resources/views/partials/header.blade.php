@@ -88,14 +88,17 @@
         <div class="searchBox">
           <form class="searchForm">
             <div class="input-group form-group">
-              <input type="text" class="form-control" id="formSearch">
-              <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
-              <div class="input-group-append">
-                  <select class="selectpicker"  multiple data-actions-box="true">
-                      @foreach(App::postTypeList() as $type)
+              <div class="input-group-prepend">
+                  <select class="selectpicker" multiple>
+                      @foreach(App::postTypeObj() as $type)
                         <option value="{{$type['name']}}">{{$type['label']}}</option>
                       @endforeach
                   </select>
+              </div>
+              <input type="text" class="form-control" id="formSearch">
+              <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
+              <div class="input-group-append">
+                <button id="syncForm" class="btn btn-link" type="button"><i class="fas fa-redo"></i></button>
               </div>
             </div>
             <button id="showForm" class="btn btn-link"><i class="fas fa-search"></i></button>

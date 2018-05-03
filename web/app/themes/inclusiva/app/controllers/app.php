@@ -104,7 +104,7 @@ class App extends Controller
       return $ShareContent;
     }
 
-    public static function postTypeList()
+    public static function postTypeObj()
     {
       $post_types = get_post_types( array('public'   => true), 'names', 'and' ); 
       $post_type_remove = array('tribe-ea-record', 'banners', 'directorios', 'convocatorias', 'page', 'attachment');
@@ -138,5 +138,19 @@ class App extends Controller
       }
 
       return $post_type_obj;
+    }
+
+    public static function postTypeArr()
+    {
+      $post_types = get_post_types( array('public'   => true), 'names', 'and' ); 
+      $post_type_remove = array('tribe-ea-record', 'banners', 'directorios', 'convocatorias', 'page', 'attachment');
+    
+      if(count(array_intersect($post_types, $post_type_remove)) == count($post_type_remove)){
+        foreach($post_type_remove as $exclude_post_type){
+          unset($post_types[$exclude_post_type]);
+        }
+      }
+
+      return $post_types;
     }
 }

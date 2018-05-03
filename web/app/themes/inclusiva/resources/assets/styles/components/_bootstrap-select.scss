@@ -3,6 +3,7 @@
     padding: $input-padding-y 0;
     background-color: transparent;
     border: 0 none;
+    border-radius: 0;
 
     .primary-nav & {
       border-bottom: 1px solid $gray-200;

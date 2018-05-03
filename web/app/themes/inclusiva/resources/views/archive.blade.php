@@ -9,7 +9,7 @@
   @endif
 <div class="row">
   @while (have_posts()) @php(the_post())
-    <div class="col-6 col-sm-4 col-lg-3">
+    <div class="content-container">
       @include('partials.content-'.get_post_type())
     </div>  
   @endwhile

@@ -24,17 +24,29 @@ export default {
       // });
 
       $('.selectpicker').selectpicker({
-        noneSelectedText: 'Buscar en...',
+        noneSelectedText: 'Todo',
         selectAllText: 'Selec.',
         deselectAllText: 'Deselec.',
+        width: '150px',
       });
 
-      $('.selectpicker').selectpicker('selectAll');
+      
 
       //OmniSearch Query
       let ajaxOmniSearch = $('.searchBox');
       let customPostTitle = '';
       let customPostExcerpt = '';
+
+      let objectToSend = {
+        action: 'ajax_omni_search',
+        postType: '',
+        txtKeyword: '',
+        max_num_pages: 0,
+        response: [],
+        bError: false,
+        vMensaje: '',
+        paged: 1,
+      };
 
       function listResults(objectToSend) {
         $.ajax({
@@ -53,6 +65,7 @@ export default {
               // ajaxOmniSearch.find('.hentry').addClass('hidden');
             },
             complete: function() {
+                $('body').addClass('show-results');              
                 // $('#txtKeyword').prop('disabled', false);
                 // $('#optMonth').prop('disabled', false);
                 // $('#optYear').prop('disabled', false);
@@ -156,33 +169,25 @@ export default {
             },
         });
       }
-      
-      let objectToSend = {
-          action: 'ajax_omni_search',
-          postType: '',
-          txtKeyword: '',
-          max_num_pages: 0,
-          response: [],
-          bError: false,
-          vMensaje: '',
-          paged: 1,
-      };
 
       $("#formSearch").keypress(function(e) {
         if (e.which === 13) {
-          objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : '';
+          objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : wp.post_types.toString();
           objectToSend.txtKeyword = $(this).val();
           objectToSend.paged = 1;
     
           if(objectToSend.txtKeyword !== ''){
             listResults(objectToSend);
+            $('[for=formSearch]').removeClass("text-danger");
+          }else{
+            $('[for=formSearch]').addClass("text-danger");
           }
         }
       });
 
       $(".selectpicker").change(function() {
         objectToSend.txtKeyword = $("#formSearch").val();
-        objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : '';
+        objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : wp.post_types.toString();
         objectToSend.paged = 1;
         /* eslint-disable no-console */
         //console.log(objectToSend.txtKeyword);
@@ -190,6 +195,18 @@ export default {
         if(objectToSend.txtKeyword !== ''){
           listResults(objectToSend);
         }
+      });
+
+      $("#syncForm").click(function(e){
+        e.preventDefault();
+        
+        objectToSend.max_num_pages = 0;
+        objectToSend.paged = 1;
+        
+        $('#formSearch').val('').focus();
+
+        $('body').removeClass('show-results');
+        $('.selectpicker').selectpicker('deselectAll');
       });
     })
     

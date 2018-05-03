@@ -18,13 +18,17 @@ add_action('wp_enqueue_scripts', function () {
       'hide_empty' => true,
     ) );
     $dir_grupos_ids = wp_list_pluck( $dir_grupos, 'term_id' );
+
+    $postTypeArr = array_values(App::postTypeArr());
+
     $ajax_params = array(
       'ajax_url' => admin_url('admin-ajax.php'),
       'ajax_nonce' => wp_create_nonce('my_nonce'),
       'upload_dir' => wp_upload_dir(),
       'is_pt'  => is_page_template(),
       'term' => get_term( get_field('doc__tipo'), '', ARRAY_A),
-      'dir_grupos_id' => $dir_grupos_ids
+      'dir_grupos_id' => $dir_grupos_ids,
+      'post_types' => $postTypeArr
     );
 
     wp_localize_script('sage/main.js', 'wp', $ajax_params);
