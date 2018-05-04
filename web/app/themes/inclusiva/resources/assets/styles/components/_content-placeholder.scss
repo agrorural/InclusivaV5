@@ -1,0 +1,162 @@
+// .preloaded {
+//   min-height: 0.1rem;
+//   margin-top: 2rem;
+//   margin-bottom: 2rem;
+
+//   .entry-container {
+//     .entry-body {
+//       height: auto;
+
+//       .entry-title,
+//       .entry-content,
+//       .post-meta,
+//       .post-meta {
+//         p {
+//           height: 1rem;
+//         }
+//       }
+
+//       .entry-title {
+//         margin-top: 2rem;
+//         margin-bottom: 3rem;
+//       }
+
+//       .entry-content {
+//         margin-top: 1rem;
+//       }
+
+//       .post-meta {
+//         margin-bottom: 2rem;
+//         position: relative;
+//         padding-left: 0;
+//         padding-right: 0;
+//         border: 0;
+//         height: auto;
+//       }
+//     }
+//   }
+
+//   .is-preloaded {
+//     position: relative;
+//     background: rgba(white, 0.7);
+//     overflow: hidden;
+
+//     &::after {
+//       content: '';
+//       position: absolute;
+//       width: 100%;
+//       height: 100%;
+//       top: 0;
+//       left: 0;
+//       background: linear-gradient(to right, rgba(238, 238, 238, 0) 0%, rgba(238, 238, 238, 1) 50%, rgba(238, 238, 238, 0) 100%);
+//       transition: loading 1s ease-in-out infinite forwards;
+//     }
+//   }
+// }
+
+// @keyframes loading {
+//   from {
+//     transform: translateX(-250px);
+//   }
+
+//   to {
+//     transform: translateX(250px);
+//   }
+// }
+
+.content-placeholder {
+  .entry-container {
+    position: relative;
+    background: $white;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    margin: 10px 15px;
+    height: 150px;
+
+    .entry-body {
+      animation-name: contentPlaceholderAnimate;
+      background-image: gradient(linear, center top, center bottom, from(deg), color-stop(0, red), color-stop(0.15, orange), color-stop(0.3, yellow), color-stop(0.45, green), color-stop(0.6, blue), color-stop(0.75, indigo), color-stop(0.8, violet), to(red));
+      background-repeat: repeat;
+      background-size: 50% auto;
+
+      div {
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: contentPlaceHolder;
+        animation-timing-function: linear;
+        background: #f6f7f8;
+        background-image: gradient(linear, left center, right center, from(#f6f7f8), color-stop(0.2, #edeef1), color-stop(0.4, #f6f7f8), to(#f6f7f8));
+        background-repeat: no-repeat;
+        background-size: 800px 104px;
+        height: 104px;
+        position: relative;
+        position: absolute;
+        right: 15px;
+        left: 15px;
+        top: 15px;
+
+        &.avatar {
+          height: 60px;
+          width: 60px;
+          border-radius: 60px;
+          right: auto;
+        }
+
+        &.author {
+          top: 20px;
+          height: 20px;
+          left: 95px;
+          width: 150px;
+        }
+
+        &.label {
+          left: 95px;
+          top: 50px;
+          height: 10px;
+          width: 100px;
+        }
+
+        &.content-1,
+        &.content-2,
+        &.content-3 {
+          left: 15px;
+          right: 15px;
+          height: 10px;
+        }
+
+        &.content-1 {
+          top: 100px;
+        }
+
+        &.content-2 {
+          top: 120px;
+        }
+
+        &.content-3 {
+          top: 140px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes contentPlaceHolder {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@keyframes contentPlaceholderAnimate {
+  from {
+    background-position: top left;
+  }
+
+  to {
+    background-position: top right;
+  }
+}

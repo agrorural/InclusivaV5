@@ -30,8 +30,6 @@ export default {
         width: '150px',
       });
 
-      
-
       //OmniSearch Query
       let ajaxOmniSearch = $('.searchBox');
       let customPostTitle = '';
@@ -53,29 +51,28 @@ export default {
             url: wp.ajax_url,
             data: objectToSend,
             beforeSend: function() {
+              // $('body').addClass('hide-results');
+              // $('body').removeClass('show-results');
               // $('#txtKeyword').prop('disabled', true);
-              // $('#optMonth').prop('disabled', true);
-              // $('#optYear').prop('disabled', true);
-              // $('#optPerPage').prop('disabled', true);
-              // $("#btnDocumento").prop('disabled', true).html("<i class='fas fa-circle-notch fa-spin'></i> Filtrando...");
-              // $("#btnLimpiar").prop('disabled', true).html("<i class='fas fa-sync fa-spin'></i> Limpiando...");
+              $("#cleanForm").prop('disabled', true).html("<i class='fas fa-redo fa-spin'></i>");
   
               // // Preloading
-              // ajaxOmniSearch.find('.preloaded').removeClass('hidden');
-              // ajaxOmniSearch.find('.hentry').addClass('hidden');
+              ajaxOmniSearch.find('.content-placeholder').removeClass('hidden');
+              ajaxOmniSearch.find('.hentry').addClass('hidden');
             },
             complete: function() {
-                $('body').addClass('show-results');              
+                // $('body').addClass('show-results');   
+                // $('body').removeClass('hide-results');           
                 // $('#txtKeyword').prop('disabled', false);
                 // $('#optMonth').prop('disabled', false);
                 // $('#optYear').prop('disabled', false);
                 // $('#optPerPage').prop('disabled', false);
                 // $("#btnDocumento").prop('disabled', false).html("<i class='fas fa-filter'></i> Filtrar");
-                // $("#btnLimpiar").prop('disabled', false).html("<i class='fas fa-sync'></i> Limpiar");
+                $("#cleanForm").prop('disabled', false).html("<i class='fas fa-redo'></i>");
   
                 // // Preloading
-                // ajaxOmniSearch.find('.preloaded').addClass('hidden');
-                // ajaxOmniSearch.find('.hentry').removeClass('hidden');
+                ajaxOmniSearch.find('.content-placeholder').addClass('hidden');
+                ajaxOmniSearch.find('.hentry').removeClass('hidden');
             },
             success: function(response) {
               objectToSend = response;
@@ -172,11 +169,16 @@ export default {
 
       $("#formSearch").keypress(function(e) {
         if (e.which === 13) {
+          e.preventDefault();
+
           objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : wp.post_types.toString();
           objectToSend.txtKeyword = $(this).val();
           objectToSend.paged = 1;
     
           if(objectToSend.txtKeyword !== ''){
+            $('body').removeClass('hide-results');
+            $('body').addClass('show-results');
+            
             listResults(objectToSend);
             $('[for=formSearch]').removeClass("text-danger");
           }else{
@@ -189,15 +191,13 @@ export default {
         objectToSend.txtKeyword = $("#formSearch").val();
         objectToSend.postType = ($(".selectpicker").val() !== null) ? ($(".selectpicker").val()).toString() : wp.post_types.toString();
         objectToSend.paged = 1;
-        /* eslint-disable no-console */
-        //console.log(objectToSend.txtKeyword);
-        /* eslint-disable no-console */
+
         if(objectToSend.txtKeyword !== ''){
           listResults(objectToSend);
         }
       });
 
-      $("#syncForm").click(function(e){
+      $("#cleanForm").click(function(e){
         e.preventDefault();
         
         objectToSend.max_num_pages = 0;
@@ -206,9 +206,21 @@ export default {
         $('#formSearch').val('').focus();
 
         $('body').removeClass('show-results');
+        $('body').addClass('hide-results');
         $('.selectpicker').selectpicker('deselectAll');
+        ajaxOmniSearch.find(".search-result").empty();
+        ajaxOmniSearch.find(".wp-pagenavi").empty();
       });
-    })
+
+      $(document).on('click', '.navi', function(e) {
+        e.preventDefault();
+      
+        let page = $(this).data("id");
+        objectToSend.paged = page;
+        
+        listResults(objectToSend);
+      });
+    });
     
     // Media Query event handler
     if (matchMedia) {
@@ -232,15 +244,34 @@ export default {
     $('#showForm').click(function(e){
       e.preventDefault();
 
-      $('body').toggleClass('with-searchform');
+      if($('body').hasClass('without-searchform')){
+        $('body').removeClass('without-searchform');
+        $('body').addClass('with-searchform');
+      }else{
+        $('body').removeClass('with-searchform');
+        $('body').addClass('without-searchform');
+      }
+      
       $('#formSearch').focus();
 
-      $("#formSearch").keypress(function(e) {
-        if (e.which === 13) {
-           e.preventDefault();
-        }
-      });
+      if($('#formSearch').val() !== '' && $('body').hasClass('with-searchform')){
+        $('body').removeClass('hide-results');
+        $('body').addClass('show-results');
+      }else{
+        $('body').removeClass('show-results');
+        $('body').addClass('hide-results');
+      }
     });
+
+    // $('.navi').click(function(e){
+    //   e.preventDefault();
+
+
+    //   let page = $(this).data("id");
+
+    //   objectToSend.paged = page;
+    //   listResults(objectToSend);
+    // });
 
     // Add class when user add content to input
     $('input.form-control').focus(function() {
@@ -266,11 +297,17 @@ export default {
       if($('body').hasClass('with-searchform')){
         if(e.which === 27){
           $('body').removeClass('with-searchform');
+          $('body').addClass('without-searchform');
           $('#showForm')
           .find('[data-fa-i2svg]')
           .addClass('fa-search')
           .removeClass('fa-times');
-        }
+
+          if($('body').hasClass('show-results')){
+            $('body').removeClass('show-results');
+            $('body').addClass('hide-results');
+          }
+        } 
       }
     });
   },

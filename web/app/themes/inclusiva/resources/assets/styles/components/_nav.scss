@@ -45,76 +45,12 @@ nav {
   }
 }
 
-#primary_navigation {
-  .searchForm {
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    right: 1.5rem;
-    top: 0;
-    height: 5rem;
-
-    .form-group {
-      display: none;
-      width: 0;
-      opacity: 0;
-      margin-bottom: 0;
-      transition: all ease-out 0.3s;
-
-      input,
-      label {
-        color: $white;
-        padding-left: 1.5rem;
-        margin-bottom: 0;
-      }
-
-      label {
-        display: none;
-        left: 15rem;
-      }
-
-      .btn-link {
-        color: $yellow-200;
-      }
-    }
-
-    .bootstrap-select {
-      .dropdown-toggle {
-        color: $white;
-      }
-    }
-
-    #showForm {
-      color: $white;
-    }
-  }
-
-  .search-result-container {
-    position: absolute;
-    display: none;
-    transition: all ease-in 0.5s;
-    background-color: $white;
-    z-index: 100;
-    left: 0;
-    right: 0;
-    height: auto;
-
-    .search-result {
-      padding: 1.5rem;
-    }
-
-    .show-results & {
-      display: block;
-    }
-  }
-}
-
 #mega-menu-wrap-primary_navigation #mega-menu-primary_navigation,
 #mega-menu-wrap-primary_navigation .mega-menu-toggle {
   transition: all ease 0.1s;
 }
 
-#mega-menu-wrap-primary_navigation .mega-menu-toggle .mega-toggle-block-1 .mega-toggle-label {
+.mega-toggle-label {
   display: none;
 }
 
@@ -123,33 +59,5 @@ nav {
 
   &::after {
     margin: 0;
-  }
-}
-
-.with-searchform {
-  #mega-menu-wrap-primary_navigation #mega-menu-primary_navigation,
-  #mega-menu-wrap-primary_navigation .mega-menu-toggle {
-    visibility: hidden;
-  }
-
-  #primary_navigation {
-    .searchForm {
-      left: 1.5rem;
-
-      .form-group {
-        display: flex;
-        opacity: 1;
-        width: 100%;
-
-        label {
-          display: flex;
-          width: auto;
-        }
-      }
-
-      #showForm {
-        color: $yellow-200;
-      }
-    }
   }
 }

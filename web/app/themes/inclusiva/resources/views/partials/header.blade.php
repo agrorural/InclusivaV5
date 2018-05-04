@@ -98,14 +98,17 @@
               <input type="text" class="form-control" id="formSearch">
               <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
               <div class="input-group-append">
-                <button id="syncForm" class="btn btn-link" type="button"><i class="fas fa-redo"></i></button>
+                <button id="cleanForm" class="btn btn-link" type="button"><i class="fas fa-redo"></i></button>
               </div>
             </div>
             <button id="showForm" class="btn btn-link"><i class="fas fa-search"></i></button>
           </form>
           <div class="search-result-container">
             <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
-            <div class="search-result"></div>
+
+            @include('partials.content-placeholder')
+
+            <div class="search-result content-container"></div>
             <nav class="wp-pagenavi nav nav-pills justify-content-center"></nav>
           </div>
         </div>

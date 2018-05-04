@@ -1,5 +1,5 @@
 {{--
-  Template Name: Template Directorios
+  Template Name: Directorio
 --}}
 
 @extends('layouts.app')

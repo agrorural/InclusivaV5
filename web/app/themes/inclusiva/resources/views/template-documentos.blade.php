@@ -1,5 +1,5 @@
 {{--
-  Template Name: Template Documentos
+  Template Name: Documentos
 --}}
 
 @extends('layouts.app')

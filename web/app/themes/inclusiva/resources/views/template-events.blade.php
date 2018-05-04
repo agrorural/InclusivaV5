@@ -1,5 +1,5 @@
 {{--
-  Template Name: Events Template
+  Template Name: Eventos
 --}}
 
 @extends('layouts.app')

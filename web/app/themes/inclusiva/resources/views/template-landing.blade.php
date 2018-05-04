@@ -1,5 +1,5 @@
 {{--
-  Template Name: Personalizado
+  Template Name: Página de Lanzamiento
 --}}
 
 @extends('layouts.app')

@@ -70,6 +70,12 @@ body {
   @include font-family();
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
 h1,
 h2,
 h3,
