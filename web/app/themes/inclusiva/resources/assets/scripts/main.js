@@ -13,6 +13,7 @@ import category from './routes/category';
 import aboutUs from './routes/about';
 import templateDocumentos from './routes/templateDocumentos';
 import templateDirectorios from './routes/templateDirectorios';
+import templateLanding from './routes/templateLanding';
 import direccionesZonales from './routes/direccionesZonales';
 
 /** Populate Router instance with DOM routes */
@@ -33,6 +34,8 @@ const routes = new Router({
   templateDirectorios,
   // Page Direcciones Zonales
   direccionesZonales,
+  // Page Template Landing Page
+  templateLanding,
 });
 
 // Load Events

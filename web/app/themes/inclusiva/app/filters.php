@@ -40,6 +40,11 @@ add_filter('body_class', function (array $classes) {
       $classes[] = 'theme-blue';
     }
 
+    /** Add class if is category */
+    if (is_tag()) {
+      $classes[] = 'theme-green';
+    }
+
     /** Add class if is is producto post type archive */
     if (is_post_type_archive('producto') || is_singular('producto') || is_tax(array('marca', 'productor')) ) {
       $classes[] = 'theme-purple';

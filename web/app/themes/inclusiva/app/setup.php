@@ -13,23 +13,37 @@ use Roots\Sage\Template\BladeProvider;
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
-    $dir_grupos = get_terms( array(
-      'taxonomy' => 'grupos',
-      'hide_empty' => true,
-    ) );
-    $dir_grupos_ids = wp_list_pluck( $dir_grupos, 'term_id' );
-
-    $postTypeArr = array_values(App::postTypeArr());
 
     $ajax_params = array(
       'ajax_url' => admin_url('admin-ajax.php'),
       'ajax_nonce' => wp_create_nonce('my_nonce'),
       'upload_dir' => wp_upload_dir(),
       'is_pt'  => is_page_template(),
-      'term' => get_term( get_field('doc__tipo'), '', ARRAY_A),
-      'dir_grupos_id' => $dir_grupos_ids,
-      'post_types' => $postTypeArr
     );
+
+    if( is_page_template( 'views/template-directorios.blade.php' ) ) {
+      $dir_grupos = get_terms( array(
+        'taxonomy' => 'grupos',
+        'hide_empty' => true,
+      ) );
+  
+      $dir_grupos_ids = wp_list_pluck( $dir_grupos, 'term_id' );
+  
+      $postTypeArr = array_values(App::postTypeArr());
+
+      $ajax_params['dir_grupos_id'] = $dir_grupos_ids;
+      $ajax_params['post_types'] = $postTypeArr;
+    }
+
+    if( is_page_template( 'views/template-documentos.blade.php' ) ) {
+      $ajax_params['term'] = get_term( get_field('doc__tipo'), '', ARRAY_A);
+    }
+
+    if( is_page_template( 'views/template-landing.blade.php' ) ) {
+      $ajax_params['has_slider'] = get_field('hasSlider');
+      $ajax_params['has_banners'] = get_field('hasBanners');
+      $ajax_params['has_videos'] = get_field('hasVideos');
+    }
 
     wp_localize_script('sage/main.js', 'wp', $ajax_params);
 }, 100);

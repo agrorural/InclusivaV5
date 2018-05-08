@@ -30,6 +30,8 @@
       <hr class="my-4">
       
       @include('partials.form.dir-filter')
+    @elseif (is_page_template( 'views/template-landing.blade.php' ))
+      Hola mundo
     @endif
   </div>
 </div>

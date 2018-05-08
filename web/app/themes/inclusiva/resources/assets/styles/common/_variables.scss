@@ -295,6 +295,10 @@ $link-hover-decoration: none;
         @include button-variant($value, $value);
       }
 
+      .btn-outline-#{$color} {
+        @include button-outline-variant($value);
+      }
+
       .badge-#{$color} {
         @include badge-variant($value);
       }

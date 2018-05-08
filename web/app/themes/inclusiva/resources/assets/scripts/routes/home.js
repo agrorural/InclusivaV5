@@ -18,57 +18,7 @@ export default {
           jQuery('body').removeClass('content-collapsed');
       }
   }
-
-  // // Params
-  // let homeSliderSelector = '#home__slider',
-  //   homeSliderOptions = {
-  //     init: false,
-  //     loop: true,
-  //     speed: 800,
-  //     autoplay: {
-  //       delay: 2500,
-  //       disableOnInteraction: true,
-  //     },
-  //     slidesPerView: 1,
-  //     effect: 'cube',
-  //     // spaceBetween: 10,
-  //     centeredSlides : true,
-  //     // effect: 'fade', // 'cube', 'fade', 'coverflow',
-  //     // coverflowEffect: {
-  //     //   rotate: 50, // Slide rotate in degrees
-  //     //   stretch: 0, // Stretch space between slides (in px)
-  //     //   depth: 100, // Depth offset in px (slides translate in Z axis)
-  //     //   modifier: 1, // Effect multipler
-  //     //   slideShadows : true, // Enables slides shadows
-  //     // },
-  //     grabCursor: true,
-  //     pagination: {
-  //       el: '#home-pagination',
-  //       // type: 'progressbar',
-  //     },
-  //     navigation: {
-  //       nextEl: '#home-arrow-right',
-  //       prevEl: '#home-arrow-left',
-  //     },
-  //     breakpoints: {
-  //       767: {
-  //         slidesPerView: 1,
-  //         spaceBetween: 0,
-  //       },
-  //     },
-  //     // Events
-  //     on: {
-  //       imagesReady: function(){
-  //         this.el.classList.remove('loading');
-  //       },
-  //     },
-  //   };
   
-  // let homeSlider = new Swiper(homeSliderSelector, homeSliderOptions);
-
-  // // Initialize homeSlider
-  // homeSlider.init();
-
   var homeSliderSelector = '#home__slider',
   isMove = false,
   homeSliderOptions = {

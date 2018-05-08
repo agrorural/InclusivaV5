@@ -33,4 +33,29 @@
   .category & {
     padding-bottom: 0;
   }
+
+  &.with-slider {
+    padding: 0;
+
+    .content {
+      position: absolute;
+      bottom: 0;
+      padding: 0 3rem 3rem;
+
+      @include bg-overlay();
+
+      .media {
+        position: relative;
+        z-index: 1;
+
+        .media-body {
+          color: $white;
+        }
+
+        p {
+          @include font-size(16);
+        }
+      }
+    }
+  }
 }
