@@ -215,10 +215,22 @@ a {
 
 //section
 .section {
-  padding: 4rem 0 1.5rem;
+  padding: 4rem 0 1.75rem;
 
   @include media-breakpoint-up(md) {
-    padding: 7.5rem 0 3rem;
+    padding: 7.5rem 0 5rem;
+  }
+
+  .section-title {
+    @include font-family('ubuntu', 'regular');
+
+    position: relative;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+
+    &.who-we-are {
+      @include font-size(36);
+    }
   }
 
   .section-title,
@@ -233,6 +245,12 @@ a {
       background-color: transparent;
     }
   }
+}
+
+.section-title:not(.who-we-are) {
+  @include font-size(18);
+
+  text-transform: uppercase;
 }
 
 //Forms

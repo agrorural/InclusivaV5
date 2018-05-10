@@ -1,22 +1,28 @@
 {{--
   Template Name: Página de Lanzamiento
 --}}
+{{-- @debug --}}
 
 @php
-  $posts = Landing::query('post', 'post_tag', $feed->slug);
-  $the_banners = Landing::query('banners', 'posiciones', $banners->slug);
-  $videos = Landing::query('post', 'post_format', $feed->slug, -1);
-@endphp
+  ( $feed === "" || $feed === false ) ? $the_posts = null : $the_posts = Landing::query('post', 'post_tag', $feed->slug);
+  ( $banners === "" || $banners === false ) ? $the_banners = null : $the_banners = Landing::query('banners', 'posiciones', $banners->slug);
+  ( $feed === "" || $feed === false ) ? $the_videos = null : $the_videos = Landing::query('post', 'post_format', $feed->slug, -1);
 
+  // var_dump( $has_menu );
+@endphp
 
 
 @extends('layouts.landing')
 
 @section('content')
-  <div class="row">
+  <h1>{!! App::title() !!}</h1>
+  {!! App::description() !!}
+@endsection
 
-    @if($posts->have_posts())
-      @while($posts->have_posts()) @php($posts->the_post())
+@section('content-feed')
+<div class="row">
+    @if($the_posts !== null && $the_posts->have_posts())
+      @while($the_posts->have_posts()) @php($the_posts->the_post())
         <div class="content-container">
           @include('partials.content-'.get_post_type())
         </div>
@@ -36,11 +42,11 @@
 @endsection
 
 @section('content-banners')
-  @if($the_banners->have_posts())
-    <section class="section">
+  @if($the_banners !== null  && $the_banners->have_posts())
+    <section id="banners" class="section">
       <div class="container">
           <header class="section-header">
-            <h2 class="section-title">Banners</h2>
+            <h2 class="section-title">Enlaces de Interés</h2>
           </header>
 
           <div id="banner__slider" class="swiper-container loading">
@@ -63,8 +69,8 @@
 @endsection
 
 @section('content-videos')
-  @if($videos->have_posts())
-    <section class="section">
+  @if($the_videos !== null  && $the_videos->have_posts())
+    <section id="videos" class="section">
       <div class="container">
           <header class="section-header">
             <h2 class="section-title">Videos</h2>
@@ -73,7 +79,7 @@
           <div id="video__slider" class="swiper-container loading">
             <div class="swiper-wrapper">
           
-              @while($videos->have_posts()) @php($videos->the_post())
+              @while($the_videos->have_posts()) @php($the_videos->the_post())
                 @include('partials.content-slide')
               @endwhile
           

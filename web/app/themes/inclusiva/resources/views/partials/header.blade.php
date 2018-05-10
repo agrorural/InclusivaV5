@@ -2,10 +2,10 @@
   <div class="container">
     <nav class="">
       @if (has_nav_menu('super_navigation_left'))
-        {!! wp_nav_menu(['theme_location' => 'super_navigation_left', 'menu_class' => 'left-links', 'container' => '']) !!}
+        {!! wp_nav_menu(['theme_location' => 'super_navigation_left', 'depth' => 1, 'menu_class' => 'left-links', 'container' => '']) !!}
       @endif
       @if (has_nav_menu('super_navigation_right'))
-        {!! wp_nav_menu(['theme_location' => 'super_navigation_right', 'menu_class' => 'right-links', 'container' => '']) !!}
+        {!! wp_nav_menu(['theme_location' => 'super_navigation_right', 'depth' => 1, 'menu_class' => 'right-links', 'container' => '']) !!}
       @endif 
     </nav>
   </div>

@@ -19,6 +19,7 @@ add_action('wp_enqueue_scripts', function () {
       'ajax_nonce' => wp_create_nonce('my_nonce'),
       'upload_dir' => wp_upload_dir(),
       'is_pt'  => is_page_template(),
+      'post_types' => array_values(App::postTypeArr())
     );
 
     if( is_page_template( 'views/template-directorios.blade.php' ) ) {
@@ -28,11 +29,8 @@ add_action('wp_enqueue_scripts', function () {
       ) );
   
       $dir_grupos_ids = wp_list_pluck( $dir_grupos, 'term_id' );
-  
-      $postTypeArr = array_values(App::postTypeArr());
 
       $ajax_params['dir_grupos_id'] = $dir_grupos_ids;
-      $ajax_params['post_types'] = $postTypeArr;
     }
 
     if( is_page_template( 'views/template-documentos.blade.php' ) ) {
@@ -40,7 +38,7 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     if( is_page_template( 'views/template-landing.blade.php' ) ) {
-      $ajax_params['has_slider'] = get_field('hasSlider');
+      $ajax_params['header_type'] = get_field('headerType');
       $ajax_params['has_banners'] = get_field('hasBanners');
       $ajax_params['has_videos'] = get_field('hasVideos');
     }
@@ -80,6 +78,7 @@ add_action('after_setup_theme', function () {
         'forms_navigation' => __('Forms Navigation', 'sage'),
         'footer_navigation' => __('Footer Navigation', 'sage'),
         'docs_navigation' => __('Docs Navigation', 'sage'),
+        'csst_navigation' => __('CSST Navigation', 'sage'),
         'categories_navigation' => __('Categories Navigation', 'sage'),
     ]);
 

@@ -29,7 +29,7 @@
         @endphp
       </aside>
       <div class="section-content">
-        <h2 class="section-title">{!! $the_post->post_title !!}</h2>
+        <h2 class="section-title who-we-are">{!! $the_post->post_title !!}</h2>
         {!! $content_parts['main'] !!}
         <a href="{{get_permalink($page_1_ID)}}" class="btn btn-outline-primary">Más info</a>
 

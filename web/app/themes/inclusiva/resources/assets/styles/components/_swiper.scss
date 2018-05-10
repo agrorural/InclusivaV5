@@ -63,8 +63,8 @@
   }
 
   &:hover {
-    .swiper-button-prev,
-    .swiper-button-next {
+    .swiper-button-prev:not(.swiper-button-disabled),
+    .swiper-button-next:not(.swiper-button-disabled) {
       transform: translateX(0);
       opacity: 1;
       visibility: visible;
@@ -227,10 +227,10 @@
 }
 
 #landing__slider {
-  height: 30rem;
+  height: 40rem;
 
   .swiper-slide {
-    height: 30rem;
+    height: 40rem;
     background-position: center;
     background-size: cover;
     perspective: 1600px;
@@ -245,5 +245,15 @@
     background-position: center;
     background-size: cover;
     perspective: 1600px;
+  }
+}
+
+#video__slider {
+  .slide-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 }

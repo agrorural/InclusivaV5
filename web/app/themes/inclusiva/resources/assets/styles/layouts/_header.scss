@@ -1,13 +1,22 @@
 header {
   &.super-header {
-    background-color: $primary;
+    background-color: transparent;
 
     nav {
-      @extend .navbar-dark;
       @extend .navbar-expand;
 
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       flex-direction: column-reverse;
       padding: 0;
+
+      a {
+        padding: 1.5rem;
+        color: $black-200;
+
+        &:hover {
+          color: $green-200;
+        }
+      }
 
       @include media-breakpoint-up(sm) {
         flex-direction: row;
@@ -35,11 +44,11 @@ header {
         li {
           &.pte {
             a {
-              background-image: url(../images/pte__icon.png);
+              background-image: url(../images/pte__logo.jpg);
               background-position: right center;
               background-repeat: no-repeat;
-              width: 75px;
-              height: 34px;
+              width: 8.5rem;
+              height: 4.5rem;
 
               span {
                 @extend .text-hide;
@@ -54,11 +63,15 @@ header {
   &.branding {
     background-color: $white;
 
+    nav {
+      padding: 5rem 0 3rem;
+    }
+
     @include media-breakpoint-down(xs) {
       nav {
         flex-direction: column;
-        margin: 1.5rem auto;
-        padding: 0;
+        margin: auto;
+        padding: 1.5rem;
 
         a {
           margin: 0;

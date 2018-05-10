@@ -1,0 +1,31 @@
+.template-landing {
+  .jumbotron {
+    .page-header {
+      @include abs-center();
+
+      width: 75%;
+      height: 40rem;
+      z-index: 1;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+
+  .wrap {
+    @extend .section;
+  }
+
+  #banners {
+    background-color: $gray-100;
+  }
+
+  #videos {
+    margin-bottom: 0;
+  }
+}

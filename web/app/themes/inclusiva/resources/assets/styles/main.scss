@@ -20,6 +20,7 @@
 @include theme('theme-blue', $blue-200, $blue-sky-300, $lime);
 @include theme('theme-gray', $black-200, $gray-100, $green-light-100);
 @include theme('theme-purple', $purple-200, $purple-100, $orange-200);
+@include theme('theme-orange', $orange-300, $orange-200, $purple-200);
 
 @import "common/global";
 @import "components/buttons";
@@ -37,6 +38,7 @@
 @import "components/bootstrap-select";
 @import "components/searchform";
 @import "components/content-placeholder";
+@import "components/template-landing";
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";

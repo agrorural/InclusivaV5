@@ -4,7 +4,7 @@ import Swiper from 'swiper/dist/js/swiper.js';
 export default {
   init() {
     // JavaScript to be fired on the about us page
-    if(wp.has_slider === "1") {
+    if(wp.header_type === "slider") {
       let landingSliderSelector = '#landing__slider',
       landingSliderOptions = {
         slidesPerView: 1,
@@ -38,6 +38,17 @@ export default {
           nextEl: '#banner-arrow-right',
           prevEl: '#banner-arrow-left',
         },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+          },
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+        },
         // Events
         on: {
           imagesReady: function(){
@@ -61,6 +72,17 @@ export default {
         navigation: {
           nextEl: '#video-arrow-right',
           prevEl: '#video-arrow-left',
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+          },
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
         },
         // Events
         on: {

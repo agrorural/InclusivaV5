@@ -1,7 +1,6 @@
 footer {
   &.content-info {
     background-image: url(../images/footer__bg.jpg);
-    margin-top: 3rem;
 
     @include font-size(13);
     @include bg-cover();
@@ -78,22 +77,32 @@ footer {
   }
 
   #footer__post {
-    a {
-      &::after {
-        background: $white;
-      }
-    }
+    background-color: $white;
 
     .footer__post__navs {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 1.5rem 0;
 
-      @include media-breakpoint-up(lg) {
+      .nav-link {
+        padding: 0;
+      }
+
+      @include media-breakpoint-up(md) {
         flex-direction: row;
         justify-content: space-between;
       }
+    }
+
+    &::after {
+      @include bg-gradient($green-100 50%, rgba($green-200, 1) 50%, 45deg);
+
+      position: absolute;
+      content: '';
+      height: 2rem;
+      width: 100%;
     }
   }
 }

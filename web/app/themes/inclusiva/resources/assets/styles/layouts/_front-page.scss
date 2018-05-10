@@ -1,21 +1,5 @@
 .home {
   .section {
-    .section-title {
-      position: relative;
-      padding-bottom: 0.5rem;
-      margin-bottom: 3rem;
-
-      &::after {
-        position: absolute;
-        content: "";
-        left: 0;
-        bottom: 0;
-        width: 30px;
-        height: 2px;
-        background-color: transparent;
-      }
-    }
-
     .entry-category {
       @include font-family('ubuntu','bold');
       @include font-size(11);

@@ -224,15 +224,17 @@ $link-hover-decoration: none;
       }
     }
 
-    .section {
-      background-color: rgba($secondary-color, 0.15);
-      margin-bottom: 3rem;
-      margin-top: -2rem;
-    }
-
     .entry-share {
       a {
         background-color: rgba($primary, 0.75);
+      }
+    }
+
+    .slide-link {
+      color: rgba($primary, 0.5);
+
+      &:hover {
+        color: $primary;
       }
     }
 
@@ -257,6 +259,20 @@ $link-hover-decoration: none;
     .entry-category {
       a:hover {
         color: $link-hover-color;
+      }
+    }
+
+
+    .section {
+      background-color: rgba($secondary-color, 0.15);
+      margin-bottom: 3rem;
+      margin-top: -3rem;
+
+      .section-title,
+      .widget h3 {
+        &::after {
+          background-color: $primary;
+        }
       }
     }
 

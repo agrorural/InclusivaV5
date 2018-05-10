@@ -65,39 +65,40 @@
   @endforeach
 @else
   <figure @php(post_class("swiper-slide")) style="background-image:url( {{ the_post_thumbnail_url( 'full' ) }} )">
-    @if ( $format )
-      <span class="fa-layers fa-fw fa-3x format">
-        <i class="fas fa-circle data-fa-transform="shrink-6""></i>
-          @if ( $format == "gallery" )
-            <i class="fa-inverse fas fa-camera fa-sm" data-fa-transform="shrink-6"></i>
-          @elseif ( $format == "video" )
-            <i class="fa-inverse fas fa-video fa-sm" data-fa-transform="shrink-6"></i>
-          @endif
-      </span>
-    @endif
-    <picture>
-      <img src="{{ the_post_thumbnail_url( 'full' ) }}" alt="{{ get_the_title() }}" class="entity-img" />
-    </picture>
-    <figcaption class="content entry-body">
-      <header>
-        <h3 class="title entry-title" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">
-          <a class="slide-link" href="{{ get_permalink() }}">
+    <a class="slide-link" href="{{ get_permalink() }}">
+      @if ( $format )
+        <span class="fa-layers fa-fw fa-3x format">
+          <i class="fas fa-circle data-fa-transform="shrink-6""></i>
+            @if ( $format == "gallery" )
+              <i class="fa-inverse fas fa-camera fa-sm" data-fa-transform="shrink-6"></i>
+            @elseif ( $format == "video" )
+              <i class="fa-inverse fas fa-play fa-sm" data-fa-transform="shrink-6"></i>
+            @endif
+        </span>
+      @endif
+      <picture>
+        <img src="{{ the_post_thumbnail_url( 'full' ) }}" alt="{{ get_the_title() }}" class="entity-img" />
+      </picture>
+      @if ( !is_page_template( 'views/template-landing.blade.php' ) )
+      <figcaption class="content entry-body">
+        <header>
+          <h3 class="title entry-title" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">
             {{ get_the_title() }}
-          </a>
-        </h3>
-      </header>
-      <div class="entry-summary">
-        @if ( $the_post_type == "banners" )
-          <span class="caption" data-swiper-parallax="-20%">
-            @php(the_content())
-          </span>
-        @else
-          <time class="caption" data-swiper-parallax="-20%">
-            {{ get_the_date() }}
-          </time>
+          </h3>
+        </header>
+          <div class="entry-summary">
+            @if ( $the_post_type == "banners" )
+              <span class="caption" data-swiper-parallax="-20%">
+                @php(the_content())
+              </span>
+            @else
+              <time class="caption" data-swiper-parallax="-20%">
+                {{ get_the_date() }}
+              </time>
+            @endif
+          </div>
+        </figcaption>
         @endif
-      </div>
-      
-    </figcaption>
+    </a>
   </figure>
 @endif

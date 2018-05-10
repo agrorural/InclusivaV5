@@ -5,8 +5,8 @@
     @php(do_action('get_header'))
     @include('partials.header')
     @include('partials.jumbotron.landing')
-    
-    @if ( $has_feed )
+    {{-- @debug --}}
+    @if( !$is_front )
       <div class="wrap container" role="document">
         <div class="content">
           <main class="main">
@@ -20,13 +20,23 @@
         </div>
       </div>
     @endif
+    
+    @if ( $has_feed )
+      <div class="container" role="document">
+        @yield('content-feed')
+      </div>
+    @endif
 
     @if ( $has_banners )
-      @yield('content-banners')
+      <div class="container" role="document">
+        @yield('content-banners')
+      </div>
     @endif
 
     @if ( $has_videos )
-      @yield('content-videos')
+      <div class="container" role="document">
+        @yield('content-videos')
+      </div>
     @endif
 
     @php(do_action('get_footer'))

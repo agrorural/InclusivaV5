@@ -1,5 +1,5 @@
 // SimplebarJS
-import SimpleBar from 'SimpleBar';
+import SimpleBar from 'simplebar';
 
 export default {
   init() {

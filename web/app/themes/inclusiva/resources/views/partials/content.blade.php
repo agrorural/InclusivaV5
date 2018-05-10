@@ -13,7 +13,7 @@
               @if ( $format == "gallery" )
                 <i class="fa-inverse fas fa-camera"></i>
               @elseif ( $format == "video" )
-                <i class="fa-inverse fas fa-video"></i>
+                <i class="fa-inverse fas fa-play"></i>
               @elseif ( $format == "aside" )
                 <i class="fa-inverse fas fa-bookmark"></i>
               @endif

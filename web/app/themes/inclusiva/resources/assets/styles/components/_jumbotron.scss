@@ -20,10 +20,9 @@
     flex-direction: row;
   }
 
-  // .template-documentos &,
-  // .single-documentos & {
-  //   @include section-palette($green-100, $yellow-200, true);
-  // }
+  .template-landing & {
+    height: 40rem;
+  }
 
   .direcciones-zonales & {
     @include section-palette($blue-100, $lime, true);
@@ -37,25 +36,16 @@
   &.with-slider {
     padding: 0;
 
-    .content {
-      position: absolute;
-      bottom: 0;
-      padding: 0 3rem 3rem;
-
-      @include bg-overlay();
-
-      .media {
-        position: relative;
-        z-index: 1;
-
-        .media-body {
-          color: $white;
-        }
-
-        p {
-          @include font-size(16);
-        }
-      }
+    .swiper-slide {
+      @include bg-overlay($black);
     }
+  }
+
+  &.with-thumbnail {
+    @include bg-overlay($black);
+  }
+
+  &.with-menu {
+    margin-bottom: 0;
   }
 }
