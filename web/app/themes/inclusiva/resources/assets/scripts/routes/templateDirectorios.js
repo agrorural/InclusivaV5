@@ -75,6 +75,10 @@ export default {
 
                   ajaxDirSearch.find(".search-result").append(objectToSend.vMensaje);
               } else {
+                /* eslint-disable no-console */
+                console.log(objectToSend);
+                /* eslint-enable no-console */
+                
                 for (var i = 0; i < objectToSend.response.length; i++) {
                   objectToSend.response[i].html = '';
                   
@@ -84,7 +88,7 @@ export default {
                     objectToSend.response[i].html += '</h3>';
                   }
        
-                  objectToSend.response[i].html += '<article class="post-' + objectToSend.response[i].id + ' status-publish hentry directorios hidden">';
+                  objectToSend.response[i].html += '<article class="' + objectToSend.response[i].post_class + '">';
                   objectToSend.response[i].html += '<div class="media">';
                   objectToSend.response[i].html += '<img class="mr-3" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="55" heigh="60" />';
                   objectToSend.response[i].html += '<div class="entry-body media-body">';

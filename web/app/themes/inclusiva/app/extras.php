@@ -351,11 +351,15 @@ function ajax_dir_search_callback(){
             $snt_correo = antispambot( get_field('dir_correo') );
             $dir_correo = '<a href="mailto:' . $snt_correo . ' ">' . $snt_correo . '</a>';
 
+            $postClass = get_post_class( get_the_ID() );
+
             if (wp_get_post_parent_id(get_the_ID()) === 0){
               $parentClass = 'father';
             }else{
               $parentClass = 'child';
             }
+
+            array_push($postClass, $parentClass);
             
             $isOpen = false;
             $isClose = false;
@@ -371,7 +375,6 @@ function ajax_dir_search_callback(){
             }
 
             $objectToSend->response[] = array(
-                "id"              =>  get_the_ID(),
                 "title"           => get_the_title(),
                 "slug"            =>  get_post_field( 'post_name', get_post() ),
                 "dir_responsable"        => get_field('dir_responsable'),
@@ -386,7 +389,7 @@ function ajax_dir_search_callback(){
                 "isClose" => $isClose,
                 "loopSlug" => $loopSlug,
                 "loopTerm" => $loopTerm,
-                "parentClass" => $parentClass,
+                "post_class" =>  join( ' ', $postClass ),
                 "html"            => ''
             );
         }
