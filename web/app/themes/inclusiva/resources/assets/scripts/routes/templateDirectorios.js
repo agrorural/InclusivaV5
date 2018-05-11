@@ -3,8 +3,8 @@ export default {
     // JavaScript to be fired on the about us page
     (function($) {
       let ajaxDirSearch = $('.directorio');
+      let theHtml = '';
       let status = '';
-      // let customPostContent = '';
       // let docPath = '/transparencia/documentos/';
     
       let objectToSend = {
@@ -72,15 +72,20 @@ export default {
                   ajaxDirSearch.find(".search-result").append(objectToSend.vMensaje);
               } else {
                 /* eslint-disable no-console */
-                console.log(objectToSend);
+                //console.log(objectToSend.html);
                 /* eslint-enable no-console */
                 
                 for (var i = 0; i < objectToSend.response.length; i++) {
                   objectToSend.response[i].html = '';
-                  
-                  if( objectToSend.response[i].isClose === true ) {
+
+                  /* eslint-disable no-debugger */
+                  //debugger;
+                  /* eslint-enable no-debugger */
+
+                  if( objectToSend.response[i].isClose ) {
                     objectToSend.response[i].html += '</div>';
                   }
+                  
 
                   if( objectToSend.response[i].isOpen === true ) {
                     objectToSend.response[i].html += '<h3 class="section-title">';
@@ -181,13 +186,19 @@ export default {
                   objectToSend.response[i].html += '</article>';
                   
 
-                  if(i === (objectToSend.response.length -1) ) {
+                  if(i === (objectToSend.response.length - 1) ) {
                     objectToSend.response[i].html += '</div>';
                   }
+
+                  
     
-                  ajaxDirSearch.find(".search-result").append(objectToSend.response[i].html);
-    
+                  
+                  theHtml += objectToSend.response[i].html;
                 }
+                ajaxDirSearch.find(".search-result").append(theHtml);
+                /* eslint-disable no-console */
+                console.log(theHtml);
+                /* eslint-enable no-console */
               }
     
                 /* eslint-disable no-console */
