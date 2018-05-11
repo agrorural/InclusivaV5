@@ -20,8 +20,8 @@
         </section>
 
         <section class="widget widget_forms_menu widget_social_menu">
-            @if (has_nav_menu('forms_navigation'))
-                {!! wp_nav_menu(['theme_location' => 'forms_navigation', 'depth' => 1, 'container' => 'nav', 'container_id' => 'forms_navigation', 'menu_class' => 'nav flex-column', 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback', 'walker' => new WP_Bootstrap_Navwalker()]) !!}
+            @if (has_nav_menu('formats_navigation'))
+                {!! wp_nav_menu(['theme_location' => 'formats_navigation', 'depth' => 1, 'container' => 'nav', 'container_id' => 'forms_navigation', 'menu_class' => 'nav flex-column', 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback', 'walker' => new WP_Bootstrap_Navwalker()]) !!}
             @endif
             @if (has_nav_menu('social_navigation'))
                 {!! wp_nav_menu(['theme_location' => 'social_navigation', 'depth' => 1, 'container' => 'nav', 'container_id' => 'social_navigation', 'menu_class' => 'nav', 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback', 'walker' => new WP_Bootstrap_Navwalker()]) !!}

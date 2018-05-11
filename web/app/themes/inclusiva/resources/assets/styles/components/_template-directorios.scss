@@ -1,0 +1,58 @@
+.template-directorios {
+  .section {
+    background-color: transparent;
+  }
+
+  .search-result {
+    h3 {
+      &:not(:first-child) {
+        margin-top: 5rem;
+      }
+    }
+  }
+
+  article {
+    .media {
+      @extend .card;
+      @extend .flex-sm-column;
+      @extend .flex-md-row;
+      @extend .mb-4;
+
+      height: 12rem;
+    }
+
+    img {
+      @extend .d-none;
+      @extend .d-lg-block;
+
+      width: 12%;
+      height: 100%;
+    }
+
+    .media-body {
+      @extend .card-body;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .align-items-start;
+
+      height: 100%;
+    }
+
+    .entry-details {
+      @extend .card-footer;
+      @extend .text-muted;
+
+      width: 30%;
+      height: 100%;
+      padding: 1.25rem;
+    }
+
+    .nav {
+      font-size: 85%;
+    }
+
+    &.child {
+      margin-left: 1.5rem;
+    }
+  }
+}

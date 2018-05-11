@@ -3,7 +3,7 @@ export default {
     // JavaScript to be fired on the about us page
     (function($) {
       let ajaxDirSearch = $('.directorio');
-      // let termPath = '';
+      let status = '';
       // let customPostContent = '';
       // let docPath = '/transparencia/documentos/';
     
@@ -44,10 +44,6 @@ export default {
               },
               success: function(response) {
                 objectToSend = response;
-
-                 /* eslint-disable no-console */
-                 console.log(objectToSend);
-                 /* eslint-disable no-console */
                 
                 ajaxDirSearch.find(".search-result").empty();
     
@@ -82,33 +78,112 @@ export default {
                 for (var i = 0; i < objectToSend.response.length; i++) {
                   objectToSend.response[i].html = '';
                   
+                  if( objectToSend.response[i].isClose === true ) {
+                    objectToSend.response[i].html += '</div>';
+                  }
+
                   if( objectToSend.response[i].isOpen === true ) {
-                    objectToSend.response[i].html += '<h3 class="mt-3">';
+                    objectToSend.response[i].html += '<h3 class="section-title">';
                     objectToSend.response[i].html += objectToSend.response[i].loopTerm;
                     objectToSend.response[i].html += '</h3>';
+                    objectToSend.response[i].html += '<div class="abre">';
                   }
-       
+
+
                   objectToSend.response[i].html += '<article class="' + objectToSend.response[i].post_class + '">';
                   objectToSend.response[i].html += '<div class="media">';
-                  objectToSend.response[i].html += '<img class="mr-3" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="55" heigh="60" />';
+                  objectToSend.response[i].html += '<img class="card-img" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="auto" heigh="80" />';
                   objectToSend.response[i].html += '<div class="entry-body media-body">';
                   objectToSend.response[i].html += '<small>';
-                  objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (objectToSend.response[i].title.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") : objectToSend.response[i].title;
+                  
+                  if(objectToSend.response[i].dir_situacion === "Encargado") {
+                    status = ' (E)'
+                  }else{
+                    status = '';
+                  }
+                  
+                  objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (objectToSend.response[i].title.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") + status : objectToSend.response[i].title + status;
                   objectToSend.response[i].html += '</small>';
                   objectToSend.response[i].html += '<h5 class="entry-title">';
                   objectToSend.response[i].html += objectToSend.response[i].dir_responsable;
                   objectToSend.response[i].html += '</h5>';
-                  objectToSend.response[i].html += '<li>';
-                  objectToSend.response[i].html += objectToSend.response[i].dir_correo;
-                  objectToSend.response[i].html += '</li>';
-                  objectToSend.response[i].html += '<ul>';
+                  objectToSend.response[i].html += '<ul class="nav flex-column">';
+                  
+                  if (objectToSend.response[i].dir_correo !== false) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += objectToSend.response[i].dir_correo;
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  if (objectToSend.response[i].phoneExt !== null || objectToSend.response[i].phoneLocal !== null || objectToSend.response[i].phoneLocal2 !== null || objectToSend.response[i].phoneDirect !== null) {
+                    objectToSend.response[i].html += '<li class="nav-item phone">';
+                    
+                    if(objectToSend.response[i].phoneExt !== null){
+                      objectToSend.response[i].html += objectToSend.response[i].phoneExt.html;
+                    }
+                    
+                    if(objectToSend.response[i].phoneLocal !== null){
+                      objectToSend.response[i].html += objectToSend.response[i].phoneLocal.html;
+                    }
+
+                    if(objectToSend.response[i].phoneLocal2 !== null){
+                      objectToSend.response[i].html += objectToSend.response[i].phoneLocal2.html;
+                    }
+
+                    if(objectToSend.response[i].phoneDirect !== null){
+                      objectToSend.response[i].html += objectToSend.response[i].phoneDirect.html;
+                    }
+                    
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  if (objectToSend.response[i].address !== null) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += objectToSend.response[i].address;
+                    objectToSend.response[i].html += '</li>';
+                  }
+
                   objectToSend.response[i].html += '</ul>';
     
                   objectToSend.response[i].html += '</div>';
+
+                  objectToSend.response[i].html += '<div class="entry-details">';
+                  objectToSend.response[i].html += '<ul class="nav flex-column">';
+
+                  if (objectToSend.response[i].dir_cv !== false) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_cv + '">';
+                    objectToSend.response[i].html += 'Curriculum vitae';
+                    objectToSend.response[i].html += '</a>';
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  if (objectToSend.response[i].dir_resolucion !== false) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_resolucion + '">';
+                    objectToSend.response[i].html += 'Resolución';
+                    objectToSend.response[i].html += '</a>';
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  if (objectToSend.response[i].dir_dji !== false) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_dji + '">';
+                    objectToSend.response[i].html += 'Declaración Jurada de Incompatibilidades';
+                    objectToSend.response[i].html += '</a>';
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  objectToSend.response[i].html += '</ul>';
+                  objectToSend.response[i].html += '</div>';
+
                   objectToSend.response[i].html += '</div>';
                   objectToSend.response[i].html += '</article>';
-
                   
+
+                  if(i === (objectToSend.response.length -1) ) {
+                    objectToSend.response[i].html += '</div>';
+                  }
     
                   ajaxDirSearch.find(".search-result").append(objectToSend.response[i].html);
     

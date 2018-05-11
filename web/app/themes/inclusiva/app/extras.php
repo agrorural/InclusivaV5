@@ -342,11 +342,163 @@ function ajax_dir_search_callback(){
     if ( $the_dir_query->have_posts() ) {
         while ( $the_dir_query->have_posts() ) {
             $the_dir_query->the_post();
+
+            $isOpen = false;
+            $isClose = false;
             
+            $sede = get_field('dir_sede');
+            $address = get_field('dz_address', $sede->taxonomy  . '_' . $sede->term_id );
+            
+            $dir_phone_ext = get_field('dir_phone_ext');
+            $dir_phone_local = get_field('dir_phone_local');
+            $dir_phone_local_2 = get_field('dir_phone_local_2');
+            $dir_phone_direct = get_field('dir_phone_direct');
+
+            if( $dir_phone_ext !== '' ){
+              $pos1 = strpos($dir_phone_ext, "-");
+              $pos2 = strpos($dir_phone_ext, "-", $pos1 + strlen("-"));
+        
+              if ( $pos1 === 7 ) {
+        
+                if( $pos1 !== false && $pos2 !== false ) {
+                  $localNumber = substr($dir_phone_ext, 0, $pos1);
+                  $ext = substr($dir_phone_ext, ($pos1 + 1), (($pos2 - 1 ) - $pos1 ));
+                  $ext2 = substr($dir_phone_ext, ($pos2 + 1));
+        
+                  $phoneExt = array(
+                    'number' => $localNumber,
+                    'ext' => $ext,
+                    'ext2' => $ext2,
+                    'html' => '<a href="tel:+511 ' . $localNumber . ';' . $ext . '">(01) ' . $localNumber . ' axo. ' . $ext . '</a><a href="tel:' . $localNumber . ';' . $ext2 . '">(01) ' . $localNumber . ' axo. ' . $ext2 . '</a>'
+                  );
+                }
+        
+                if( $pos1 !== false && $pos2 === false ) {
+                  $localNumber = substr($dir_phone_ext, 0, $pos1); 
+                  $ext = substr($dir_phone_ext, ($pos1 + 1));
+        
+                  $phoneExt = array(
+                    'number' => $localNumber,
+                    'ext' => $ext,
+                    'ext2' => '',
+                    'html' => '<a href="tel:+511' . $localNumber . ';' . $ext . '">(01) ' . $localNumber . ' axo. ' . $ext . '</a>'
+                  );
+                }
+              }
+      
+              if ( $pos1 !== false && $pos1 !== 7 ) {
+                $phoneExt = array(
+                  'number' => '',
+                  'ext' => '',
+                  'ext2' => '',
+                  'message' => 'Solo números fijos de Lima sin codigo de ciudad y con anexo(s)'
+                );
+              }
+            }else {
+              $phoneExt = null;
+            }
+
+            if( $dir_phone_local !== '' ){
+              $pos1 = strpos($dir_phone_local, "-");
+        
+              if ( $pos1 !== 1 && $pos1 !== false ) {
+                $cityCode = substr($dir_phone_local, 0, $pos1);
+                $localNumber = substr($dir_phone_local, ($pos1 + 1)); 
+        
+                $phoneLocal = array(
+                  'code' => $cityCode,
+                  'number' => $localNumber,
+                  'html' => '<a href="tel:+51' . $cityCode . $localNumber . '">('. $cityCode . ') ' .  $localNumber . '</a>'
+                );
+              }
+      
+              if ( $pos1 === false ) {
+                $phoneLocal = null;
+              }
+      
+              if ( $pos1 === 1 ) {
+                $cityCode = substr($dir_phone_local, 0, $pos1);
+                $localNumber = substr($dir_phone_local, ($pos1 + 1)); 
+                $phoneLocal = array(
+                  'code' => $cityCode,
+                  'number' => $localNumber,
+                  'message' => 'Número de Lima',
+                  'html' => '<a href="tel:+51' . $cityCode . $localNumber . '">(01) ' . $localNumber . '</a>'                  
+                );
+              }
+            }else{
+              $phoneLocal = null;
+            }
+
+            if( $dir_phone_local_2 !== '' ){
+              $pos1 = strpos($dir_phone_local_2, "-");
+        
+              if ( $pos1 !== 1 && $pos1 !== false ) {
+                $cityCode = substr($dir_phone_local_2, 0, $pos1);
+                $localNumber = substr($dir_phone_local_2, ($pos1 + 1)); 
+        
+                $phoneLocal2 = array(
+                  'code' => $cityCode,
+                  'number' => $localNumber,
+                  'html' => '<a href="tel:+51' . $cityCode . $localNumber . '">('. $cityCode . ') ' .  $localNumber . '</a>'                  
+                );
+              }
+      
+              if ( $pos1 === false ) {
+                $phoneLocal2 = array(
+                  'city_code' => '',
+                  'number' => '',
+                  'message' => 'Ingrese codigo de ciudad'
+                );
+              }
+      
+              if ( $pos1 === 1 ) {
+                $cityCode = substr($dir_phone_local_2, 0, $pos1);
+                $localNumber = substr($dir_phone_local_2, ($pos1 + 1)); 
+                $phoneLocal2 = array(
+                  'code' => $cityCode,
+                  'number' => $localNumber,
+                  'message' => 'Número de Lima',
+                  'html' => '<a href="tel:+51' . $cityCode . $localNumber . '">(01) ' . $localNumber . '</a>'                  
+                );
+              }
+            }else{
+              $phoneLocal2 = null;
+            }
+
+            if( $dir_phone_direct !== '' ){
+              $pos1 = strpos($dir_phone_direct, "-");
+        
+              if ( $pos1 === false ) {
+                $phoneDirect = array(
+                  'number' => $dir_phone_direct,
+                  'html' => '<a href="tel:+51' . $dir_phone_direct . '">' . $dir_phone_direct . '</a>'                  
+                );
+              }
+      
+              if ( $pos1 === 1 ) {
+                $cityCode = substr($dir_phone_direct, 0, $pos1);
+                $localNumber = substr($dir_phone_direct, ($pos1 + 1)); 
+                
+                $phoneDirect = array(
+                  'code' => $cityCode,
+                  'number' => $localNumber,
+                  'message' => 'Número de Lima',
+                  'html' => '<a href="tel:+511' . $localNumber . ';' . $ext . '">(01) ' . $localNumber . ' axo. ' . $ext . '</a>'
+                );
+              }
+
+            }else{
+              $phoneDirect = null;
+            }
+            
+
             $terms = wp_get_object_terms(get_the_ID(), 'grupos');
+            
             $tempTerm = $terms[0]->name;
             $loopTerm = $terms[0]->name;
             $loopSlug = $terms[0]->slug;
+            
             $dir_imagen = ( get_field('dir_imagen') ) ? get_field('dir_imagen')['url'] : \App\asset_path('images/avatar--default.jpg');
             $snt_correo = antispambot( get_field('dir_correo') );
             $dir_correo = '<a href="mailto:' . $snt_correo . ' ">' . $snt_correo . '</a>';
@@ -361,15 +513,15 @@ function ajax_dir_search_callback(){
 
             array_push($postClass, $parentClass);
             
-            $isOpen = false;
-            $isClose = false;
 
             if( $tempTerm !== $group && $group !== ""){
               $isClose = true;
+              $closeTag = '</div>';
             }
 
             if( $group !== $loopTerm ){
               $isOpen = true;
+              $openTag = '<div>';
 
               $group = $loopTerm;
             }
@@ -385,11 +537,19 @@ function ajax_dir_search_callback(){
                 "dir_cv"   => get_field('dir_cv'),
                 "dir_dji"   => get_field('dir_dji'),
                 "dir_imagen"   => $dir_imagen,
+                "sede" => $sede,
+                "address" => $address['address'],
                 "isOpen" => $isOpen,
                 "isClose" => $isClose,
+                "closeTag" => $closeTag,
+                "openTag" => $openTag,
                 "loopSlug" => $loopSlug,
                 "loopTerm" => $loopTerm,
                 "post_class" =>  join( ' ', $postClass ),
+                "phoneExt" => $phoneExt,
+                "phoneLocal" => $phoneLocal,
+                "phoneLocal2" => $phoneLocal2,
+                "phoneDirect" => $phoneDirect,
                 "html"            => ''
             );
         }

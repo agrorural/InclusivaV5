@@ -75,7 +75,7 @@ add_action('after_setup_theme', function () {
         'super_navigation_left' => __('Super Navigation Left', 'sage'),
         'super_navigation_right' => __('Super Navigation Right', 'sage'),
         'social_navigation' => __('Social Navigation', 'sage'),
-        'forms_navigation' => __('Forms Navigation', 'sage'),
+        'formats_navigation' => __('Formatos Navigation', 'sage'),
         'footer_navigation' => __('Footer Navigation', 'sage'),
         'docs_navigation' => __('Docs Navigation', 'sage'),
         'csst_navigation' => __('CSST Navigation', 'sage'),

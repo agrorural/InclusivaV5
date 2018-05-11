@@ -224,6 +224,10 @@ $link-hover-decoration: none;
       }
     }
 
+    .section-title::after {
+      background-color: $primary;
+    }
+
     .entry-share {
       a {
         background-color: rgba($primary, 0.75);
