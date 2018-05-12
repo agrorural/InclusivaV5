@@ -76,6 +76,7 @@ export default {
                 /* eslint-enable no-console */
                 
                 for (var i = 0; i < objectToSend.response.length; i++) {
+                  
                   objectToSend.response[i].html = '';
 
                   /* eslint-disable no-debugger */
@@ -85,13 +86,14 @@ export default {
                   if( objectToSend.response[i].isClose ) {
                     objectToSend.response[i].html += '</div>';
                   }
-                  
 
                   if( objectToSend.response[i].isOpen === true ) {
                     objectToSend.response[i].html += '<h3 class="section-title">';
+                    objectToSend.response[i].html += '<button class="btn btn-link btn-collapse" type="button">';
                     objectToSend.response[i].html += objectToSend.response[i].loopTerm;
                     objectToSend.response[i].html += '</h3>';
-                    objectToSend.response[i].html += '<div class="abre">';
+                    objectToSend.response[i].html += '</button>';
+                    objectToSend.response[i].html += '<div class="collapse show">';
                   }
 
 
@@ -195,10 +197,13 @@ export default {
                   
                   theHtml += objectToSend.response[i].html;
                 }
+
                 ajaxDirSearch.find(".search-result").append(theHtml);
                 /* eslint-disable no-console */
                 console.log(theHtml);
                 /* eslint-enable no-console */
+
+                theHtml = '';
               }
     
                 /* eslint-disable no-console */
@@ -261,5 +266,8 @@ export default {
   },
   finalize() {
     // JavaScript to be fired on the home page, after the init JS
+    $(document).on("click", '.btn-collapse', function() { 
+      $(this).parent().next().collapse('toggle');
+    });
   },
 };
