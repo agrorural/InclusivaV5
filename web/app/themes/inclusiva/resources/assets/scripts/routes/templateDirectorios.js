@@ -114,7 +114,7 @@ export default {
                   objectToSend.response[i].html += '<h5 class="entry-title">';
                   objectToSend.response[i].html += objectToSend.response[i].dir_responsable;
                   objectToSend.response[i].html += '</h5>';
-                  objectToSend.response[i].html += '<ul class="nav flex-column">';
+                  objectToSend.response[i].html += '<ul class="nav">';
                   
                   if (objectToSend.response[i].dir_correo !== false) {
                     objectToSend.response[i].html += '<li class="nav-item">';
@@ -155,20 +155,21 @@ export default {
                   objectToSend.response[i].html += '</div>';
 
                   objectToSend.response[i].html += '<div class="entry-details">';
-                  objectToSend.response[i].html += '<ul class="nav flex-column">';
-
-                  if (objectToSend.response[i].dir_cv !== false) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
-                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_cv + '">';
-                    objectToSend.response[i].html += 'Curriculum vitae';
-                    objectToSend.response[i].html += '</a>';
-                    objectToSend.response[i].html += '</li>';
-                  }
+                  objectToSend.response[i].html += '<h6>Información Adicional</h6>';
+                  objectToSend.response[i].html += '<ul class="nav">';
 
                   if (objectToSend.response[i].dir_resolucion !== false) {
                     objectToSend.response[i].html += '<li class="nav-item">';
                     objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_resolucion + '">';
                     objectToSend.response[i].html += 'Resolución';
+                    objectToSend.response[i].html += '</a>';
+                    objectToSend.response[i].html += '</li>';
+                  }
+
+                  if (objectToSend.response[i].dir_cv !== false) {
+                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_cv + '">';
+                    objectToSend.response[i].html += 'Curriculum vitae';
                     objectToSend.response[i].html += '</a>';
                     objectToSend.response[i].html += '</li>';
                   }

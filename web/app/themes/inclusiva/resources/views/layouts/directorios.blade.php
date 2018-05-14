@@ -13,11 +13,7 @@
           </main>
           @if (App\display_sidebar())
             <aside class="sidebar">
-              @if (is_page_template( 'views/template-documentos.blade.php' ))
-                @include('partials.sidebar.documentos')
-              @else
-                @include('partials.sidebar')
-              @endif
+              @include('partials.sidebar')
             </aside>
           @endif
         </div>

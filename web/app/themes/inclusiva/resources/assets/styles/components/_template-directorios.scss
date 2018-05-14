@@ -12,47 +12,73 @@
   }
 
   article {
+    .nav {
+      font-size: 85%;
+    }
+
     .media {
       @extend .card;
       @extend .flex-sm-column;
       @extend .flex-md-row;
       @extend .mb-4;
 
-      height: 12rem;
+      @include media-breakpoint-up(md) {
+        height: 13rem;
+      }
     }
 
     img {
       @extend .d-none;
       @extend .d-lg-block;
 
-      width: 12%;
+      width: 11.5%;
       height: 100%;
     }
 
     .media-body {
       @extend .card-body;
-      @extend .d-flex;
-      @extend .flex-column;
-      @extend .align-items-start;
+      @extend .d-md-flex;
+      @extend .flex-md-column;
+      @extend .align-items-md-start;
 
       height: 100%;
+      width: 100%;
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+
+        li.phone {
+          a {
+            padding: 0 1rem;
+          }
+
+          a:first-child {
+            padding: 0 1rem 0 0;
+          }
+
+          a:not(:last-child) {
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+          }
+        }
+      }
     }
 
     .entry-details {
       @extend .card-footer;
       @extend .text-muted;
 
-      width: 30%;
+      @include media-breakpoint-up(md) {
+        width: 30%;
+      }
+
       height: 100%;
+      width: 100%;
       padding: 1.25rem;
     }
 
-    .nav {
-      font-size: 85%;
-    }
-
-    &.child {
-      margin-left: 1.5rem;
-    }
+    // &.child {
+    //   margin-left: 1.5rem;
+    // }
   }
 }
