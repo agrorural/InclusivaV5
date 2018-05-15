@@ -101,6 +101,7 @@ export default {
                   objectToSend.response[i].html += '<div class="media">';
                   objectToSend.response[i].html += '<img class="card-img" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="auto" heigh="80" />';
                   objectToSend.response[i].html += '<div class="entry-body media-body">';
+                  objectToSend.response[i].html += '<header>';
                   objectToSend.response[i].html += '<small>';
                   
                   if(objectToSend.response[i].dir_situacion === "Encargado") {
@@ -114,6 +115,7 @@ export default {
                   objectToSend.response[i].html += '<h5 class="entry-title">';
                   objectToSend.response[i].html += objectToSend.response[i].dir_responsable;
                   objectToSend.response[i].html += '</h5>';
+                  objectToSend.response[i].html += '</header>';
                   objectToSend.response[i].html += '<ul class="nav">';
                   
                   if (objectToSend.response[i].dir_correo !== false) {
@@ -154,36 +156,30 @@ export default {
     
                   objectToSend.response[i].html += '</div>';
 
-                  objectToSend.response[i].html += '<div class="entry-details">';
-                  objectToSend.response[i].html += '<h6>Información Adicional</h6>';
-                  objectToSend.response[i].html += '<ul class="nav">';
 
-                  if (objectToSend.response[i].dir_resolucion !== false) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
-                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_resolucion + '">';
-                    objectToSend.response[i].html += 'Resolución';
-                    objectToSend.response[i].html += '</a>';
-                    objectToSend.response[i].html += '</li>';
+                  if (objectToSend.response[i].dir_resolucion !== null || objectToSend.response[i].dir_cv !== null || objectToSend.response[i].dir_dji !== null ) {
+                    objectToSend.response[i].html += '<nav class="nav nav-details">';
+                    
+                    if (objectToSend.response[i].dir_resolucion !== false) {
+                      objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_resolucion + '" class="nav-link" title="Resolución">';
+                      objectToSend.response[i].html += '<i class="fas fa-file-alt"></i> <span class="d-none">Resolución</span>';
+                      objectToSend.response[i].html += '</a>';
+                    }
+
+                    if (objectToSend.response[i].dir_cv !== false) {
+                      objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_cv + '" class="nav-link" title="Curriculum vitae">';
+                      objectToSend.response[i].html += '<i class="fas fa-file-alt"></i> <span class="d-none">Curriculum vitae</span>';
+                      objectToSend.response[i].html += '</a>';
+                    }
+  
+                    if (objectToSend.response[i].dir_dji !== false) {
+                      objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_dji + '" class="nav-link" title="Declaración Jurada de Incompatibilidades">';
+                      objectToSend.response[i].html += '<i class="fas fa-address-book"></i> <span class="d-none">Declaración Jurada de Incompatibilidades</span>';
+                      objectToSend.response[i].html += '</a>';
+                    }
+
+                    objectToSend.response[i].html += '</nav>';
                   }
-
-                  if (objectToSend.response[i].dir_cv !== false) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
-                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_cv + '">';
-                    objectToSend.response[i].html += 'Curriculum vitae';
-                    objectToSend.response[i].html += '</a>';
-                    objectToSend.response[i].html += '</li>';
-                  }
-
-                  if (objectToSend.response[i].dir_dji !== false) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
-                    objectToSend.response[i].html += '<a href="' + objectToSend.response[i].dir_dji + '">';
-                    objectToSend.response[i].html += 'Declaración Jurada de Incompatibilidades';
-                    objectToSend.response[i].html += '</a>';
-                    objectToSend.response[i].html += '</li>';
-                  }
-
-                  objectToSend.response[i].html += '</ul>';
-                  objectToSend.response[i].html += '</div>';
 
                   objectToSend.response[i].html += '</div>';
                   objectToSend.response[i].html += '</article>';
@@ -201,7 +197,7 @@ export default {
 
                 ajaxDirSearch.find(".search-result").append(theHtml);
                 /* eslint-disable no-console */
-                console.log(theHtml);
+                //console.log(theHtml);
                 /* eslint-enable no-console */
 
                 theHtml = '';
@@ -269,6 +265,12 @@ export default {
     // JavaScript to be fired on the home page, after the init JS
     $(document).on("click", '.btn-collapse', function() { 
       $(this).parent().next().collapse('toggle');
+    });
+
+    $(document).on("mouseenter", ".nav-details a", function () {
+      $(this).tooltip('show');
+    }).on("mouseleave", ".nav-details a", function (){
+      $(this).tooltip('hide');
     });
   },
 };

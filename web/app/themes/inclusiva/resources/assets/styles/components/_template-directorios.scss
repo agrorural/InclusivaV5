@@ -22,8 +22,11 @@
       @extend .flex-md-row;
       @extend .mb-4;
 
+      align-items: flex-end;
+
       @include media-breakpoint-up(md) {
         height: 13rem;
+        align-items: center;
       }
     }
 
@@ -35,6 +38,34 @@
       height: 100%;
     }
 
+    .nav-details {
+      display: flex;
+      flex-direction: row;
+
+      @include media-breakpoint-up(md) {
+        flex-direction: column;
+      }
+
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+
+      a {
+        background-color: rgba(0, 0, 0, 0.05);
+        width: 2.6rem;
+        height: 2.6rem;
+        line-height: 2.6rem;
+        padding: 0;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+
+        &:hover {
+          color: $green-100;
+          background-color: rgba(0, 0, 0, 0.08);
+        }
+      }
+    }
+
     .media-body {
       @extend .card-body;
       @extend .d-md-flex;
@@ -43,10 +74,22 @@
 
       height: 100%;
       width: 100%;
+      justify-content: space-between;
 
       .nav {
         display: flex;
         flex-direction: column;
+
+        li a {
+          @extend .nav-link;
+
+          padding: 0.5rem 0;
+          color: rgba(0, 0, 0, 0.5);
+
+          &:hover {
+            color: $green-100;
+          }
+        }
 
         li.phone {
           a {
@@ -62,19 +105,6 @@
           }
         }
       }
-    }
-
-    .entry-details {
-      @extend .card-footer;
-      @extend .text-muted;
-
-      @include media-breakpoint-up(md) {
-        width: 30%;
-      }
-
-      height: 100%;
-      width: 100%;
-      padding: 1.25rem;
     }
 
     // &.child {
