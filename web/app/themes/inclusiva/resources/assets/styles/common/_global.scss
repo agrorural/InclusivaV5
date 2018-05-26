@@ -292,3 +292,27 @@ textarea.materialize-textarea,
 figure {
   margin: 0;
 }
+
+// Backdrop
+.backdrop-light {
+  background-color: $white;
+
+  &.show {
+    opacity: 0.99;
+  }
+}
+
+.with-searchform {
+  .section,
+  footer,
+  .jumbotron,
+  .wrap {
+    display: none;
+  }
+}
+
+.without-searchform {
+  #omnisearch {
+    display: none;
+  }
+}

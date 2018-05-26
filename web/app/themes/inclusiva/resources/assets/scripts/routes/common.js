@@ -31,7 +31,7 @@ export default {
       });
 
       //OmniSearch Query
-      let ajaxOmniSearch = $('.searchBox');
+      let ajaxOmniSearch = $('#omnisearch');
       let customPostTitle = '';
       let customPostExcerpt = '';
 
@@ -108,7 +108,7 @@ export default {
               for (var i = 0; i < objectToSend.response.length; i++) {
   
                 objectToSend.response[i].html = '';
-                objectToSend.response[i].html += '<article class="post-' + objectToSend.response[i].id + ' status-publish hentry tipos-rde documentos hidden">';
+                objectToSend.response[i].html += '<article class="' + objectToSend.response[i].post_class + '">';
                 objectToSend.response[i].html += '<div class="entry-container">';
                 objectToSend.response[i].html += '<div class="entry-body ">';
                 customPostTitle = objectToSend.response[i].title;
@@ -145,10 +145,10 @@ export default {
             }
   
               for (var j = 1; j <= objectToSend.max_num_pages; j++) {
-                  var html = '<a href="page/' + j + '" class="page navi nav-link" data-id="' + j + '">' + j + '</a>';
+                  var html = '<a href="page/' + j + '" class="larger page navi" data-id="' + j + '">' + j + '</a>';
   
                   if (objectToSend.paged === j) {
-                      html = '<span class="current nav-link active">' + j + '</span>';
+                      html = '<span class="current">' + j + '</span>';
                   }
   
                     ajaxOmniSearch.find(".wp-pagenavi").append(html);
@@ -247,9 +247,11 @@ export default {
       if($('body').hasClass('without-searchform')){
         $('body').removeClass('without-searchform');
         $('body').addClass('with-searchform');
+        $('body').append('<div class="modal-backdrop backdrop-light fade show"></div>');
       }else{
         $('body').removeClass('with-searchform');
         $('body').addClass('without-searchform');
+        $('.modal-backdrop').remove();
       }
       
       $('#formSearch').focus();
@@ -298,6 +300,7 @@ export default {
         if(e.which === 27){
           $('body').removeClass('with-searchform');
           $('body').addClass('without-searchform');
+          $('.modal-backdrop').remove();
           $('#showForm')
           .find('[data-fa-i2svg]')
           .addClass('fa-search')

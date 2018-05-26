@@ -79,7 +79,7 @@ add_filter('sage/display_sidebar', function ($display) {
 });
 
 /**
- * Ajax para Omnisearch
+ * Ajax para Docssearch
  */
 add_action('wp_ajax_ajax_docs_search', __NAMESPACE__ . '\\ajax_docs_search_callback');
 add_action('wp_ajax_nopriv_ajax_docs_search', __NAMESPACE__ . '\\ajax_docs_search_callback');
@@ -162,6 +162,8 @@ function ajax_docs_search_callback(){
     if ( $the_docs_query->have_posts() ) {
         while ( $the_docs_query->have_posts() ) {
             $the_docs_query->the_post();
+
+            $postClass = get_post_class( get_the_ID() );
             
             $objectToSend->response[] = array(
                 "id"              =>  get_the_ID(),
@@ -173,6 +175,7 @@ function ajax_docs_search_callback(){
                 "doc_link"        => get_field('rde_link'),
                 "doc_ane__nom"    => get_field('doc_ane__nom'),
                 "doc_ane__desc"   => get_field('doc_ane__desc'),
+                "post_class" =>  join( ' ', $postClass ),
                 "html"            => ''
             );
         }
@@ -252,6 +255,7 @@ function ajax_omni_search_callback(){
     if ( $the_omni_search_query->have_posts() ) {
         while ( $the_omni_search_query->have_posts() ) {
             $the_omni_search_query->the_post();
+            $postClass = get_post_class( get_the_ID() );
             
             $objectToSend->response[] = array(
                 "id"              =>  get_the_ID(),
@@ -260,6 +264,8 @@ function ajax_omni_search_callback(){
                 "permalink"       => get_permalink(),
                 "excerpt"         => get_the_excerpt(),
                 "date"            => get_the_date(),
+                "post_class" =>  join( ' ', $postClass ),
+                "post_type" => get_post_type(),
                 "html"            => ''
             );
         }

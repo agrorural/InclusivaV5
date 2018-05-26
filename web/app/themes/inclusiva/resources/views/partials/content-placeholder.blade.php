@@ -19,7 +19,7 @@
   </div>
 </article> --}}
 
-<article class="content-placeholder">
+<article class="content-placeholder preloaded hidden">
   <div class="entry-container">
       <div class="entry-body">
         <div class="avatar"></div>

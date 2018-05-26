@@ -1,5 +1,7 @@
 header {
   &.super-header {
+    position: relative;
+    z-index: $zindex-modal;
     background-color: transparent;
 
     nav {
@@ -61,6 +63,8 @@ header {
   }
 
   &.branding {
+    position: relative;
+    z-index: $zindex-modal;
     background-color: $white;
 
     nav {
@@ -85,6 +89,9 @@ header {
   }
 
   &.primary-nav {
+    position: relative;
+    z-index: $zindex-modal;
+
     > .container-boxed {
       background-color: $primary;
       transition: background-color ease-in 0.3s;
@@ -94,4 +101,13 @@ header {
       }
     }
   }
+}
+
+#omnisearch {
+  display: block;
+  z-index: $zindex-modal - 1;
+  transition: opacity 0.1s;
+  position: relative;
+  overflow: auto;
+  opacity: 1;
 }
