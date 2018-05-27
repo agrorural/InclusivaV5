@@ -59,20 +59,17 @@ export default {
               // // Preloading
               ajaxOmniSearch.find('.content-placeholder').removeClass('hidden');
               ajaxOmniSearch.find('.hentry').addClass('hidden');
+              ajaxOmniSearch.find('.pagination-container').addClass('hidden');
             },
             complete: function() {
                 // $('body').addClass('show-results');   
                 // $('body').removeClass('hide-results');           
-                // $('#txtKeyword').prop('disabled', false);
-                // $('#optMonth').prop('disabled', false);
-                // $('#optYear').prop('disabled', false);
-                // $('#optPerPage').prop('disabled', false);
-                // $("#btnDocumento").prop('disabled', false).html("<i class='fas fa-filter'></i> Filtrar");
                 $("#cleanForm").prop('disabled', false).html("<i class='fas fa-redo'></i>");
   
                 // // Preloading
                 ajaxOmniSearch.find('.content-placeholder').addClass('hidden');
                 ajaxOmniSearch.find('.hentry').removeClass('hidden');
+                ajaxOmniSearch.find('.pagination-container').removeClass('hidden');
             },
             success: function(response) {
               objectToSend = response;

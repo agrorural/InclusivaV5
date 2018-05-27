@@ -71,9 +71,9 @@ body {
 }
 
 .hidden {
-  display: none;
-  visibility: hidden;
-  opacity: 0;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 h1,
