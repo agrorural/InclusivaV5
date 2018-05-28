@@ -13,7 +13,73 @@
 
   article {
     .nav {
-      font-size: 85%;
+      @include font-size(12, 12);
+
+      color: rgba(0, 0, 0, 0.85);
+
+      a {
+        color: rgba(0, 0, 0, 0.85);
+
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      &.nav-details {
+        display: flex;
+        flex-direction: row;
+
+        @include media-breakpoint-up(md) {
+          flex-direction: column;
+        }
+
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        a {
+          background-color: rgba(0, 0, 0, 0.05);
+          width: 2.6rem;
+          height: 2.6rem;
+          line-height: 2.6rem;
+          padding: 0;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      &.fa-ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin-left: 2rem;
+
+        li {
+          padding: 0.25rem 0;
+
+          a {
+            @extend .nav-link;
+
+            padding: 0;
+          }
+
+          .fa-li {
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        li.phone {
+          display: flex;
+
+          a:not(:last-child) {
+            &::after {
+              content: '\00a0\00a0\005C\00a0\00a0';
+              position: relative;
+              color: rgba(0, 0, 0, 0.5);
+            }
+          }
+        }
+      }
     }
 
     .media {
@@ -23,9 +89,9 @@
       @extend .mb-4;
 
       align-items: flex-end;
+      height: 100%;
 
       @include media-breakpoint-up(md) {
-        height: 13rem;
         align-items: center;
       }
     }
@@ -34,36 +100,8 @@
       @extend .d-none;
       @extend .d-lg-block;
 
-      width: 11.5%;
-      height: 100%;
-    }
-
-    .nav-details {
-      display: flex;
-      flex-direction: row;
-
-      @include media-breakpoint-up(md) {
-        flex-direction: column;
-      }
-
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-
-      a {
-        background-color: rgba(0, 0, 0, 0.05);
-        width: 2.6rem;
-        height: 2.6rem;
-        line-height: 2.6rem;
-        padding: 0;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.5);
-
-        &:hover {
-          color: $green-100;
-          background-color: rgba(0, 0, 0, 0.08);
-        }
-      }
+      width: 12rem;
+      height: 13rem;
     }
 
     .media-body {
@@ -76,39 +114,13 @@
       width: 100%;
       justify-content: space-between;
 
-      .nav {
-        display: flex;
-        flex-direction: column;
+      header {
+        small {
+          @include font-size(12, 12);
 
-        li a {
-          @extend .nav-link;
-
-          padding: 0.5rem 0;
-          color: rgba(0, 0, 0, 0.5);
-
-          &:hover {
-            color: $green-100;
-          }
-        }
-
-        li.phone {
-          a {
-            padding: 0 1rem;
-          }
-
-          a:first-child {
-            padding: 0 1rem 0 0;
-          }
-
-          a:not(:last-child) {
-            border-right: 1px solid rgba(0, 0, 0, 0.15);
-          }
+          color: rgba(0, 0, 0, 0.85);
         }
       }
     }
-
-    // &.child {
-    //   margin-left: 1.5rem;
-    // }
   }
 }

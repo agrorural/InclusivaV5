@@ -271,6 +271,15 @@ textarea.materialize-textarea,
   border-bottom: 1px solid $gray-200;
 }
 
+.custom-select:not(.browser-default) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+  option {
+    color: $black-200;
+  }
+}
+
 // Hentry
 .entry-img {
   position: relative;

@@ -13,6 +13,7 @@
   "fonts/Viga-Regular.woff2": "fonts/Viga-Regular_6cde5c4b.woff2",
   "images/ExcelRptDocRec_20180502_085037.xlsx": "images/ExcelRptDocRec_20180502_085037_e3a96293.xlsx",
   "images/agro_rural__logo.svg": "images/agro_rural__logo_6b195460.svg",
+  "images/avatar--default--12x13.jpg": "images/avatar--default--12x13_d8819655.jpg",
   "images/avatar--default.jpg": "images/avatar--default_85739955.jpg",
   "images/banner__agrojoven--750x215.jpg": "images/banner__agrojoven--750x215_6d443359.jpg",
   "images/banner__aiaf--750-215.jpg": "images/banner__aiaf--750-215_a8757ab3.jpg",
@@ -45,7 +46,7 @@
   "images/slide--3.jpg": "images/slide--3_df2f4752.jpg",
   "images/slide--4.jpg": "images/slide--4_25f15054.jpg",
   "images/slide--default.jpg": "images/slide--default_45277aa2.jpg",
-  "scripts/customizer.js": "scripts/customizer_cc63073d.js",
-  "styles/main.css": "styles/main_cc63073d.css",
-  "scripts/main.js": "scripts/main_cc63073d.js"
+  "scripts/customizer.js": "scripts/customizer_40ca9e10.js",
+  "styles/main.css": "styles/main_40ca9e10.css",
+  "scripts/main.js": "scripts/main_40ca9e10.js"
 }

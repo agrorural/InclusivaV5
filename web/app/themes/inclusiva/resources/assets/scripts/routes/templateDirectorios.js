@@ -72,7 +72,7 @@ export default {
                   ajaxDirSearch.find(".search-result").append(objectToSend.vMensaje);
               } else {
                 /* eslint-disable no-console */
-                //console.log(objectToSend.html);
+                console.log(objectToSend);
                 /* eslint-enable no-console */
                 
                 for (var i = 0; i < objectToSend.response.length; i++) {
@@ -99,7 +99,7 @@ export default {
 
                   objectToSend.response[i].html += '<article class="' + objectToSend.response[i].post_class + '">';
                   objectToSend.response[i].html += '<div class="media">';
-                  objectToSend.response[i].html += '<img class="card-img" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" width="auto" heigh="80" />';
+                  objectToSend.response[i].html += '<img class="card-img" src="' + objectToSend.response[i].dir_imagen + '" alt="' + objectToSend.response[i].dir_responsable + '" />';
                   objectToSend.response[i].html += '<div class="entry-body media-body">';
                   objectToSend.response[i].html += '<header>';
                   objectToSend.response[i].html += '<small>';
@@ -116,16 +116,16 @@ export default {
                   objectToSend.response[i].html += objectToSend.response[i].dir_responsable;
                   objectToSend.response[i].html += '</h5>';
                   objectToSend.response[i].html += '</header>';
-                  objectToSend.response[i].html += '<ul class="nav">';
+                  objectToSend.response[i].html += '<ul class="nav fa-ul">';
                   
-                  if (objectToSend.response[i].dir_correo !== false) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
+                  if (objectToSend.response[i].dir_correo !== null) {
+                    objectToSend.response[i].html += '<li class=""><span class="fa-li"><i class="fas fa-envelope-open"></i></span>';
                     objectToSend.response[i].html += objectToSend.response[i].dir_correo;
                     objectToSend.response[i].html += '</li>';
                   }
 
                   if (objectToSend.response[i].phoneExt !== null || objectToSend.response[i].phoneLocal !== null || objectToSend.response[i].phoneLocal2 !== null || objectToSend.response[i].phoneDirect !== null) {
-                    objectToSend.response[i].html += '<li class="nav-item phone">';
+                    objectToSend.response[i].html += '<li class="phone"><span class="fa-li"><i class="fas fa-phone"></i></span>';
                     
                     if(objectToSend.response[i].phoneExt !== null){
                       objectToSend.response[i].html += objectToSend.response[i].phoneExt.html;
@@ -147,7 +147,7 @@ export default {
                   }
 
                   if (objectToSend.response[i].address !== null) {
-                    objectToSend.response[i].html += '<li class="nav-item">';
+                    objectToSend.response[i].html += '<li class="address"><span class="fa-li"><i class="fas fa-map-marker"></i></span>';
                     objectToSend.response[i].html += objectToSend.response[i].address;
                     objectToSend.response[i].html += '</li>';
                   }
@@ -157,7 +157,7 @@ export default {
                   objectToSend.response[i].html += '</div>';
 
 
-                  if (objectToSend.response[i].dir_resolucion !== null || objectToSend.response[i].dir_cv !== null || objectToSend.response[i].dir_dji !== null ) {
+                  if (objectToSend.response[i].dir_resolucion !== false || objectToSend.response[i].dir_cv !== false || objectToSend.response[i].dir_dji !== false ) {
                     objectToSend.response[i].html += '<nav class="nav nav-details">';
                     
                     if (objectToSend.response[i].dir_resolucion !== false) {

@@ -505,10 +505,12 @@ function ajax_dir_search_callback(){
             $loopTerm = $terms[0]->name;
             $loopSlug = $terms[0]->slug;
             
-            $dir_imagen = ( get_field('dir_imagen') ) ? get_field('dir_imagen')['url'] : \App\asset_path('images/avatar--default.jpg');
-            $snt_correo = antispambot( get_field('dir_correo') );
-            $dir_correo = '<a href="mailto:' . $snt_correo . ' ">' . $snt_correo . '</a>';
-
+            $dir_imagen = ( get_field('dir_imagen') ) ? get_field('dir_imagen')['url'] : \App\asset_path('images/avatar--default--12x13.jpg');
+            $dir_responsable = ( get_field('dir_responsable') ) ? get_field('dir_responsable') : 'No designado';
+            
+            $the_mail = get_field('dir_correo');
+            ($the_mail !== "") ? $dir_correo = '<a href="mailto:' . antispambot( $the_mail ) . ' ">' . antispambot( $the_mail ) . '</a>' : $dir_correo = null; 
+            
             $postClass = get_post_class( get_the_ID() );
 
             if (wp_get_post_parent_id(get_the_ID()) === 0){
@@ -535,7 +537,7 @@ function ajax_dir_search_callback(){
             $objectToSend->response[] = array(
                 "title"           => get_the_title(),
                 "slug"            =>  get_post_field( 'post_name', get_post() ),
-                "dir_responsable"        => get_field('dir_responsable'),
+                "dir_responsable"        => $dir_responsable,
                 "dir_resolucion"    => get_field('dir_resolucion'),
                 "dir_situacion"   => get_field('dir_situacion'),
                 "dir_cargo"   => get_field('dir_cargo'),
