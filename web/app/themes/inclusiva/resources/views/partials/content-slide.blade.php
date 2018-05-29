@@ -54,10 +54,10 @@
         <picture>
           @if ($slide['url'])
             <a class="slide-link" href="{{ $slide['url'] }}">
-              <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'featured-thumb', array( 'class' => 'img-fluid' ) ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="img-fluid" />
+              <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'featured-thumb', array( 'class' => '' ) ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="" />
             </a>
           @else
-            <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="img-fluid" />
+            <img src="{{ has_post_thumbnail() ? the_post_thumbnail_url( 'full' ) : App\asset_path('images/slide--default.jpg') }}" alt="{{ get_the_title() }}" class="" />
           @endif
         </picture>
       </figure>

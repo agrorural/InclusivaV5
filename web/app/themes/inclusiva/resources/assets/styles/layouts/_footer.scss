@@ -87,12 +87,17 @@ footer {
       padding: 1.5rem 0;
 
       .nav-link {
+        margin: 1rem auto;
         padding: 0;
       }
 
       @include media-breakpoint-up(md) {
         flex-direction: row;
         justify-content: space-between;
+
+        .nav-link {
+          margin: auto;
+        }
       }
     }
 

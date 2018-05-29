@@ -119,13 +119,23 @@
     }
 
     &#services {
-      @include section-palette($yellow-300, $blue-100);
+      @include section-palette($yellow-100, $blue-100);
 
       .section-header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: baseline;
+
+        .navbar-swiper {
+          display: flex;
+          justify-content: space-between;
+          width: 12rem;
+
+          #services-pagination {
+            width: auto;
+          }
+        }
       }
 
       article {

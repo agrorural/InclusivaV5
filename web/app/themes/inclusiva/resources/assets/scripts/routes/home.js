@@ -24,15 +24,15 @@ export default {
   homeSliderOptions = {
     init: false,
     loop: true,
-    speed:800,
-    autoplay:{
-      delay:3000,
-    },
+    speed: 800,
+    // autoplay: {
+    //   delay: 3000,
+    // },
     effect: 'cube', // 'cube', 'fade', 'coverflow',
     cubeEffect: {
       shadow: true,
       slideShadows: true,
-      shadowOffset: 40,
+      shadowOffset: 5,
       shadowScale: 0.94,
     },
     grabCursor: true,

@@ -40,7 +40,7 @@ function posts_for_current_contributor() {
 
 function my_acf_google_map_api( $api ){
 	
-	$api['key'] = 'AIzaSyDdSKjFYyQMK1yLHdvbblCjR_RHY5A6yUs';
+	$api['key'] = 'AIzaSyDzKaN5RTFgX1jSy-dpVgIdGnwDdpHFpws';
 	
 	return $api;
 	

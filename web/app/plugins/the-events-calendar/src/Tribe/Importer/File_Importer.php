@@ -16,7 +16,7 @@ abstract class Tribe__Events__Importer__File_Importer {
 	private $updated  = 0;
 	private $created  = 0;
 	private $encoding = array();
-	private $log      = array();
+	protected $log    = array();
 
 	protected $skipped      = array();
 	protected $inverted_map = array();
@@ -211,6 +211,15 @@ abstract class Tribe__Events__Importer__File_Importer {
 			$id = $this->create_post( $record );
 			$this->created ++;
 			$this->log[ $this->reader->get_last_line_number_read() + 1 ] = sprintf( esc_html__( '%s (post ID %d) created.', 'the-events-calendar' ), get_the_title( $id ), $id );
+		}
+
+		$featured_image = $this->get_value_by_key( $record, 'featured_image' );
+
+		if ( ! empty( $featured_image ) ) {
+			$post_thumbnail_process = new Tribe__Process__Post_Thumbnail_Setter();
+			$post_thumbnail_process->set_post_id( $id );
+			$post_thumbnail_process->set_post_thumbnail( $featured_image );
+			$post_thumbnail_process->dispatch();
 		}
 
 		return $id;

@@ -114,6 +114,7 @@
 
 #home__slider {
   height: 30rem;
+  overflow: hidden;
 
   @include media-breakpoint-up(lg) {
     height: 53rem;
@@ -131,32 +132,62 @@
 
     .content {
       position: absolute;
-      top: 40%;
+      bottom: 25%;
       left: 0;
-      width: 50%;
-      padding-left: 5%;
+      width: 40%;
       color: $white;
+      background-color: rgba(0, 0, 0, 0.45);
       transform: translateZ(100px) translateX(100px);
 
       .title {
-        font-size: 2.5em;
-        font-weight: bold;
-        margin-bottom: 30px;
+        @include font-family('viga', 'regular');
+        @include font-size(18);
+
+        padding: 2rem;
+
+        @include media-breakpoint-up(lg) {
+          @include font-size(36);
+
+          padding: 3rem 3rem 1.5rem;
+        }
+
+        margin-bottom: 0;
       }
 
       .caption {
-        display: block;
-        font-size: 12px;
-        line-height: 1.4;
-      }
+        display: none;
 
-      @media (max-width: 1180px) {
-        .title {
-          font-size: 25px;
+        @include media-breakpoint-up(lg) {
+          display: block;
         }
 
-        .caption {
-          font-size: 12px;
+        background-color: $orange-200;
+        padding: 0.65rem 3rem;
+        margin-bottom: 1.5rem;
+
+        p {
+          @include font-family('ubuntu', 'regular');
+          @include font-size(14);
+
+          margin-bottom: 0;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .swiper-pagination-bullets {
+    .swiper-pagination-bullet {
+      &:hover,
+      &.swiper-pagination-bullet-active {
+        opacity: 1;
+        background-color: $orange-200;
+      }
+
+      &.swiper-pagination-bullet-active {
+        &::before {
+          border-width: 1px;
+          border-color: $orange-200;
         }
       }
     }

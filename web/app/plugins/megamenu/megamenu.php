@@ -4,7 +4,7 @@
  * Plugin Name: Max Mega Menu
  * Plugin URI:  https://www.megamenu.com
  * Description: Easy to use drag & drop WordPress Mega Menu plugin. Create Mega Menus using Widgets. Responsive, retina & touch ready.
- * Version:     2.4.1.4
+ * Version:     2.4.2
  * Author:      Tom Hemsley
  * Author URI:  https://www.megamenu.com
  * License:     GPL-2.0+
@@ -26,7 +26,7 @@ final class Mega_Menu {
     /**
      * @var string
      */
-    public $version = '2.4.1.4';
+    public $version = '2.4.2';
 
 
     /**
@@ -1090,7 +1090,7 @@ final class Mega_Menu {
                 'container'       => 'div',
                 'container_class' => 'mega-menu-wrap',
                 'container_id'    => 'mega-menu-wrap-' . $sanitized_location,
-                'menu_class'      => 'mega-menu mega-menu-horizontal',
+                'menu_class'      => 'mega-menu max-mega-menu mega-menu-horizontal',
                 'menu_id'         => 'mega-menu-' . $sanitized_location,
                 'fallback_cb'     => 'wp_page_menu',
                 'before'          => '',
@@ -1448,7 +1448,8 @@ if ( ! function_exists('max_mega_menu_get_active_caching_plugins') ) {
             'remove-query-strings-littlebizzy/remove-query-strings.php',
             'remove-query-strings-from-static-resources/remove-query-strings.php',
             'query-strings-remover/query-strings-remover.php',
-            'wp-rocket/wp-rocket.php'
+            'wp-rocket/wp-rocket.php',
+            'hummingbird-performance/wp-hummingbird.php'
         ));
 
         $active_plugins = array();
