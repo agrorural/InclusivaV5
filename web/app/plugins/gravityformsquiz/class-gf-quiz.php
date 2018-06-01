@@ -21,7 +21,7 @@ function gquiz_answer_indicator ($indicator_markup, $form, $field, $choice, $lea
     if ( $is_response_correct )
         $indicator_markup = ' (you got this one right!)';
     elseif ( $is_response_wrong ) {
-	    if  ( $field['inputType'] == 'checkbox' && rgar( $choice, 'gquizIsCorrect' ) )
+	    if  ( $field->inputType == 'checkbox' && rgar( $choice, 'gquizIsCorrect' ) )
 	        $indicator_markup = ' (you missed this one!)';
 	    else
 	        $indicator_markup = ' (you got this one wrong!)';
@@ -376,6 +376,10 @@ class GFQuiz extends GFAddOn {
 			$params = array(
 				'correctIndicator'   => $this->_correct_indicator_url,
 				'incorrectIndicator' => $this->_incorrect_indicator_url,
+				'strings' => array(
+					'correctResponse' =>   __( 'Correct response', 'gravityformsquiz' ),
+					'incorrectResponse' => __( 'Incorrect response', 'gravityformsquiz' ),
+				)
 			);
 			wp_localize_script( 'gquiz_js', 'gquizVars', $params );
 
@@ -2235,7 +2239,7 @@ class GFQuiz extends GFAddOn {
 		$total_score = 0;
 
 		$output['fields']  = array();
-		$output['summary'] = '<div class="gquiz-container">';
+		$output['summary'] = '<div class="gquiz-container">' . PHP_EOL;
 		$fields            = GFAPI::get_fields_by_type( $form, array( 'quiz' ) );
 		$pass_percent      = $this->get_form_setting( $form, 'passPercent' );
 		$grades            = $this->get_form_setting( $form, 'grades' );
@@ -2247,15 +2251,15 @@ class GFQuiz extends GFAddOn {
 
 			$field_score = 0;
 
-			$field_markup = '<div class="gquiz-field">';
+			$field_markup = '<div class="gquiz-field">' . PHP_EOL;
 			if ( $show_question ) {
 				$field_markup .= '    <div class="gquiz-field-label">';
 				$field_markup .= GFCommon::get_label( $field );
-				$field_markup .= '    </div>';
+				$field_markup .= '    </div>' . PHP_EOL;
 			}
 
 			$field_markup .= '    <div class="gquiz-field-choice">';
-			$field_markup .= '    <ul>';
+			$field_markup .= '    <ul>' . PHP_EOL;
 
 			// for checkbox inputs with multiple correct choices
 			$completely_correct = true;
@@ -2319,27 +2323,27 @@ class GFQuiz extends GFAddOn {
 				$indicator_markup = apply_filters( 'gquiz_answer_indicator', $indicator_markup, $form, $field, $choice, $lead, $is_response_correct, $is_response_wrong );
 
 				$choice_class_markup = empty( $choice_class ) ? '' : 'class="' . $choice_class . '"';
-				$field_markup .= "<li {$choice_class_markup}>";
 
-				$field_markup .= $choice['text'] . $indicator_markup;
-				$field_markup .= '</li>';
+				$field_markup .= "<li {$choice_class_markup}>" . PHP_EOL;
+				$field_markup .= $choice['text'] . PHP_EOL;
+				$field_markup .= $indicator_markup . '</li>' . PHP_EOL;
 
 			} // end foreach choice
 
 			$field_markup .= '    </ul>';
-			$field_markup .= '    </div>';
+			$field_markup .= '    </div>' . PHP_EOL;
 
 			if ( $field->gquizShowAnswerExplanation ) {
-				$field_markup .= '<div class="gquiz-answer-explanation">';
-				$field_markup .= $field->gquizAnswerExplanation;
-				$field_markup .= '</div>';
+				$field_markup .= '<div class="gquiz-answer-explanation">' . PHP_EOL;
+				$field_markup .= $field->gquizAnswerExplanation . PHP_EOL;
+				$field_markup .= '</div><br>' . PHP_EOL;
 			}
 
 			$field_markup .= '</div>';
 			if ( ! $weighted_score_enabled && $completely_correct ) {
 				$field_score += 1;
 			}
-			$output['summary'] .= $field_markup;
+			$output['summary'] .= $field_markup . PHP_EOL;
 			array_push(
 				$output['fields'], array(
 					'id'         => $field->id,

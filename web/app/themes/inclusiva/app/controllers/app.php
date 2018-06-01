@@ -106,35 +106,25 @@ class App extends Controller
 
     public static function postTypeObj()
     {
-      $post_types = get_post_types( array('public'   => true), 'names', 'and' ); 
-      $post_type_remove = array('tribe-ea-record', 'banners', 'directorios', 'convocatorias', 'page', 'attachment');
-    
-      if(count(array_intersect($post_types, $post_type_remove)) == count($post_type_remove)){
-        foreach($post_type_remove as $exclude_post_type){
-          unset($post_types[$exclude_post_type]);
-        }
-      }
+      $custom_post_types = get_post_types(
+        array(
+                'public' => true
+            ),
+            'objects'
+        );
+        
+        ksort( $custom_post_types, SORT_ASC );
+        
+        $post_type_obj = new \ArrayObject();
 
-      $post_type_obj = new \ArrayObject();
+        foreach ( $custom_post_types as $custom_post_type ) {
 
-      foreach( $post_types  as $post_type ) {
-        switch ($post_type) {
-          case 'post':
-            $post_type_obj->append(array('name' => $post_type, 'label' => 'Noticias'));
-            break;
-          
-          case 'tribe_events':
-            $post_type_obj->append(array('name' => $post_type, 'label' => 'Eventos'));
-            break;
-            
-          case 'producto':
-            $post_type_obj->append(array('name' => $post_type, 'label' => 'Productos'));
-            break;
-          
-          default:
-            $post_type_obj->append(array('name' => $post_type, 'label' => ucfirst($post_type)));
-            break;
-        }
+          $exclude = array( 'tribe-ea-record', 'banners', 'directorios', 'convocatorias', 'page', 'attachment', 'tribe_events' );
+
+          if( TRUE === in_array( $custom_post_type->name, $exclude ) )
+              continue;
+
+          $post_type_obj->append(array('name' => $custom_post_type->name, 'label' => $custom_post_type->label));
       }
 
       return $post_type_obj;

@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------
+Version 3.1.2
+	- Fixed strings for translations
+
+---------------------------------------------------------------------
 Version 3.1.1
     - Fixed an issue with the locations the gform_merge_tags hook was being used to include the merge tags.
 

@@ -2255,7 +2255,7 @@ class GFPolls extends GFAddOn {
 							'orange' => esc_html__( 'Orange', 'gravityformspolls' ),
 							'blue'   => esc_html__( 'Blue', 'gravityformspolls' ),
 						),
-						'tooltip' => esc_html__( 'The Add-On currently supports 4 built in styles: red, green, orange, blue. Defaults to "green".', 'gravityformspolls' )
+						'tooltip' => esc_html__( 'The Add-On currently supports 4 built-in styles: red, green, orange, blue. Defaults to "green".', 'gravityformspolls' )
 					),
 					array(
 						'label'   => esc_html__( 'Mode', 'gravityformspolls' ),

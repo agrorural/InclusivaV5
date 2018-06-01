@@ -28,9 +28,21 @@ class GF_Field extends stdClass implements ArrayAccess {
 	private $_is_entry_detail = null;
 
 	/**
-	 * @var array $_modifiers An array of modifiers specified on the field or all_fields merge tag being processed.
+	 * An array of properties used to help define and determine the context for the field.
+	 * As this is private, it won't be available in any json_encode() output and consequently not saved in the Form array.
+	 *
+	 * @since 2.3
+	 *
+	 * @private
+	 *
+	 * @var array
 	 */
-	private $_modifiers = array();
+	private $_context_properties = array();
+
+	/**
+	 * @var array $_merge_tag_modifiers An array of modifiers specified on the field or all_fields merge tag being processed.
+	 */
+	private $_merge_tag_modifiers = array();
 
 	public function __construct( $data = array() ) {
 		if ( empty( $data ) ) {
@@ -104,8 +116,11 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 	public function __set( $key, $value ) {
 		switch( $key ) {
-			// intercept 3rd parties trying to set the adminOnly property and convert to visibility property
+			case '_context_properties' :
+				_doing_it_wrong( '$field->_context_properties', 'Use $field->get_context_property() instead.', '2.3' );
+				break;
 			case 'adminOnly':
+				// intercept 3rd parties trying to set the adminOnly property and convert to visibility property
 				$this->visibility = $value ? 'administrative' : 'visible';
 				break;
 			default:
@@ -116,8 +131,11 @@ class GF_Field extends stdClass implements ArrayAccess {
 	public function &__get( $key ) {
 
 		switch( $key ) {
-			// intercept 3rd parties trying to get the adminOnly property and fetch visibility property instead
-			case 'adminOnly':
+			case '_context_properties' :
+				_doing_it_wrong( '$field->_context_properties', 'Use $field->get_context_property() instead.', '2.3' );
+				return false;
+			case 'adminOnly' :
+				// intercept 3rd parties trying to get the adminOnly property and fetch visibility property instead
 				$value = $this->visibility == 'administrative'; // set and return variable to avoid notice
 				return $value;
 			default:
@@ -131,6 +149,14 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 	public function __unset( $key ) {
 		unset( $this->$key );
+	}
+
+	public function set_context_property( $property_key, $value ) {
+		$this->_context_properties[ $property_key ] = $value;
+	}
+
+	public function get_context_property( $property_key ) {
+		return isset( $this->_context_properties[ $property_key ] ) ? $this->_context_properties[ $property_key ] : null;
 	}
 
 
@@ -443,7 +469,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 	public function get_value_merge_tag( $value, $input_id, $entry, $form, $modifier, $raw_value, $url_encode, $esc_html, $format, $nl2br ) {
 
 		if ( $format === 'html' ) {
-			$form_id = absint( $form['id'] );
+			$form_id = isset( $form['id'] ) ? absint( $form['id'] ) : null;
 			$allowable_tags = $this->get_allowable_tags( $form_id );
 
 			if ( $allowable_tags === false ) {
@@ -550,12 +576,14 @@ class GF_Field extends stdClass implements ArrayAccess {
 	/**
 	 * Format the entry value before it is used in entry exports and by framework add-ons using GFAddOn::get_field_value().
 	 *
+	 * For CSV export return a string or array.
+	 *
 	 * @param array      $entry    The entry currently being processed.
 	 * @param string     $input_id The field or input ID.
 	 * @param bool|false $use_text When processing choice based fields should the choice text be returned instead of the value.
 	 * @param bool|false $is_csv   Is the value going to be used in the .csv entries export?
 	 *
-	 * @return string
+	 * @return string|array
 	 */
 	public function get_value_export( $entry, $input_id = '', $use_text = false, $is_csv = false ) {
 		if ( empty( $input_id ) ) {
@@ -613,7 +641,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 		$placeholder_value = GFCommon::replace_variables_prepopulate( $this->placeholder );
 
-		return ! empty( $placeholder_value ) ? sprintf( "placeholder='%s'", esc_attr( $placeholder_value ) ) : '';
+		return ! rgblank( $placeholder_value ) ? sprintf( "placeholder='%s'", esc_attr( $placeholder_value ) ) : '';
 	}
 
 	/**
@@ -627,7 +655,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 		$placeholder_value = $this->get_input_placeholder_value( $input );
 
-		return ! empty( $placeholder_value ) ? sprintf( "placeholder='%s'", esc_attr( $placeholder_value ) ) : '';
+		return ! rgblank( $placeholder_value ) ? sprintf( "placeholder='%s'", esc_attr( $placeholder_value ) ) : '';
 	}
 
 	/**
@@ -641,7 +669,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 		$placeholder = rgar( $input, 'placeholder' );
 
-		return empty( $placeholder ) ? '' : GFCommon::replace_variables_prepopulate( $placeholder );
+		return rgblank( $placeholder ) ? '' : GFCommon::replace_variables_prepopulate( $placeholder );
 	}
 
 
@@ -725,7 +753,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 	 */
 	public function set_modifiers( $modifiers ) {
 
-		$this->_modifiers = $modifiers;
+		$this->_merge_tag_modifiers = $modifiers;
 	}
 
 	/**
@@ -735,7 +763,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 	 */
 	public function get_modifiers() {
 
-		return $this->_modifiers;
+		return $this->_merge_tag_modifiers;
 	}
 
 	/**
@@ -810,7 +838,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 		 */
 		$duplicate_field_link = apply_filters( 'gform_duplicate_field_link', $duplicate_field_link );
 
-		$delete_field_link = "<a class='field_delete_icon' id='gfield_delete_{$this->id}' title='" . esc_attr__( 'click to delete this field', 'gravityforms' ) . "' href='#' onclick='StartDeleteField(this); return false;' onkeypress='StartDeleteField(this); return false;'><i class='fa fa-times fa-lg'></i></a>";
+		$delete_field_link = "<a class='field_delete_icon' id='gfield_delete_{$this->id}' title='" . esc_attr__( 'click to delete this field', 'gravityforms' ) . "' href='#' onclick='DeleteField(this); return false;' onkeypress='DeleteField(this); return false;'><i class='fa fa-times fa-lg'></i></a>";
 
 		/**
 		 * This filter allows for modification of a form field delete link. This will change the link for all fields
@@ -824,7 +852,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 		$is_entry_detail = $this->is_entry_detail();
 		$is_admin        = $is_form_editor || $is_entry_detail;
 
-		$admin_buttons = $is_admin ? "<div class='gfield_admin_icons'><div class='gfield_admin_header_title'>{$field_type_title} : " . esc_html__( 'Field ID', 'gravityforms' ) . " {$this->id}</div>" . $delete_field_link . $duplicate_field_link . "<a class='field_edit_icon edit_icon_collapsed' title='" . esc_attr__( 'click to expand and edit the options for this field', 'gravityforms' ) . "'><i class='fa fa-caret-down fa-lg'></i></a></div>" : '';
+		$admin_buttons = $is_admin ? "<div class='gfield_admin_icons'><div class='gfield_admin_header_title'>{$field_type_title} : " . esc_html__( 'Field ID', 'gravityforms' ) . " {$this->id}</div>" . $delete_field_link . $duplicate_field_link . "<a href='javascript:void(0);' class='field_edit_icon edit_icon_collapsed' aria-expanded='false' title='" . esc_attr__( 'click to expand and edit the options for this field', 'gravityforms' ) . "'><i class='fa fa-caret-down fa-lg'></i></a></div>" : '';
 
 		return $admin_buttons;
 	}

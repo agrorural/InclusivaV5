@@ -219,9 +219,14 @@ class GF_Field_Likert extends GF_Field {
 	 * @return string
 	 */
 	public function get_value_merge_tag( $value, $input_id, $entry, $form, $modifier, $raw_value, $url_encode, $esc_html, $format, $nl2br ) {
-		$column_text = $this->get_column_text( $value, $entry, $input_id, true );
+
+		// Exclude row text if using value modifier.
+		$include_row_text = 'value' !== $modifier;
+
+		$column_text = $this->get_column_text( $value, $entry, $input_id, $include_row_text );
 
 		return $url_encode ? urlencode( $column_text ) : $column_text;
+
 	}
 
 	/**
