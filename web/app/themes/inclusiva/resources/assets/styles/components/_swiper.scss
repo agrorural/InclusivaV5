@@ -305,3 +305,15 @@
     height: 100%;
   }
 }
+
+#links__slider {
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    perspective: 1600px;
+
+    img {
+      @extend .img-fluid;
+    }
+  }
+}

@@ -223,14 +223,26 @@ homeSlider.init();
       speed: 800,
       slidesPerView: 4,
       slidesPerColumn: 2,
-      spaceBetween: 30,
+      spaceBetween: 15,
       navigation: {
         nextEl: '#links-arrow-right',
         prevEl: '#links-arrow-left',
       },
       breakpoints: {
-        767: {
+        576: {
           slidesPerView: 2,
+          slidesPerColumn: 1,
+        },
+        768: {
+          slidesPerView: 2,
+          slidesPerColumn: 2,
+        },
+        992: {
+          slidesPerView: 3,
+          slidesPerColumn: 2,
+        },
+        1200: {
+          slidesPerView: 4,
           slidesPerColumn: 2,
         },
       },
