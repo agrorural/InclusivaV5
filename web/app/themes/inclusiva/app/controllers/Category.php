@@ -27,7 +27,13 @@ class Category extends Controller
 
     public function phoneExt()
     {
-      $the_phone = ( get_field('dz_phone', get_queried_object()) ) ? get_field('dz_phone', get_queried_object()) : '';
+      //$the_phone = ( get_field('dz_phone', get_queried_object()) ) ? get_field('dz_phone', get_queried_object()) : '';
+      
+      $the_slug = get_queried_object()->slug;
+
+      $the_post = ($the_slug == 'agro-rural') ? get_page_by_path('direccion-ejecutiva' , OBJECT, 'directorios') : get_page_by_path($the_slug , OBJECT, 'directorios');
+
+      $the_phone = (get_field('dir_phone_ext', $the_post->ID) ? get_field('dir_phone_ext', $the_post->ID) : '');
 
       if( $the_phone !== '' ){
         $pos1 = strpos($the_phone, "-");
@@ -83,11 +89,19 @@ class Category extends Controller
         'ext2' => '',
         'message' => 'No tiene formato correcto'
       );
+
+      //return $the_phone;
     }
 
     public function phoneLocal()
     {
-      $the_phone = ( get_field('dz_phone_local', get_queried_object()) ) ? get_field('dz_phone_local', get_queried_object()) : '';
+      $the_slug = get_queried_object()->slug;
+
+      $the_post = ($the_slug == 'agro-rural') ? get_page_by_path('direccion-ejecutiva' , OBJECT, 'directorios') : get_page_by_path($the_slug , OBJECT, 'directorios');
+
+      $the_phone = (get_field('dir_phone_local', $the_post->ID) ? get_field('dir_phone_local', $the_post->ID) : '');
+
+      //$the_phone = ( get_field('dz_phone_local', get_queried_object()) ) ? get_field('dz_phone_local', get_queried_object()) : '';
 
       if( $the_phone !== '' ){
         $pos1 = strpos($the_phone, "-");
@@ -129,7 +143,13 @@ class Category extends Controller
 
     public function phoneLocalTwo()
     {
-      $the_phone = ( get_field('dz_phone_local_two', get_queried_object()) ) ? get_field('dz_phone_local_two', get_queried_object()) : '';
+      //$the_phone = ( get_field('dz_phone_local_two', get_queried_object()) ) ? get_field('dz_phone_local_two', get_queried_object()) : '';
+
+      $the_slug = get_queried_object()->slug;
+
+      $the_post = ($the_slug == 'agro-rural') ? get_page_by_path('direccion-ejecutiva' , OBJECT, 'directorios') : get_page_by_path($the_slug , OBJECT, 'directorios');
+
+      $the_phone = (get_field('dir_phone_local_2', $the_post->ID) ? get_field('dir_phone_local_2', $the_post->ID) : '');
 
       if( $the_phone !== '' ){
         $pos1 = strpos($the_phone, "-");
@@ -171,7 +191,14 @@ class Category extends Controller
 
     public function phoneDirect()
     {
-      $the_phone = ( get_field('dz_phone_direct', get_queried_object()) ) ? get_field('dz_phone_direct', get_queried_object()) : '';
+
+      $the_slug = get_queried_object()->slug;
+
+      $the_post = ($the_slug == 'agro-rural') ? get_page_by_path('direccion-ejecutiva' , OBJECT, 'directorios') : get_page_by_path($the_slug , OBJECT, 'directorios');
+
+      //$the_phone = ( get_field('dz_phone_direct', get_queried_object()) ) ? get_field('dz_phone_direct', get_queried_object()) : '';
+
+      $the_phone = (get_field('dir_phone_direct', $the_post->ID) ? get_field('dir_phone_direct', $the_post->ID) : '');
 
       if( $the_phone !== '' ){
         $pos1 = strpos($the_phone, "-");
@@ -212,8 +239,6 @@ class Category extends Controller
       $the_slug = get_queried_object()->slug;
 
       $the_post = ($the_slug == 'agro-rural') ? get_page_by_path('direccion-ejecutiva' , OBJECT, 'directorios') : get_page_by_path($the_slug , OBJECT, 'directorios');
-      
-      $photo = ( get_field('dir_imagen', $the_post->ID) ) ? get_field('dir_imagen', $the_post->ID)['url'] : \App\asset_path('images/avatar--default.jpg');
 
       return (object) array(
         'director' => get_field('dir_responsable', $the_post->ID),
@@ -223,7 +248,7 @@ class Category extends Controller
         'email' => get_field('dir_correo', $the_post->ID),
         'cv' => get_field('dir_cv', $the_post->ID),
         'dji' => get_field('dir_dji', $the_post->ID),
-        'photo' => $photo
+        'photo' => ( get_field('dir_imagen', $the_post->ID) ) ? get_field('dir_imagen', $the_post->ID)['url'] : \App\asset_path('images/avatar--default.jpg')
       );
     }
 }

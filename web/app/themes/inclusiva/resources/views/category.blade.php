@@ -192,6 +192,7 @@
     })(jQuery);
 </script>
 
+
 <div class="row">
   <div class="col-4">
     <div class="card">
@@ -236,7 +237,7 @@
         </li> 
       @endif
       @if($address) <li class="list-group-item">{{$address['address']}}</li> @endif
-      @if($agency) <li class="list-group-item"><strong>{!! $agency !!}</strong></li> @endif
+      @if($agency && $agency > 0) <li class="list-group-item"><strong>{!! $agency !!}</strong></li> @endif
       </ul>
     </div>
   </div>
@@ -246,7 +247,6 @@
     </div>
   </div>
 </div>
-
 
 @endsection
 
