@@ -8,7 +8,9 @@ library.add(fas, far, fab)
 // continue doing this as the DOM changes.
 dom.watch()
 
-import 'bootstrap-select';
+import 'bootstrap-select'
+
+import 'lightbox2'
 
 export default {
   init() {
@@ -16,6 +18,9 @@ export default {
 
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
+
+      // Support Lightbox
+      $('.gallery a[href$=".jpg"], .gallery a[href$=".jpeg"], .gallery a[href$=".png"], .gallery a[href$=".gif"]').attr('data-lightbox','lightbox');
       
       // $('.selectpicker').change(function(){
       //   console.log($('.selectpicker').val());

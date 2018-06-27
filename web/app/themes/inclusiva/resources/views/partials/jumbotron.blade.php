@@ -1,4 +1,4 @@
-<div class="jumbotron jumbotron-fluid container-boxed">
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
     @include('partials.page-header')
 

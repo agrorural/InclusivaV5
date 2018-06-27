@@ -1,0 +1,13 @@
+.gallery {
+  @extend .row;
+}
+
+.gallery-item {
+  @extend .col-6;
+
+  margin-bottom: 3rem;
+
+  .gallery-columns-4 & {
+    @extend .col-sm-3;
+  }
+}

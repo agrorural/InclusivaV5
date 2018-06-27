@@ -10,6 +10,7 @@
  * @see https://github.com/webpack-contrib/sass-loader#imports
  */
 @import "~swiper/dist/css/swiper";
+@import "~lightbox2/dist/css/lightbox";
 @import "~simplebar/dist/simplebar";
 @import "~bootstrap-select/sass/bootstrap-select";
 
@@ -41,6 +42,7 @@
 @import "components/template-landing";
 @import "components/template-directorios";
 @import "components/animate";
+@import "components/gallery";
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";
@@ -48,9 +50,3 @@
 @import "layouts/posts";
 @import "layouts/tinymce";
 @import "layouts/front-page";
-
-.glasses::before {
-  display: none;
-  font-family: 'Font Awesome 5 Solid';
-  content: "\f530";
-}

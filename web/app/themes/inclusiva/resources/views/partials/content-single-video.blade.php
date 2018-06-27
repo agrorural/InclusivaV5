@@ -1,4 +1,6 @@
+{{-- @debug --}}
 <article @php(post_class())>
+  <iframe width="100%" height="415" src="https://www.youtube.com/embed/{{ $video }}" frameborder="0" allowfullscreen></iframe>
   <header>
     <h1 class="entry-title">{{ get_the_title() }}</h1>
     @include('partials/entry-meta')
