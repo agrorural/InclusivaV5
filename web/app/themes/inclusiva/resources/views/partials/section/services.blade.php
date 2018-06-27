@@ -1,6 +1,6 @@
 <section id="services" class="section">
   <div class="container">
-    <header class="section-header">
+    {{-- <header class="section-header">
       <h2 class="section-title">Servicios</h2>
       <nav class="navbar-swiper">
         <div id="services-pagination" class="nav-swiper-pagination"></div>
@@ -14,7 +14,7 @@
           </button>
         </div>
       </nav>
-    </header>
+    </header> --}}
 
     @include('partials.slider.services')
 

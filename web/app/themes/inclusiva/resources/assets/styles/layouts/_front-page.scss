@@ -119,7 +119,14 @@
     }
 
     &#services {
-      @include section-palette($yellow-100, $blue-100);
+      @include section-palette(transparent, $green-100);
+
+      padding: 1.5rem 0 4rem;
+
+      @include media-breakpoint-up(md) {
+        margin-top: -10rem;
+        padding: 7.5rem 0;
+      }
 
       .section-header {
         display: flex;
@@ -139,8 +146,8 @@
       }
 
       article {
-        background-color: transparent;
-        border: 1px solid rgba($blue-100, 0.5);
+        border: 0 none;
+        text-align: center;
       }
     }
 
@@ -284,7 +291,14 @@
     }
 
     &#featured {
-      padding: 0;
+      background-color: rgba($brown-100, 0.3);
+      padding-top: 3rem;
+      margin-bottom: 0;
+
+      @include media-breakpoint-down(xs) {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
 
       .container-boxed {
         padding: 0;

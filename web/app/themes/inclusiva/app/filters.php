@@ -20,6 +20,11 @@ add_filter('body_class', function (array $classes) {
         $classes[] = 'sidebar-primary';
     }
 
+    /** Add class if is home page */
+    if (is_front_page()) {
+      $classes[] = 'theme-green';
+    }
+
     /** Add class if is blog page */
     if (is_home()) {
       $classes[] = 'theme-green';

@@ -40,6 +40,7 @@
 @import "components/content-placeholder";
 @import "components/template-landing";
 @import "components/template-directorios";
+@import "components/animate";
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";
@@ -47,3 +48,9 @@
 @import "layouts/posts";
 @import "layouts/tinymce";
 @import "layouts/front-page";
+
+.glasses::before {
+  display: none;
+  font-family: 'Font Awesome 5 Solid';
+  content: "\f530";
+}

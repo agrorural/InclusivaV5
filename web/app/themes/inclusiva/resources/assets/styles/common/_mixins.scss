@@ -67,7 +67,7 @@
     color: color-yiq($color);
   }
 
-  a:not(.btn-outline-primary):not([data-id]):not(.slide-link) {
+  a:not(.btn-outline-primary):not([data-id]):not(.slide-link):not(.slide-footer-link) {
     color: $contrast-color;
   }
 
@@ -119,6 +119,12 @@
   }
 }
 
+@mixin bg-color($color: $white) {
+  .bg-#{$color} {
+    @include bg-variant(".bg-#{$color}", $color);
+  }
+}
+
 @mixin bg-overlay($color: $black-200, $position: to bottom) {
   &::before,
   &::after {
@@ -150,4 +156,72 @@
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+$nameDefault: fade !default;
+$countDefault: 1s !default;
+$durationDefault: 1s !default;
+$delayDefault: 0s !default;
+$functionDefault: ease !default;
+$fillDefault: both;
+$visibilityDefault: hidden !default;
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation-name($animation-name: $nameDefault) {
+  animation-name: $animation-name;
+}
+
+@mixin count($count: 1) {
+  animation-iteration-count: $count;
+}
+
+@mixin duration($duration: 1s) {
+  animation-duration: $duration;
+}
+
+@mixin delay($delay: 0.2s) {
+  animation-delay: $delay;
+}
+
+@mixin function($function: ease) {
+  animation-timing-function: $function;
+}
+
+@mixin fill-mode($fill: both) {
+  animation-fill-mode: $fill;
+}
+
+@mixin visibility($visibility: hidden) {
+  backface-visibility: $visibility;
+}
+
+@mixin animation($name: $nameDefault, $count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) {
+  @include animation-name($name);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
 }

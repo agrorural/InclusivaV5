@@ -1,14 +1,12 @@
-import fontawesome from '@fortawesome/fontawesome'
-import brands from '@fortawesome/fontawesome-free-brands'
-import solid from '@fortawesome/fontawesome-free-solid'
-import regular from '@fortawesome/fontawesome-free-regular'
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
-fontawesome.library.add(brands, solid, regular)
-
-// Make sure we can use pseudo classes
-// fontawesome.config = { 
-//   searchPseudoElements: true,
-//  }
+library.add(fas, far, fab)
+// Replace any existing <i> tags with <svg> and set up a MutationObserver to
+// continue doing this as the DOM changes.
+dom.watch()
 
 import 'bootstrap-select';
 

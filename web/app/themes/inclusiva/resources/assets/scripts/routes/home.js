@@ -26,20 +26,21 @@ export default {
     loop: true,
     speed: 800,
     // autoplay: {
-    //   delay: 3000,
+    //   delay: 8000,
     // },
     effect: 'cube', // 'cube', 'fade', 'coverflow',
     cubeEffect: {
-      shadow: true,
-      slideShadows: true,
-      shadowOffset: 5,
-      shadowScale: 0.94,
+      shadow: false,
+      // shadow: true,
+      // slideShadows: true,
+      // shadowOffset: 5,
+      // shadowScale: 0.94,
     },
     grabCursor: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    // },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -104,19 +105,34 @@ homeSlider.init();
       init: false,
       speed: 800,
       slidesPerView: 4,
-      spaceBetween: 30,
+      slidesPerGroup: 4,
+      spaceBetween: 0,
       grabCursor: true,
       pagination: {
         el: '#services-pagination',
-        type: 'fraction',
+        bullets: true,
+        clickable: true,
       },
-      navigation: {
-        nextEl: '#services-arrow-right',
-        prevEl: '#services-arrow-left',
-      },
+      // navigation: {
+      //   nextEl: '#services-arrow-right',
+      //   prevEl: '#services-arrow-left',
+      // },
       breakpoints: {
-        767: {
+        576: {
           slidesPerView: 2,
+          slidesPerGroup: 2,
+        },
+        768: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+        },
+        992: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+        },
+        1200: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
         },
       },
       // Events

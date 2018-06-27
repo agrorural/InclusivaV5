@@ -206,9 +206,9 @@ a {
   @extend .container;
 
   position: relative;
-  max-width: 100%;
+  // max-width: 100%;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(xl) {
     max-width: 124rem;
   }
 }

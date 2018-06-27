@@ -90,6 +90,7 @@ header {
 
   &.primary-nav {
     position: relative;
+    background-color: $green-100;
     z-index: $zindex-modal;
 
     > .container-boxed {
