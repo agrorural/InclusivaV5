@@ -1,4 +1,4 @@
-<div class="jumbotron jumbotron-fluid container-boxed with-{!! $header_type->is !!} @if( $has_menu->is !== false ) with-menu @endif"  @if( $header_type->is === 'thumbnail' ) style="background-image: url({!! $header_type->item !!})" @endif>
+<div class="jumbotron jumbotron-fluid with-{!! $header_type->is !!} @if( $has_menu->is !== false ) with-menu @endif"  @if( $header_type->is === 'thumbnail' ) style="background-image: url({!! $header_type->item !!})" @endif>
 <div class="jumbotron-container">
     @if( $header_type->is === 'slider' )
       <div id="landing__slider" class="swiper-container">
@@ -23,7 +23,8 @@
 
 @if( $has_menu->is !== false )
   @if ( has_nav_menu( $has_menu->menu . '_navigation' ) )
-    <nav id="landingNav" class="container-boxed navbar navbar-expand-md navbar-light bg-light nav">
+    <nav id="landingNav" class="navbar navbar-expand-md navbar-light bg-light nav">
+      <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,6 +40,8 @@
             'walker'            => new WP_Bootstrap_Navwalker(),
           ) );
         ?>
+      </div>  
+      
     </nav>
   @endif
     

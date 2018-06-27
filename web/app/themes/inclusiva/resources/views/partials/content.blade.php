@@ -8,15 +8,15 @@
       @if ( $format )
         <nav class="entry-type">
           <a href="{{ get_permalink() }}">
-            <span class="fa-layers fa-fw format-type">
-                <i class="fas fa-circle"  data-fa-transform="grow-18"></i>
-              @if ( $format == "gallery" )
-                <i class="fa-inverse fas fa-camera"></i>
-              @elseif ( $format == "video" )
-                <i class="fa-inverse fas fa-play"></i>
-              @elseif ( $format == "aside" )
-                <i class="fa-inverse fas fa-bookmark"></i>
-              @endif
+            <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                @if ( $format == "gallery" )
+                  <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                @elseif ( $format == "video" )
+                  <i class="fas fa-play fa-stack-1x fa-inverse"></i>
+                @elseif ( $format == "aside" )
+                <i class="fas fa-bookmark fa-stack-1x fa-inverse"></i>
+                @endif
             </span>
           </a>
         </nav>

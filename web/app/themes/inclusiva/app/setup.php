@@ -80,6 +80,7 @@ add_action('after_setup_theme', function () {
         'docs_navigation' => __('Docs Navigation', 'sage'),
         'csst_navigation' => __('CSST Navigation', 'sage'),
         'categories_navigation' => __('Categories Navigation', 'sage'),
+        'aliados-ii_navigation' => __('ALIADOS II Navigation', 'sage'),
     ]);
 
     /**

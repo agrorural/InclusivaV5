@@ -22,21 +22,15 @@
     @endif
     
     @if ( $has_feed )
-      <div class="container" role="document">
-        @yield('content-feed')
-      </div>
+      @yield('content-feed')
     @endif
 
     @if ( $has_banners )
-      <div class="container" role="document">
-        @yield('content-banners')
-      </div>
+      @yield('content-banners')
     @endif
 
     @if ( $has_videos )
-      <div class="container" role="document">
-        @yield('content-videos')
-      </div>
+      @yield('content-videos')
     @endif
 
     @php(do_action('get_footer'))

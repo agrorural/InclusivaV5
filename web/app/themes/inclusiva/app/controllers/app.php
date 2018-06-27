@@ -88,16 +88,16 @@ class App extends Controller
 
       $ShareContent .= '<nav class="entry-share">';
       $ShareContent .= '<a class="fb" href="' . $facebookURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<i class="fab fa-facebook-f"></i>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i></span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="tw" href="' . $twitterURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<i class="fab fa-twitter"></i>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="li" href="' . $linkedInURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<i class="fab fa-linkedin"></i>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i></span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="d-block d-sm-none wa" href="' . $whatsappURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<i class="fab fa-whatsapp"></i>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i></span>';
       $ShareContent .= '</a>';
       $ShareContent .= '</nav>';
 

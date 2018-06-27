@@ -1,6 +1,7 @@
+{{-- @debug --}}
 <div class="page-header">
   @if( $logo )
-    <img src="{!! $logo["sizes"]["thumbnail"] !!}" alt="" class="fluid-img mb-5">
+    <img src="{!! $logo !!}" alt="" class="fluid-img mb-5">
   @endif
   
   @if( $get_parent === null )
@@ -13,6 +14,6 @@
     {!! App::description() !!}
   @endif
 </div>
-{{-- @debug --}}
-{{-- 
-@php(var_dump(get_the_title($get_parent))) --}}
+
+
+{{-- @php(var_dump($logo)) --}}

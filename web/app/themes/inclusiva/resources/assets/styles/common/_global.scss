@@ -242,7 +242,6 @@ a {
       bottom: 0;
       width: 30px;
       height: 2px;
-      background-color: transparent;
     }
   }
 }
@@ -286,9 +285,12 @@ textarea.materialize-textarea,
   // height: 100%;
 
   .entry-type {
+    @include font-size(8);
+
     position: absolute;
     top: 1.5rem;
-    right: 1rem;
+    right: 1.5rem;
+    padding: 0;
   }
 }
 

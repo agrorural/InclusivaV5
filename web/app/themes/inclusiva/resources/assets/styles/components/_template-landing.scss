@@ -1,5 +1,7 @@
 .template-landing {
   .jumbotron {
+    position: relative;
+
     .page-header {
       @include abs-center();
 

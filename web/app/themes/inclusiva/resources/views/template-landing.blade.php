@@ -20,30 +20,35 @@
 @endsection
 
 @section('content-feed')
-<div class="row">
-    @if($the_posts !== null && $the_posts->have_posts())
-      @while($the_posts->have_posts()) @php($the_posts->the_post())
-        <div class="content-container">
-          @include('partials.content-'.get_post_type())
-        </div>
-      @endwhile
+  <section id="feed" class="wrap">
+    <div class="container">
+      <div class="row">
+        @if($the_posts !== null && $the_posts->have_posts())
+          @while($the_posts->have_posts()) @php($the_posts->the_post())
+            <div class="content-container">
+              @include('partials.content-'.get_post_type())
+            </div>
+          @endwhile
 
-    @php(wp_reset_postdata())
-    
-    @endif
-  
-  </div> 
-  
-  <div class="row d-flex justify-content-center">
-    <div class="content-container">
-        <a href="{!! get_tag_link($feed->term_id) !!}" class="btn btn-outline-primary btn-block">Todas las entradas</a>
+        @php(wp_reset_postdata())
+        
+        @endif
+      
+      </div> 
+      
+      <div class="row d-flex justify-content-center">
+        <div class="content-container">
+            <a href="{!! get_tag_link($feed->term_id) !!}" class="btn btn-outline-primary btn-block">Todas las entradas</a>
+        </div>
+      </div>
     </div>
-  </div>
+    
+  </section>
 @endsection
 
 @section('content-banners')
   @if($the_banners !== null  && $the_banners->have_posts())
-    <section id="banners" class="section">
+    <section id="banners" class="wrap">
       <div class="container">
           <header class="section-header">
             <h2 class="section-title">Enlaces de Interés</h2>
@@ -70,7 +75,7 @@
 
 @section('content-videos')
   @if($the_videos !== null  && $the_videos->have_posts())
-    <section id="videos" class="section">
+    <section id="videos" class="wrap">
       <div class="container">
           <header class="section-header">
             <h2 class="section-title">Videos</h2>
