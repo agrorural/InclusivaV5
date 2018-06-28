@@ -71,16 +71,17 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
+        'aliados-ii_navigation' => __('ALIADOS II Navigation', 'sage'),
+        'intranet_navigation' => __('Intranet Navigation', 'sage'),
+        'categories_navigation' => __('Categories Navigation', 'sage'),
+        'csst_navigation' => __('CSST Navigation', 'sage'),
+        'footer_navigation' => __('Footer Navigation', 'sage'),
+        'formats_navigation' => __('Formatos Navigation', 'sage'),
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'docs_navigation' => __('Docs Navigation', 'sage'),
+        'social_navigation' => __('Social Navigation', 'sage'),
         'super_navigation_left' => __('Super Navigation Left', 'sage'),
         'super_navigation_right' => __('Super Navigation Right', 'sage'),
-        'social_navigation' => __('Social Navigation', 'sage'),
-        'formats_navigation' => __('Formatos Navigation', 'sage'),
-        'footer_navigation' => __('Footer Navigation', 'sage'),
-        'docs_navigation' => __('Docs Navigation', 'sage'),
-        'csst_navigation' => __('CSST Navigation', 'sage'),
-        'categories_navigation' => __('Categories Navigation', 'sage'),
-        'aliados-ii_navigation' => __('ALIADOS II Navigation', 'sage'),
     ]);
 
     /**

@@ -19,12 +19,32 @@ export default {
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
 
+      // $('.modal-backdrop').hide();
+
       // Support Lightbox
       $('.gallery a[href$=".jpg"], .gallery a[href$=".jpeg"], .gallery a[href$=".png"], .gallery a[href$=".gif"]').attr('data-lightbox','lightbox');
       
       // $('.selectpicker').change(function(){
       //   console.log($('.selectpicker').val());
       // });
+
+      $('.intranetSidebarToggler').click(function(e){
+        e.preventDefault();
+        $("body").toggleClass("sidebar-expanded");
+        if($("body").hasClass("sidebar-expanded")) {
+          $(".intranetSidebarToggler")
+          .find('[data-fa-i2svg]')
+          .removeClass('fa-plus')
+          .addClass('fa-minus');
+          $('body').append('<div id="sidebarBackdrop" class="modal-backdrop fade show"></div>');
+        }else{
+          $(".intranetSidebarToggler")
+            .find('[data-fa-i2svg]')
+            .addClass('fa-plus')
+            .removeClass('fa-minus');
+          $('#sidebarBackdrop').remove();
+        }
+      });
 
       $('.selectpicker').selectpicker({
         noneSelectedText: 'Todo',
@@ -247,11 +267,11 @@ export default {
       if($('body').hasClass('without-searchform')){
         $('body').removeClass('without-searchform');
         $('body').addClass('with-searchform');
-        $('body').append('<div class="modal-backdrop backdrop-light fade show"></div>');
+        $('body').append('<div id="searchBackdrop" class="modal-backdrop fade show"></div>');
       }else{
         $('body').removeClass('with-searchform');
         $('body').addClass('without-searchform');
-        $('.modal-backdrop').remove();
+        $('#searchBackdrop').remove();
       }
       
       $('#formSearch').focus();
@@ -312,6 +332,26 @@ export default {
           }
         } 
       }
+
+      if( $("body").hasClass("sidebar-expanded") ){
+        if(e.which === 27){
+          $("body").removeClass("sidebar-expanded");
+          $('#sidebarBackdrop').remove();
+          $(".intranetSidebarToggler")
+            .find('[data-fa-i2svg]')
+            .addClass('fa-plus')
+            .removeClass('fa-minus');
+        }
+      }
     });
+
+    $(document).on('click', '#sidebarBackdrop', function(){ 
+      $("body").removeClass("sidebar-expanded");
+      $(this).remove();
+      $(".intranetSidebarToggler")
+        .find('[data-fa-i2svg]')
+        .addClass('fa-plus')
+        .removeClass('fa-minus');
+    }); 
   },
 };

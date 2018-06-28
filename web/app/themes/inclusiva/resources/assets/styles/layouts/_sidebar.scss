@@ -1,3 +1,7 @@
+.sidebar-expanded {
+  overflow-y: hidden;
+}
+
 .sidebar-primary {
   .content {
     display: flex;
@@ -29,5 +33,42 @@
 
   > p {
     @include font-size(13);
+  }
+}
+
+.offcanvas-collapse {
+  position: fixed;
+  bottom: 0;
+  width: 0;
+  top: 8.3rem;
+  padding: 0;
+  overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  background-color: $white;
+  transition-timing-function: ease-in;
+  transition-duration: 0.2s;
+  transition-property: width, margin-left, visibility, opacity;
+  z-index: 1070;
+  margin-left: -100%;
+
+  svg {
+    padding: 1.5rem 1.5rem 0.5rem;
+  }
+
+  @include media-breakpoint-up(sm) {
+    top: 4rem; /* Height of navbar */
+    margin-left: -22.5rem;
+  }
+
+  .sidebar-expanded & {
+    margin-left: 0;
+    visibility: visible;
+    width: 100%;
+    opacity: 1;
+
+    @include media-breakpoint-up(sm) {
+      width: 22.5rem;
+    }
   }
 }

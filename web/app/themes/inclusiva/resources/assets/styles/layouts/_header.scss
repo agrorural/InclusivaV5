@@ -1,18 +1,20 @@
 header {
   &.super-header {
     position: relative;
+    background-color: rgba($gray-200, 0.5);
     z-index: $zindex-modal;
-    background-color: transparent;
 
     nav {
       @extend .navbar-expand;
 
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       flex-direction: column-reverse;
       padding: 0;
 
       a {
-        padding: 1.5rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         color: $black-200;
 
         &:hover {
@@ -44,18 +46,41 @@ header {
         }
 
         li {
+          &.intranetSidebarToggler {
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              span {
+                @include font-size(7, 7);
+
+                padding-left: 0.2rem;
+              }
+            }
+          }
+
+          &:not(.pte) {
+            border-top: 5px solid transparent;
+          }
+
           &.pte {
             a {
-              background-image: url(../images/pte__logo.jpg);
+              background-image: url(../images/pte__logo.png);
               background-position: right center;
               background-repeat: no-repeat;
-              width: 8.5rem;
-              height: 4.5rem;
+              width: 7.5rem;
+              height: 4rem;
 
               span {
                 @extend .text-hide;
               }
             }
+          }
+
+          &.current_page_item {
+            background-color: $white;
+            border-top: 5px solid rgba($gray-200, 0.5);
           }
         }
       }
@@ -64,11 +89,11 @@ header {
 
   &.branding {
     position: relative;
-    z-index: $zindex-modal;
     background-color: $white;
+    z-index: $zindex-modal;
 
     nav {
-      padding: 5rem 0 3rem;
+      padding: 3rem 0;
     }
 
     @include media-breakpoint-down(xs) {
@@ -93,6 +118,10 @@ header {
     background-color: $green-100;
     z-index: $zindex-modal;
 
+    > .container {
+      position: relative;
+    }
+
     > .container-boxed {
       background-color: $primary;
       transition: background-color ease-in 0.3s;
@@ -105,10 +134,21 @@ header {
 }
 
 #omnisearch {
-  display: block;
-  z-index: $zindex-modal - 1;
+  display: none;
   transition: opacity 0.1s;
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   overflow: auto;
   opacity: 1;
+  z-index: $zindex-modal + 1;
+  height: calc(100vh - 30rem);
+
+  .container {
+    background-color: $white;
+  }
+
+  .show-results & {
+    display: block;
+  }
 }

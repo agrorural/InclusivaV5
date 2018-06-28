@@ -49,6 +49,35 @@ nav {
       width: 100%;
     }
   }
+
+  &#intranetNav {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+
+    .dropdown-header {
+      // padding: 0.5rem 0;
+      color: $green-100;
+    }
+
+    ul {
+      width: 100%;
+
+      li {
+        a {
+          color: $black-100;
+          padding: 0.5rem 1.5rem;
+          background-color: transparent;
+          transition: background-color 0.1s ease-in-out;
+
+          &:hover {
+            color: $white;
+            background-color: rgba($green-100, 0.9);
+          }
+        }
+      }
+    }
+  }
 }
 
 #mega-menu-wrap-primary_navigation #mega-menu-primary_navigation,

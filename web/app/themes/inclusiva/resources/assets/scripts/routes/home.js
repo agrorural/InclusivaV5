@@ -25,9 +25,10 @@ export default {
     init: false,
     loop: true,
     speed: 800,
-    // autoplay: {
-    //   delay: 8000,
-    // },
+    autoplay: {
+      delay: 7000,
+      disableOnInteraction: false,
+    },
     effect: 'cube', // 'cube', 'fade', 'coverflow',
     cubeEffect: {
       shadow: false,

@@ -44,14 +44,6 @@
       visibility: hidden;
     }
 
-    &.scale-out {
-      transform: scale(0.9);
-    }
-
-    &.scale-in {
-      transform: scale(1);
-    }
-
     .entity-img {
       display: none;
     }
@@ -393,6 +385,14 @@
 
   @include media-breakpoint-up(lg) {
     height: 53rem;
+  }
+
+  &.scale-out {
+    transform: scale(0.95);
+  }
+
+  &.scale-in {
+    transform: scale(1);
   }
 
   .swiper-slide {

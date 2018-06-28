@@ -76,6 +76,16 @@ body {
   opacity: 0 !important;
 }
 
+// #overlay {
+//   @extend .modal-backdrop;
+
+//   opacity: 0;
+
+//   &.is-active {
+//     opacity: 0.5;
+//   }
+// }
+
 h1,
 h2,
 h3,
@@ -305,25 +315,55 @@ figure {
 }
 
 // Backdrop
-.backdrop-light {
-  background-color: $white;
+#searchBackdrop {
+  // background-color: $white;
+  top: 21rem;
 
   &.show {
-    opacity: 0.99;
+    opacity: 0.5;
   }
 }
 
-.with-searchform {
-  .section,
-  footer,
-  .jumbotron,
-  .wrap {
-    display: none;
+#sidebarBackdrop {
+  // background-color: $white;
+  top: 8.3rem;
+  z-index: 1060;
+
+  @include media-breakpoint-up(sm) {
+    top: 4rem;
+  }
+
+  &.show {
+    opacity: 0.5;
   }
 }
+
+// .with-searchform {
+//   .section,
+//   footer,
+//   .jumbotron,
+//   .wrap {
+//     display: none;
+//   }
+// }
 
 .without-searchform {
   #omnisearch {
     display: none;
+  }
+}
+
+.sidebar-expanded,
+.with-searchform {
+  overflow-y: hidden;
+}
+
+.show-results {
+  .wp-pagenavi-container {
+    margin-top: 0;
+
+    .pagination {
+      margin: 0 auto 2rem;
+    }
   }
 }
