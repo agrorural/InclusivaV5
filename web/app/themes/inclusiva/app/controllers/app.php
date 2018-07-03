@@ -87,17 +87,18 @@ class App extends Controller
       $linkedInURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$webURL.'&amp;title='.$postTitle;
 
       $ShareContent .= '<nav class="entry-share">';
+      $ShareContent .= '<h4 class="entry-share-header">Compartir:</h4>';
       $ShareContent .= '<a class="fb" href="' . $facebookURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i></span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i></span> <span class="shareName">Facebook</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="tw" href="' . $twitterURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span> <span class="shareName">Twitter</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="li" href="' . $linkedInURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i></span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i></span> <span class="shareName">LinkedIn</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="d-block d-sm-none wa" href="' . $whatsappURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i></span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i></span> <span class="shareName">WhatsApp</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '</nav>';
 

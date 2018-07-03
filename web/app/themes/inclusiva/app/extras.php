@@ -35,6 +35,16 @@ function posts_for_current_contributor() {
 }
 
 /**
+ * Make theme available for translation
+ */
+
+add_action( 'after_setup_theme', __NAMESPACE__ . '\\my_theme_setup' );
+function my_theme_setup(){
+  load_theme_textdomain( 'sage', get_template_directory() . '/lang' );
+}
+
+
+/**
  * Agrega API de Google Maps en ACF
  */
 
@@ -71,6 +81,7 @@ add_filter('sage/display_sidebar', function ($display) {
   isset($display) || $display = in_array(true, [
     // The sidebar will be displayed if any of the following return true
     is_page_template( 'views/template-documentos.blade.php' ),
+    is_singular('post'),
   ]);
 
   return $display;

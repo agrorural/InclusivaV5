@@ -158,12 +158,7 @@ add_action('after_setup_theme', function () {
     sage()->singleton('sage.assets', function () {
         return new JsonManifest(config('assets.manifest'), config('assets.uri'));
     });
-
-    /**
-     * Make theme available for translation
-     */
-    load_theme_textdomain('sage', get_stylesheet_directory() . '/lang');
-
+    
     /**
      * Add Blade to Sage container
      */

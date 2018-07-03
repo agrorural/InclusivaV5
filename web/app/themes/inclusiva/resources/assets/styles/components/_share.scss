@@ -1,20 +1,19 @@
+// 
+
 .entry-share {
   @extend .nav;
-  @extend .nav-justified;
-  @extend .d-lg-none;
 
-  @include font-size(8);
+  h4,
+  .shareName {
+    display: none;
+  }
 
-  padding: 0;
-  position: absolute;
-  right: 1.5rem;
-  bottom: 1.5rem;
+  .fa-stack {
+    @include font-size(12);
+  }
 
   a {
     @extend .nav-link;
-    @extend .nav-item;
-
-    padding: 0.25rem;
 
     &:hover {
       &.fb {
@@ -33,9 +32,5 @@
         color: $green-wa;
       }
     }
-  }
-
-  article:hover & {
-    @extend .d-flex;
   }
 }

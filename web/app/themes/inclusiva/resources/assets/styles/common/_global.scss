@@ -317,10 +317,14 @@ figure {
 // Backdrop
 #searchBackdrop {
   // background-color: $white;
-  top: 21rem;
+  top: 29.7rem;
 
   &.show {
     opacity: 0.5;
+  }
+
+  @include media-breakpoint-up(sm) {
+    top: 20rem;
   }
 }
 

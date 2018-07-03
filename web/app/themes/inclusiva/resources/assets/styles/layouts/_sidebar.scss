@@ -5,17 +5,42 @@
 .sidebar-primary {
   .content {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    flex-direction: column-reverse;
+    justify-content: start;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
 
     main {
-      @extend .col-sm-9;
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+
+      @include media-breakpoint-up(lg) {
+        flex: 0 0 75%;
+        max-width: 75%;
+      }
     }
 
     aside {
-      @extend .col-sm-3;
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
 
-      position: sticky;
+      @include media-breakpoint-up(lg) {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
     }
   }
 }

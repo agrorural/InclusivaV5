@@ -1,6 +1,9 @@
-<time class="updated" datetime="{{ get_post_time('c', true) }}">{{ get_the_date() }}</time>
-<p class="byline author vcard">
-  {{ __('By', 'sage') }} <a href="{{ get_author_posts_url(get_the_author_meta('ID')) }}" rel="author" class="fn">
+<div class="meta">
+  <time class="updated" datetime="{{ get_post_time('c', true) }}">@if( get_the_category() ) {{ get_the_category()[0]->name }} @else AGRO RURAL @endif, {{ get_the_date() }}</time>
+  <p class="byline author vcard">
+    {{-- {{ __('By', 'sage') }} {{ get_the_author() }} --}}
     {{ get_the_author() }}
-  </a>
-</p>
+  </p>
+</div>
+
+{!! App::share() !!}
