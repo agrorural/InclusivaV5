@@ -4,7 +4,13 @@
   <body @php(body_class())>
     @php(do_action('get_header'))
     @include('partials.header')
-    @include('partials.jumbotron')
+    
+    @if(is_singular('post'))
+      @include('partials.jumbotron.single')
+    @else
+      @include('partials.jumbotron')
+    @endif
+    
     <div class="wrap container" role="document">
       <div class="content">
         <main class="main">

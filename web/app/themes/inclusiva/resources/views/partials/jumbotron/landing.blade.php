@@ -1,5 +1,5 @@
 <div class="jumbotron jumbotron-fluid with-{!! $header_type->is !!} @if( $has_menu->is !== false ) with-menu @endif"  @if( $header_type->is === 'thumbnail' ) style="background-image: url({!! $header_type->item !!})" @endif>
-<div class="jumbotron-container">
+  <div class="jumbotron-container">
     @if( $header_type->is === 'slider' )
       <div id="landing__slider" class="swiper-container">
         <div class="swiper-wrapper">
