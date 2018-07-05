@@ -156,16 +156,47 @@ header {
   position: absolute;
   left: 0;
   right: 0;
-  overflow: auto;
+  // overflow: auto;
   opacity: 1;
   z-index: $zindex-modal - 1;
-  height: calc(100vh - 30rem);
+  // height: calc(100vh - 30rem);
 
   .container {
     background-color: $white;
   }
 
+  .pagination-container {
+    .pagination {
+      background-color: $white;
+      margin-bottom: 0;
+      border-top: 0 solid transparent;
+      border-bottom: 1px solid rgba(33, 37, 41, 0.15);
+
+      a:hover {
+        color: $green-100;
+      }
+
+      .current {
+        border-top: 0 none;
+        border-bottom: 1px solid $green-100;
+        color: $green-100;
+      }
+    }
+  }
+
+  .result-container {
+    padding-top: 5.5rem;
+  }
+
   .show-results & {
     display: block;
+  }
+
+  #simpleBarSearch {
+    max-height: 30rem;
+
+    @include media-breakpoint-up(sm) {
+      max-height: calc(100vh - 40rem);
+    }
   }
 }

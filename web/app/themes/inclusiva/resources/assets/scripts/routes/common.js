@@ -1,3 +1,6 @@
+import SimpleBar from 'simplebar';
+
+
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -15,6 +18,8 @@ import 'lightbox2'
 export default {
   init() {
     // JavaScript to be fired on all pages
+
+    new SimpleBar(document.getElementById('simpleBarSearch'));
 
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
@@ -135,7 +140,7 @@ export default {
                 customPostExcerpt = objectToSend.response[i].excerpt;
   
                 objectToSend.response[i].html += '<h2 class="entry-title">';
-                objectToSend.response[i].html += '<a href="' + objectToSend.response[i].permalink + '">';
+                objectToSend.response[i].html += '<a class="search-result-link" href="' + objectToSend.response[i].permalink + '">';
                 objectToSend.response[i].html += objectToSend.txtKeyword.length >= 1 ? (customPostTitle.replace(new RegExp("(" + objectToSend.txtKeyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") + ")", "gi"), "<mark>$1</mark>")).replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4") : customPostTitle;
                 objectToSend.response[i].html += '</a>';
                 objectToSend.response[i].html += '</h2>';
@@ -163,17 +168,26 @@ export default {
                 }
   
             }
+
+            var html = '';
   
               for (var j = 1; j <= objectToSend.max_num_pages; j++) {
-                  var html = '<a href="page/' + j + '" class="larger page navi" data-id="' + j + '">' + j + '</a>';
-  
-                  if (objectToSend.paged === j) {
-                      html = '<span class="current">' + j + '</span>';
+                  if( j === 1 && objectToSend.paged !== 1 ) {
+                    html += '<a class="previouspostslink navi" rel="prev" href="page/' + ( objectToSend.paged -1 ) + '" data-id="' + ( objectToSend.paged -1 ) + '">«</a>';
                   }
-  
-                    ajaxOmniSearch.find(".wp-pagenavi").append(html);
+                  if (objectToSend.paged === j) {
+                      html += '<span class="current">' + j + '</span>';
+                  }else{
+                    html += '<a href="page/' + j + '" class="larger page navi" data-id="' + j + '">' + j + '</a>';
+                  }
+
+                  if( j === objectToSend.max_num_pages && objectToSend.paged < objectToSend.max_num_pages ) {
+                    html += '<a class="nextpostslink navi" rel="next" href="page/' + ( objectToSend.paged + 1 ) + '" data-id="' + ( objectToSend.paged + 1 ) + '">»</a>';
+                  }
                 }
               }
+
+              ajaxOmniSearch.find(".wp-pagenavi").append(html);
   
               /* eslint-disable no-console */
               console.log(objectToSend);
@@ -297,12 +311,12 @@ export default {
 
     // Add class when user add content to input
     $('input.form-control').focus(function() {
-      $(this).parents('.form-group').addClass('has-focus');
+      $(this).parents('.form-label-group').addClass('has-focus');
     }).blur(function(){
         let tmpval = $(this).val();
-        $(this).parents('.form-group').removeClass('has-focus');
+        $(this).parents('.form-label-group').removeClass('has-focus');
         
-        (tmpval !== '') ? $(this).parents('.form-group').addClass('has-value') : $(this).parents('.form-group').removeClass('has-value');
+        (tmpval !== '') ? $(this).parents('.form-label-group').addClass('has-value') : $(this).parents('.form-label-group').removeClass('has-value');
     });
   },
   finalize() {

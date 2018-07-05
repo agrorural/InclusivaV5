@@ -20,7 +20,7 @@
 
 @include theme('theme-green', $green-100, $green-light-200, $orange-200);
 @include theme('theme-blue', $blue-200, $blue-sky-300, $lime);
-@include theme('theme-gray', $black-200, $gray-100, $green-light-100);
+@include theme('theme-gray', $black-200, $gray-100, $green-light-200);
 @include theme('theme-purple', $purple-200, $purple-100, $orange-200);
 @include theme('theme-orange', $orange-300, $orange-200, $purple-200);
 
@@ -39,9 +39,8 @@
 @import "components/simplebar";
 @import "components/bootstrap-select";
 @import "components/searchform";
-@import "components/content-placeholder";
-@import "components/template-landing";
-@import "components/template-directorios";
+@import "components/gravity-forms";
+@import "components/fonts";
 @import "components/animate";
 @import "components/gallery";
 @import "layouts/header";
@@ -51,3 +50,7 @@
 @import "layouts/posts";
 @import "layouts/tinymce";
 @import "layouts/front-page";
+@import "components/content-placeholder";
+@import "components/template-landing";
+@import "components/template-directorios";
+@import "components/template-documentos";

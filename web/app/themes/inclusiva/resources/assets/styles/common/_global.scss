@@ -92,15 +92,13 @@ h3,
 h4,
 h5,
 h6 {
-  @include font-family('ubuntu', 'light');
+  @include font-family('ubuntu', 'medium');
 }
 
 // Time
 time,
 .entry-category {
   @include font-size(10);
-
-  color: rgba($black-200, 0.75);
 }
 
 .entry-category {
@@ -146,9 +144,9 @@ a {
     }
   }
 
-  .entry-category:not(:hover) & {
-    color: hsla(0, 0%, 30%, 1);
-  }
+  // .entry-category:not(:hover) & {
+  //   color: hsla(0, 0%, 30%, 1);
+  // }
 }
 
 #agro_rural__logo {
@@ -238,9 +236,9 @@ a {
     padding-bottom: 1.5rem;
     margin-bottom: 3rem;
 
-    &.who-we-are {
-      @include font-size(36);
-    }
+    // &.who-we-are {
+    //   @include font-size(36);
+    // }
   }
 
   .section-title,
@@ -263,31 +261,31 @@ a {
 }
 
 //Forms
-input:not([type]),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
-input[type=email]:not(.browser-default),
-input[type=url]:not(.browser-default),
-input[type=time]:not(.browser-default),
-input[type=date]:not(.browser-default),
-input[type=datetime]:not(.browser-default),
-input[type=datetime-local]:not(.browser-default),
-input[type=tel]:not(.browser-default),
-input[type=number]:not(.browser-default),
-input[type=search]:not(.browser-default),
-textarea.materialize-textarea,
-.custom-select:not(.browser-default) {
-  border-bottom: 1px solid $gray-200;
-}
+// input:not([type]),
+// input[type=text]:not(.browser-default),
+// input[type=password]:not(.browser-default),
+// input[type=email]:not(.browser-default),
+// input[type=url]:not(.browser-default),
+// input[type=time]:not(.browser-default),
+// input[type=date]:not(.browser-default),
+// input[type=datetime]:not(.browser-default),
+// input[type=datetime-local]:not(.browser-default),
+// input[type=tel]:not(.browser-default),
+// input[type=number]:not(.browser-default),
+// input[type=search]:not(.browser-default),
+// textarea.materialize-textarea,
+// .custom-select:not(.browser-default) {
+//   border-bottom: 1px solid $gray-200;
+// }
 
-.custom-select:not(.browser-default) {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+// .custom-select:not(.browser-default) {
+//   padding-left: 0.5rem;
+//   padding-right: 0.5rem;
 
-  option {
-    color: $black-200;
-  }
-}
+//   option {
+//     color: $black-200;
+//   }
+// }
 
 // Hentry
 .entry-img {
@@ -362,12 +360,6 @@ figure {
   overflow-y: hidden;
 }
 
-.show-results {
-  .wp-pagenavi-container {
-    margin-top: 0;
-
-    .pagination {
-      margin: 0 auto 2rem;
-    }
-  }
+.wrap.container .content {
+  @include make-row();
 }

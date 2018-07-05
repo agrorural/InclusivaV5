@@ -1,9 +1,9 @@
 {{-- @debug --}}
 <article @php(post_class())>
-  <header>
+  {{-- <header>
     <h1 class="entry-title">{{ get_the_title() }}</h1>
     @include('partials/entry-meta')
-  </header>
+  </header> --}}
   <div class="entry-content">
     @php(the_content())
   </div>

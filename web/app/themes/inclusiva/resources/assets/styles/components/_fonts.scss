@@ -1,0 +1,27 @@
+@include media-breakpoint-down(sm) {
+  .content {
+    p,
+    time,
+    .author {
+      @include font-size(14);
+    }
+  }
+
+  .jumbotron h1 {
+    font-size: 2.4rem;
+  }
+
+  .content h3 {
+    font-size: 2rem;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .single {
+    time,
+    .author,
+    .entry-content {
+      @include font-size(16);
+    }
+  }
+}

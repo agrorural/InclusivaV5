@@ -949,14 +949,16 @@
           <form class="searchForm">
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                  <select class="selectpicker" multiple>
-                      @foreach(App::postTypeObj() as $type)
-                        <option value="{{$type['name']}}">{{$type['label']}}</option>
-                      @endforeach
-                  </select>
+                <select class="selectpicker" multiple>
+                    @foreach(App::postTypeObj() as $type)
+                      <option value="{{$type['name']}}">{{$type['label']}}</option>
+                    @endforeach
+                </select>
               </div>
-              <input type="text" class="form-control" id="formSearch">
-              <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
+              <div class="form-label-group">
+                <input type="text" class="form-control" id="formSearch">
+                <label for="formSearch">Ingrese su búsqueda y presione [enter]</label>
+              </div>
               <div class="input-group-append">
                 <button id="cleanForm" class="btn btn-link" type="button"><i class="fas fa-redo"></i></button>
               </div>

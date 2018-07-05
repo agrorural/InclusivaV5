@@ -1,54 +1,56 @@
 //Formulario
-.search-result-container {
-  transition: all ease-in 0.5s;
+#omnisearch {
+  .search-result-container {
+    transition: all ease-in 0.5s;
 
-  nav {
-    margin: 2rem auto;
-    padding: 0;
-    border-top: 1px solid rgba(33, 37, 41, 0.15);
+    // nav {
+    //   margin: 2rem auto;
+    //   padding: 0;
+    //   border-top: 1px solid rgba(33, 37, 41, 0.15);
 
-    a {
-      color: rgba(33, 37, 41, 0.5);
+    //   a {
+    //     color: rgba(33, 37, 41, 0.5);
 
-      &:hover {
-        color: $primary;
-        border-top: 1px solid $primary;
+    //     &:hover {
+    //       color: $primary;
+    //       border-top: 1px solid $primary;
+    //     }
+    //   }
+
+    //   .current {
+    //     color: $primary;
+    //     border-top: 1px solid $primary;
+    //   }
+    // }
+
+    .search-result {
+      @extend .col-12;
+
+      article {
+        .entry-container {
+          position: relative;
+          margin-bottom: 1rem;
+
+          .entry-title {
+            margin-top: 0;
+            margin-bottom: 0.25rem;
+          }
+
+          .entry-content,
+          .post-meta {
+            font-size: 80%;
+          }
+        }
       }
     }
 
-    .current {
-      color: $primary;
-      border-top: 1px solid $primary;
+    .show-results & {
+      display: block;
     }
-  }
 
-  .search-result {
-    @extend .col-12;
-
-    article {
-      .entry-container {
-        position: relative;
-        margin-bottom: 1rem;
-
-        .entry-title {
-          margin-top: 0;
-          margin-bottom: 0.25rem;
-        }
-
-        .entry-content,
-        .post-meta {
-          font-size: 80%;
-        }
-      }
+    .hide-results & {
+      display: none;
     }
-  }
-
-  .show-results & {
-    display: block;
-  }
-
-  .hide-results & {
-    display: none;
   }
 }
 
@@ -115,8 +117,18 @@
 
       .form-group {
         display: flex;
+        justify-content: space-between;
         opacity: 1;
         width: 100%;
+
+        .form-label-group {
+          position: static;
+          width: calc(100% - 18.5rem);
+
+          input {
+            border-bottom: 1px solid $white;
+          }
+        }
 
         label {
           display: flex;

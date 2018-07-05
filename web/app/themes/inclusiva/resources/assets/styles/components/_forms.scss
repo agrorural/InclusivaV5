@@ -17,3 +17,27 @@
   @extend .btn;
   @extend .btn-secondary;
 }
+
+form {
+  &#docSearch {
+    .filterSearch {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+
+      @include media-breakpoint-up(md) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .filter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}

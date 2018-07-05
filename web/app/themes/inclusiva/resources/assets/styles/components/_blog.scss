@@ -14,8 +14,8 @@
 
       .entry-title {
         @include font-family('ubuntu', 'medium');
-        @include font-size(16);
 
+        font-size: 1.6rem;
         margin: 1rem 0 1rem;
       }
     }
@@ -47,13 +47,13 @@
       .entry-body {
         @include media-breakpoint-up(sm) {
           .entry-title {
-            @include font-size(24);
+            font-size: 2.4rem;
           }
         }
 
         @include media-breakpoint-up(lg) {
           .entry-title {
-            @include font-size(30);
+            font-size: 3rem;
           }
 
           display: flex;

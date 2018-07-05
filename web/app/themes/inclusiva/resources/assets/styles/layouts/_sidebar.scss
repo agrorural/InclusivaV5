@@ -45,22 +45,6 @@
   }
 }
 
-.widget {
-  h3 {
-    @include font-family('ubuntu', 'regular');
-    @include font-size(16);
-
-    position: relative;
-    text-transform: uppercase;
-    padding-bottom: 2rem;
-    margin-bottom: 2.2rem;
-  }
-
-  > p {
-    @include font-size(13);
-  }
-}
-
 .offcanvas-collapse {
   position: fixed;
   bottom: 0;
@@ -94,6 +78,51 @@
 
     @include media-breakpoint-up(sm) {
       width: 22.5rem;
+    }
+  }
+}
+
+.sidebar {
+  .widget {
+    @include box-shadow(1);
+
+    background-color: $white;
+
+    header {
+      padding: 1.5rem 1.5rem 0;
+    }
+
+    h3 {
+      @include font-family('ubuntu', 'regular');
+      @include font-size(16);
+
+      position: relative;
+      text-transform: uppercase;
+      padding-bottom: 2rem;
+      margin-bottom: 2.2rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 33px;
+      }
+    }
+
+    nav {
+      @include font-size(13);
+
+      padding: 0 1.5rem 1.5rem;
+
+      a {
+        color: $black-200;
+      }
+    }
+
+    > p {
+      @include font-size(13);
     }
   }
 }

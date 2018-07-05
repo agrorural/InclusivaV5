@@ -6,6 +6,9 @@
   nav {
     @extend .justify-content-center;
 
+    padding: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+
     span {
       @extend .nav-link;
 
@@ -22,11 +25,40 @@
 
     .page,
     .extend,
-    .last {
+    .last,
+    .navi {
       @extend .d-none;
       @extend .d-md-block;
       @extend .d-lg-block;
       @extend .d-xl-block;
+
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &.pagination-top {
+    nav {
+      border-top: 0 none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+      span {
+        &.current {
+          margin-top: 0;
+          margin-bottom: -1px;
+        }
+      }
+    }
+  }
+
+  &.pagination-fixed {
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    nav {
+      margin: 0 auto;
     }
   }
 }

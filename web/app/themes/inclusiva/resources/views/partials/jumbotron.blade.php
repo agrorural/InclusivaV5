@@ -1,13 +1,8 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     @include('partials.page-header')
-
-    @if (is_page_template( 'views/template-documentos.blade.php' ))
-      <hr class="my-4">
-      
-      @include('partials.form.docs-filter')
     
-    @elseif ( ( !is_front_page() && is_home() ) || is_category() )
+    @if ( ( !is_front_page() && is_home() ) || is_category() )
 
       @if (has_nav_menu('categories_navigation'))  
         @php
