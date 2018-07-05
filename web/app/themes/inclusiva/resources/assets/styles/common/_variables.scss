@@ -155,7 +155,7 @@ $link-hover-decoration: none;
   $secondary: map-get($theme-colors, secondary);
   $contrast: map-get($theme-colors, contrast);
   $link-color: $primary;
-  $link-hover-color: $contrast;
+  $link-hover-color: $secondary;
 
   .#{$name} {
     .sidebar {

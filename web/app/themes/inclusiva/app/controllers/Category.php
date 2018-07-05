@@ -12,7 +12,7 @@ class Category extends Controller
   
     public function flag()
     {
-        return (get_field('dz_flag', get_queried_object())) ? get_field('dz_flag', get_queried_object()) : \App\asset_path('images/card__flag--default.jpg');
+        return (get_field('dz_flag', get_queried_object())) ? get_field('dz_flag', get_queried_object()) : array('url' => \App\asset_path('images/card__flag--default.jpg'), 'title' => 'AGRO RURAL');
     }
 
     public function bg()

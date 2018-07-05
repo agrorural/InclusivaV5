@@ -5,9 +5,9 @@
   <body @php(body_class())>
     @php(do_action('get_header'))
     @include('partials.header')
-    @include('partials.jumbotron')
+    @include('partials.jumbotron.direcciones-zonales')
     
-    <section id="categoryContent" class="container-boxed section">
+    <section id="categoryContent" class="section">
       <div class="container">
         @yield('content-category')
       </div>

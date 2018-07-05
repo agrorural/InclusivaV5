@@ -28,9 +28,33 @@
     @include section-palette($blue-100, $lime, true);
   }
 
+  .category & {
+    .headerIcon {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      justify-content: space-between;
+
+      header {
+        display: flex;
+        align-items: center;
+
+        h1 {
+          padding-left: 1rem;
+          margin-bottom: 0;
+        }
+      }
+
+      footer {
+        color: $white;
+      }
+    }
+  }
+
   .blog &,
   .category & {
     padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   &.with-slider {
