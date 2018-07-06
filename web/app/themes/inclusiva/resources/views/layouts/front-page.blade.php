@@ -9,6 +9,7 @@
     @include('partials.section.services')
     @include('partials.section.directions')
     @include('partials.section.newsfeed')
+    @include('partials.section.social')
     @include('partials.section.multimedia')
 
     @php(do_action('get_footer'))

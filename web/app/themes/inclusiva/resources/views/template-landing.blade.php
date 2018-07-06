@@ -6,9 +6,10 @@
 @php
   ( $feed === "" || $feed === false ) ? $the_posts = null : $the_posts = Landing::query('post', 'post_tag', $feed->slug);
   ( $banners === "" || $banners === false ) ? $the_banners = null : $the_banners = Landing::query('banners', 'posiciones', $banners->slug);
+  ( $docs === "" || $docs === false ) ? $the_docs = null : $the_docs = Landing::query('documentos', 'tipos', $docs->slug, -1);
   ( $feed === "" || $feed === false ) ? $the_videos = null : $the_videos = Landing::query('post', 'post_format', $feed->slug, -1);
 
-  // var_dump( $has_menu );
+  //var_dump( $the_docs );
 @endphp
 
 
@@ -22,6 +23,9 @@
 @section('content-feed')
   <section id="feed" class="wrap">
     <div class="container">
+      <header class="section-header">
+        <h2 class="section-title">Entradas</h2>
+      </header>
       <div class="row">
         @if($the_posts !== null && $the_posts->have_posts())
           @while($the_posts->have_posts()) @php($the_posts->the_post())
@@ -71,6 +75,30 @@
       </div>
     </section>
   @endif
+@endsection
+
+@section('content-docs')
+  <section id="docs" class="wrap">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title">Documentos</h2>
+      </header>
+      <div class="row">
+        @if($the_docs !== null && $the_docs->have_posts())
+          @while($the_docs->have_posts()) @php($the_docs->the_post())
+            <div class="content-container">
+              @include('partials.content-'.get_post_type())
+            </div>
+          @endwhile
+
+        @php(wp_reset_postdata())
+        
+        @endif
+      
+      </div> 
+    </div>
+    
+  </section>
 @endsection
 
 @section('content-videos')

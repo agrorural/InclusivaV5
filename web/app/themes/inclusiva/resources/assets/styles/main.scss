@@ -20,7 +20,7 @@
 
 @include theme('theme-green', $green-100, $green-light-200, $orange-200);
 @include theme('theme-blue', $blue-200, $blue-sky-300, $lime);
-@include theme('theme-gray', $black-200, $gray-100, $green-light-200);
+@include theme('theme-gray', $black-200, $black-100, $green-light-200);
 @include theme('theme-purple', $purple-200, $purple-100, $orange-200);
 @include theme('theme-orange', $orange-300, $orange-200, $purple-200);
 

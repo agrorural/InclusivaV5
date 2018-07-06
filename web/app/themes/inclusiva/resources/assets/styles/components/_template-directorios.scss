@@ -1,6 +1,12 @@
 .template-directorios {
   .section {
     background-color: transparent;
+
+    .section-title button {
+      padding-left: 0;
+      padding-right: 0;
+      text-transform: uppercase;
+    }
   }
 
   .search-result {

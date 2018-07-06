@@ -29,6 +29,10 @@
       @yield('content-banners')
     @endif
 
+    @if ( $has_docs )
+      @yield('content-docs')
+    @endif
+
     @if ( $has_videos )
       @yield('content-videos')
     @endif

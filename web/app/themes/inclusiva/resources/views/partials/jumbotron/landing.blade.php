@@ -23,10 +23,10 @@
 
 @if( $has_menu->is !== false )
   @if ( has_nav_menu( $has_menu->menu . '_navigation' ) )
-    <nav id="landingNav" class="navbar navbar-expand-md navbar-light bg-light nav">
+    <nav id="landingNav" class="navbar navbar-expand-md nav">
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <i class="fas fa-bars"></i>
         </button>
         <?php
           wp_nav_menu( array(

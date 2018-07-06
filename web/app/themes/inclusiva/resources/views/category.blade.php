@@ -184,36 +184,35 @@
       <div class="media">
         <img class="mr-3" src="{{$directory->photo}}" alt="{{$directory->director}}" width="55">
         <div class="media-body">
-          <strong>{{$directory->director}}</strong><br>
-          {{$directory->position}}
+          <h6>{{$directory->director}}</h6>
+         <p>{{$directory->position}}</p>
         </div>
       </div>
       <ul class="list-group list-group-flush">
         @if($phone_local || $phone_direct || @phone_ext) 
           <li class="list-group-item">
-            @if($phone_local->number) <a href="tel:+51{{$phone_local->code}}{{$phone_local->number}}">+51 {{$phone_local->code}} {{$phone_local->number}}</a> <br> @endif
-            @if($phone_local_two->number) <a href="tel:+51{{$phone_local_two->code}}{{$phone_local_two->number}}">+51 {{$phone_local_two->code}} {{$phone_local_two->number}}</a>  <br> @endif
+            @if($phone_local->number) <a href="tel:+51{{$phone_local->code}}{{$phone_local->number}}"><i class="fas fa-phone"></i> +51 {{$phone_local->code}} {{$phone_local->number}}</a> <br> @endif
+            @if($phone_local_two->number) <a href="tel:+51{{$phone_local_two->code}}{{$phone_local_two->number}}"><i class="fas fa-phone"></i> +51 {{$phone_local_two->code}} {{$phone_local_two->number}}</a>  <br> @endif
             @if($phone_direct->number)
               @php($directLenght = strlen($phone_direct->number))
               
               @if($directLenght > 7)
-                <a href="tel:+51{{$phone_direct->number}}">+51 {{$phone_direct->number}}</a>  <br> 
+                <a href="tel:+51{{$phone_direct->number}}"><i class="fas fa-phone"></i> +51 {{$phone_direct->number}}</a>  <br> 
               @else
                 <a href="tel:+511{{$phone_direct->number}}">+511 {{$phone_direct->number}}</a>  <br>           
               @endif
             @endif
             @if($phone_ext->number)
               @if($phone_ext->ext)
-                <a href="tel:+511{{$phone_ext->number}};{{$phone_ext->ext}}">+51 1 {{$phone_ext->number}} axo. {{$phone_ext->ext}}</a> 
+                <a href="tel:+511{{$phone_ext->number}};{{$phone_ext->ext}}"><i class="fas fa-phone"></i> +51 1 {{$phone_ext->number}} axo. {{$phone_ext->ext}}</a> 
               @endif
               @if($phone_ext->ext2)
               <br>
-                <a href="tel:+511{{$phone_ext->number}};{{$phone_ext->ext2}}">+51 1 {{$phone_ext->number}} axo. {{$phone_ext->ext2}}</a> 
+                <a href="tel:+511{{$phone_ext->number}};{{$phone_ext->ext2}}"><i class="fas fa-phone"></i> +51 1 {{$phone_ext->number}} axo. {{$phone_ext->ext2}}</a> 
               @endif
             @endif
           </li> 
         @endif
-        @if($address) <li class="list-group-item">{{$address['address']}}</li> @endif
       </ul>
     </div>
   </div>
@@ -221,6 +220,7 @@
     <div class="acf-map">
       <div class="marker" data-lat="{{ $address['lat'] }}" data-lng="{{ $address['lng'] }}"></div>
     </div>
+    @if($address) <li class="list-group-item">{{$address['address']}}</li> @endif
   </div>
 </div>
 

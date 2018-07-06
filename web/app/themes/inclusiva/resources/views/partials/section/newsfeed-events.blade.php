@@ -19,11 +19,11 @@
       <article class="widget">
         <div class="entry-body">
           <header>
-            <time class="entry-date"><a href="{!! $post->guid !!}">{!! tribe_get_start_date( $post, $display_time = false, $date_format = "j/m" ) !!}</a></time>
+            <time class="entry-date"><a class="slide-link" href="{!! $post->guid !!}">{!! tribe_get_start_date( $post, $display_time = false, $date_format = "j/m" ) !!}</a></time>
           </header>
 
           <div class="entry-content">
-            <h2 class="entry-title"><a href="{!! $post->guid !!}">{!! $post->post_title !!}</a></h2>
+            <h2 class="entry-title"><a class="slide-link" href="{!! $post->guid !!}">{!! $post->post_title !!}</a></h2>
           </div>
 
           <div class="entry-summary">
