@@ -1,20 +1,20 @@
 <section id="services" class="section">
   <div class="container">
-    {{-- <header class="section-header">
-      <h2 class="section-title">Servicios</h2>
+    <header class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
       <nav class="navbar-swiper">
         <div id="services-pagination" class="nav-swiper-pagination"></div>
         <div class="swiper-navigation">
-          <button id="services-arrow-left" class="btn btn-outline-info arrow-left">
+          <button id="services-arrow-left" class="btn btn-outline-secondary arrow-left">
             <i class="fas fa-angle-left"></i>
           </button>
 
-          <button id="services-arrow-right" class="btn btn-outline-info arrow-right">
+          <button id="services-arrow-right" class="btn btn-outline-secondary arrow-right">
             <i class="fas fa-angle-right"></i>
           </button>
         </div>
       </nav>
-    </header> --}}
+    </header>
 
     @include('partials.slider.services')
 

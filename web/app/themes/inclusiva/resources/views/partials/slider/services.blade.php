@@ -1,8 +1,8 @@
 @php
   $args  = array(
     'post_type' => 'servicios', 
-    'condiciones' => 'serviagro',
-    'orderby' => 'title',
+    'condiciones' => 'destacado',
+    'orderby' => 'menu_order',
 	  'order'   => 'ASC',
     'posts_per_page' => -1,
   );

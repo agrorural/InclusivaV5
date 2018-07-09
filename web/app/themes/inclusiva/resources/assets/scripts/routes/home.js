@@ -111,13 +111,12 @@ homeSlider.init();
       grabCursor: true,
       pagination: {
         el: '#services-pagination',
-        bullets: true,
-        clickable: true,
+        type: 'fraction',
       },
-      // navigation: {
-      //   nextEl: '#services-arrow-right',
-      //   prevEl: '#services-arrow-left',
-      // },
+      navigation: {
+        nextEl: '#services-arrow-right',
+        prevEl: '#services-arrow-left',
+      },
       breakpoints: {
         576: {
           slidesPerView: 2,

@@ -226,7 +226,7 @@ function create_my_post_types() {
 		'rewrite'            => array( 'slug' => 'servicios' ),
 		'menu_position'      => 5,
 		'menu_icon'			 => 'dashicons-businessman',
-		'supports'           => array( 'title', 'editor', 'author', 'revisions', 'thumbnail' )
+		'supports'           => array( 'title', 'editor', 'author', 'revisions', 'thumbnail', 'page-attributes' )
 	);
 
 	$labels_directorios = array(
@@ -271,7 +271,7 @@ function create_my_post_types() {
 		'rewrite'            => array( 'slug' => 'directorios' ),
 		'menu_position'      => 5,
 		'menu_icon'			 => 'dashicons-groups',
-		'supports'           => array( 'title', 'editor', 'author', 'revisions' )
+		'supports'           => array( 'title', 'editor', 'author', 'revisions', 'page-attributes' )
 	);
 
 	register_post_type('producto', $args_producto);

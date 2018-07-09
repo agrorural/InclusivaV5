@@ -119,12 +119,11 @@
     // }
 
     &#services {
-      @include section-palette(transparent, $green-100);
+      @include section-palette($gray-100, $green-100);
 
       padding: 1.5rem 0 4rem;
 
       @include media-breakpoint-up(md) {
-        margin-top: -10rem;
         padding: 7.5rem 0;
       }
 
@@ -138,9 +137,15 @@
           display: flex;
           justify-content: space-between;
           width: 12rem;
+          align-items: center;
 
           #services-pagination {
             width: auto;
+          }
+
+          .swiper-navigation .swiper-button-disabled {
+            pointer-events: none;
+            opacity: 0.5;
           }
         }
       }
