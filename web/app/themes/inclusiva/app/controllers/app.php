@@ -122,7 +122,7 @@ class App extends Controller
       $followContent .= '<i class="fab fa-twitter"></i> <span class="shareName">Twitter</span>';
       $followContent .= '</a>';
       $followContent .= '<a class="yt" href="' . $youtubeURL . '" target="_blank">';
-      $followContent .= '<i class="fab fa-youtube"></i> <span class="shareName">youtube</span>';
+      $followContent .= '<i class="fab fa-youtube"></i> <span class="shareName">YouTube</span>';
       $followContent .= '</a>';
       $followContent .= '</nav>';
 
