@@ -90,7 +90,7 @@ add_action('after_setup_theme', function () {
      */
     add_theme_support('post-thumbnails');
 
-    add_image_size( 'feed-thumb', 190, 120, array( 'left', 'top' ) ); // (cropped)
+    add_image_size( 'feed-thumb', 225, 125, array( 'left', 'top' ) ); // (cropped)
     add_image_size( 'featured-thumb', 1270, 530, array( 'left', 'top' ) ); // (cropped)
     add_image_size( 'content-thumb', 720, 420, array( 'left', 'top' ) ); // (cropped)
     add_image_size( 'card-vertical-thumb', 560, 685, array( 'left', 'top' ) ); // (cropped)
