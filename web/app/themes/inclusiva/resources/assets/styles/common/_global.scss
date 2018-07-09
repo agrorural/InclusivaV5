@@ -355,7 +355,3 @@ figure {
 .with-searchform {
   overflow-y: hidden;
 }
-
-.wrap.container .content {
-  @include make-row();
-}
