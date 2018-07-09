@@ -65,8 +65,12 @@ main {
   z-index: 1070;
   margin-left: -100%;
 
-  svg {
-    padding: 1.5rem 1.5rem 0.5rem;
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
   }
 
   @include media-breakpoint-up(sm) {

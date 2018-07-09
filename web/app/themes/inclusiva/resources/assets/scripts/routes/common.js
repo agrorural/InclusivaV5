@@ -51,6 +51,15 @@ export default {
         }
       });
 
+      $('#closeintranetSidebar').click(function(){
+        $("body").removeClass("sidebar-expanded");
+        $(".intranetSidebarToggler")
+        .find('[data-fa-i2svg]')
+        .addClass('fa-plus')
+        .removeClass('fa-minus');
+        $('#sidebarBackdrop').remove();
+      });
+
       $('.selectpicker').selectpicker({
         noneSelectedText: 'Todo',
         selectAllText: 'Selec.',
@@ -278,12 +287,18 @@ export default {
     // Show search form
     $('#showForm').click(function(e){
       e.preventDefault();
-
+      
       if($('body').hasClass('without-searchform')){
+        $('html, body').animate({
+          scrollTop: $('.primary-nav').offset().top,
+        }, 'slow');
         $('body').removeClass('without-searchform');
         $('body').addClass('with-searchform');
         $('body').append('<div id="searchBackdrop" class="modal-backdrop fade show"></div>');
       }else{
+        $('html, body').animate({
+          scrollTop: $('body').offset().top,
+        }, 'slow');
         $('body').removeClass('with-searchform');
         $('body').addClass('without-searchform');
         $('#searchBackdrop').remove();
@@ -333,6 +348,9 @@ export default {
     $('body').keyup(function(e){
       if($('body').hasClass('with-searchform')){
         if(e.which === 27){
+          $('html, body').animate({
+            scrollTop: $('body').offset().top,
+          }, 'slow');
           $('body').removeClass('with-searchform');
           $('body').addClass('without-searchform');
           $('.modal-backdrop').remove();
@@ -367,6 +385,21 @@ export default {
         .find('[data-fa-i2svg]')
         .addClass('fa-plus')
         .removeClass('fa-minus');
-    }); 
+    });
+    
+    $(document).on('click', '#searchBackdrop', function(){
+      $('html, body').animate({
+        scrollTop: $('body').offset().top,
+      }, 'slow');
+      $('body').removeClass('with-searchform');
+      $('body').addClass('without-searchform');
+      $('body').removeClass('show-results');
+      $('body').addClass('hide-results');
+      $('#searchBackdrop').remove();
+      $('#showForm')
+        .find('[data-fa-i2svg]')
+        .toggleClass('fa-search')
+        .toggleClass('fa-times');
+    });
   },
 };
