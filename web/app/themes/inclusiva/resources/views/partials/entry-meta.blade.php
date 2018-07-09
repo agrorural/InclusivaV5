@@ -5,5 +5,3 @@
     {{-- {{ get_the_author() }} --}}
   </p>
 </div>
-
-{!! App::share() !!}

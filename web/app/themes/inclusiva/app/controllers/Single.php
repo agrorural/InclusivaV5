@@ -16,11 +16,6 @@ class Single extends Controller
     return get_field('video__id');
   }
 
-  public function rdeLink()
-  {
-    return get_field('rde_link');
-  }
-
   public function category()
   {
 

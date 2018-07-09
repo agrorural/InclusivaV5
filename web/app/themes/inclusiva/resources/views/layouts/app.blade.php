@@ -7,6 +7,8 @@
     
     @if(is_singular('post'))
       @include('partials.jumbotron.single')
+    @elseif(is_singular('documentos'))
+    @include('partials.jumbotron.single-documentos')
     @elseif (is_page_template( 'views/template-documentos.blade.php' ))
       @include('partials.jumbotron.documentos')
     @else

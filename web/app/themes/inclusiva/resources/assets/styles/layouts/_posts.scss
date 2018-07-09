@@ -127,3 +127,18 @@
     margin-top: 3rem;
   }
 }
+
+.single-documentos {
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    border: 0 none;
+
+    .updated,
+    .post-commenst a {
+      @include font-size(13, 13);
+    }
+  }
+}
