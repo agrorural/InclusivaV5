@@ -5,3 +5,5 @@
   @include('partials.section.footer')
   @include('partials.section.footer-post')
 </footer>
+
+{!! App::follow() !!}

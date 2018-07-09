@@ -1,4 +1,66 @@
 // 
+.entry-follow {
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000200;
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    flex-direction: column;
+    align-items: start;
+    top: 21.5rem;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    width: auto;
+
+    .shareName {
+      display: none;
+    }
+  }
+
+  a {
+    position: relative;
+    display: flex;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+    color: $white;
+    height: 4.8rem;
+    align-items: center;
+    justify-content: center;
+
+    @include media-breakpoint-up(lg) {
+      width: 4.8rem;
+      max-width: 100%;
+      transition: width 0.3s ease;
+
+      &:hover {
+        width: 6rem;
+      }
+    }
+
+    &.fb {
+      background-color: $blue-fb;
+    }
+
+    &.tw {
+      background-color: $blue-tw;
+    }
+
+    &.yt {
+      background-color: $red-yt;
+    }
+  }
+
+  .shareName {
+    padding-left: 1rem;
+  }
+}
 
 .entry-share {
   @extend .nav;
@@ -34,5 +96,13 @@
         color: $green-wa;
       }
     }
+  }
+}
+
+.content-info {
+  margin-bottom: 6.8rem;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 6.8rem;
   }
 }

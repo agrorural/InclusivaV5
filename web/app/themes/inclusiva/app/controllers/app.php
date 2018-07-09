@@ -84,7 +84,7 @@ class App extends Controller
       $twitterURL = 'https://twitter.com/intent/tweet?text='.$postTitle.'&amp;url='.$webURL.'&amp;via=agrorural';
       $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$webURL;
       $whatsappURL = 'whatsapp://send?text='.$postTitle . ' ' . $webURL;
-      $linkedInURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$webURL.'&amp;title='.$postTitle;
+      $youtubeURL = 'https://www.youtube.com/shareArticle?mini=true&url='.$webURL.'&amp;title='.$postTitle;
 
       $ShareContent .= '<nav class="entry-share">';
       $ShareContent .= '<h4 class="entry-share-header">Compartir:</h4>';
@@ -94,8 +94,8 @@ class App extends Controller
       $ShareContent .= '<a class="tw" href="' . $twitterURL . '" title="' . $postTitle . '" target="_blank">';
       $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span> <span class="shareName">Twitter</span>';
       $ShareContent .= '</a>';
-      $ShareContent .= '<a class="li" href="' . $linkedInURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i></span> <span class="shareName">LinkedIn</span>';
+      $ShareContent .= '<a class="li" href="' . $youtubeURL . '" title="' . $postTitle . '" target="_blank">';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-youtube-in fa-stack-1x fa-inverse"></i></span> <span class="shareName">youtube</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="d-block d-sm-none wa" href="' . $whatsappURL . '" title="' . $postTitle . '" target="_blank">';
       $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i></span> <span class="shareName">WhatsApp</span>';
@@ -103,6 +103,30 @@ class App extends Controller
       $ShareContent .= '</nav>';
 
       return $ShareContent;
+    }
+
+    public static function follow()
+    {
+      $followContent = '';
+
+      // Construct sharing URL without using any script
+      $twitterURL = 'https://twitter.com/agrorural';
+      $facebookURL = 'https://www.facebook.com/agroruralfans';
+      $youtubeURL = 'https://www.youtube.com/user/pnmsperu';
+
+      $followContent .= '<nav class="entry-follow">';
+      $followContent .= '<a class="fb" href="' . $facebookURL . '" target="_blank">';
+      $followContent .= '<i class="fab fa-facebook-f"></i> <span class="shareName">Facebook</span>';
+      $followContent .= '</a>';
+      $followContent .= '<a class="tw" href="' . $twitterURL . '" target="_blank">';
+      $followContent .= '<i class="fab fa-twitter"></i> <span class="shareName">Twitter</span>';
+      $followContent .= '</a>';
+      $followContent .= '<a class="yt" href="' . $youtubeURL . '" target="_blank">';
+      $followContent .= '<i class="fab fa-youtube"></i> <span class="shareName">youtube</span>';
+      $followContent .= '</a>';
+      $followContent .= '</nav>';
+
+      return $followContent;
     }
 
     public static function postTypeObj()
