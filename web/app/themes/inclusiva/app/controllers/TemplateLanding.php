@@ -34,11 +34,7 @@ class Landing extends Controller
   public function feed() {
     $parent = $this->getParent();
     
-    if ( $parent !== null ) {
-      return get_field('feed', $parent);
-    }else{
-      return get_field('feed');
-    }
+    return $parent !== null ? get_field('feed', $parent): get_field('feed');
   }
 
   public function hasVideos() {

@@ -212,6 +212,7 @@ export default {
           if(objectToSend.txtKeyword !== ''){
             $('body').removeClass('hide-results');
             $('body').addClass('show-results');
+            $(this).blur();
             
             listResults(objectToSend);
             $('[for=formSearch]').removeClass("text-danger");
