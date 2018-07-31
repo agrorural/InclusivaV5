@@ -312,8 +312,12 @@
         padding-bottom: 0;
       }
 
-      .container-boxed {
-        padding: 0;
+      .container {
+        position: relative;
+
+        @include media-breakpoint-down(xs) {
+          padding: 0;
+        }
       }
 
       figure {
