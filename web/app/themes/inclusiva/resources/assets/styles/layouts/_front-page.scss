@@ -121,11 +121,11 @@
     &#services {
       @include section-palette($gray-100, $green-100);
 
-      padding: 1.5rem 0 4rem;
+      // padding: 1.5rem 0 4rem;
 
-      @include media-breakpoint-up(md) {
-        padding: 7.5rem 0;
-      }
+      // @include media-breakpoint-up(md) {
+      //   padding: 4rem 0;
+      // }
 
       .section-header {
         display: flex;
