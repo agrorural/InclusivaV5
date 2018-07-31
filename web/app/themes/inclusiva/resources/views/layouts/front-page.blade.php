@@ -7,8 +7,8 @@
     @include('partials.section.featured')
     {{-- @include('partials.section.la-institucion') --}}
     @include('partials.section.services')
-    @include('partials.section.directions')
     @include('partials.section.newsfeed')
+    @include('partials.section.directions')
     @include('partials.section.social')
     @include('partials.section.multimedia')
 

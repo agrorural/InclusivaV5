@@ -89,16 +89,16 @@ class App extends Controller
       $ShareContent .= '<nav class="entry-share">';
       $ShareContent .= '<h4 class="entry-share-header">Compartir:</h4>';
       $ShareContent .= '<a class="fb" href="' . $facebookURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i></span> <span class="shareName">Facebook</span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-facebook-f fa-stack-1x fa-inverse"></i></span> <span class="shareName">Facebook</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="tw" href="' . $twitterURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span> <span class="shareName">Twitter</span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-twitter fa-stack-1x fa-inverse"></i></span> <span class="shareName">Twitter</span>';
       $ShareContent .= '</a>';
-      $ShareContent .= '<a class="li" href="' . $youtubeURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-youtube-in fa-stack-1x fa-inverse"></i></span> <span class="shareName">youtube</span>';
+      $ShareContent .= '<a class="yt" href="' . $youtubeURL . '" title="' . $postTitle . '" target="_blank">';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-youtube fa-stack-1x fa-inverse"></i></span> <span class="shareName">youtube</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '<a class="d-block d-sm-none wa" href="' . $whatsappURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i></span> <span class="shareName">WhatsApp</span>';
+      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-whatsapp fa-stack-1x fa-inverse"></i></span> <span class="shareName">WhatsApp</span>';
       $ShareContent .= '</a>';
       $ShareContent .= '</nav>';
 
