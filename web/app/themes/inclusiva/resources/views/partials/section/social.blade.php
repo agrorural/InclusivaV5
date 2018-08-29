@@ -19,18 +19,18 @@
     <div class="row socialItems">
       <div class="col socialItem facebook">
         <div class="item-container d-none d-lg-block embed-responsive">
-            <div class="fb-page" data-href="https://www.facebook.com/AgroRuralFans/" data-tabs="timeline" data-height="370" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AgroRuralFans/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AgroRuralFans/">Agro Rural</a></blockquote></div>
+            <div class="fb-page" data-href="https://www.facebook.com/agroruralPER/" data-tabs="timeline" data-height="370" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/agroruralPER/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/agroruralPER/">Agro Rural</a></blockquote></div>
         </div>
         <div class="item-container d-block d-lg-none embed-responsive">
-          <div class="fb-page" data-href="https://www.facebook.com/agroruralfans/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/agroruralfans/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/agroruralfans/">AGRO RURAL</a></blockquote></div>
+          <div class="fb-page" data-href="https://www.facebook.com/agroruralPER/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/agroruralPER/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/agroruralPER/">AGRO RURAL</a></blockquote></div>
         </div>
       </div>
       <div class="col socialItem twitter">
         <div class="item-container d-none d-lg-block embed-responsive">
-          <a class="twitter-timeline" data-lang="es" data-width="323" data-height="370" href="https://twitter.com/agrorural">Tweets by agrorural</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a class="twitter-timeline" data-lang="es" data-width="323" data-height="370" href="https://twitter.com/agroruralPER">Tweets by @agroruralPER</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
           </div>
           <div class="item-container d-block d-lg-none embed-responsive">
-            <a href="https://twitter.com/agrorural" class="twitter-follow-button" data-show-count="false">Follow @agrorural</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <a href="https://twitter.com/agroruralPER" class="twitter-follow-button" data-show-count="false">Follow @agroruralPER</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
           </div>
       </div>
       <div class="col socialItem youtube">
