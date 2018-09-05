@@ -137,7 +137,7 @@ msgstr ""
 msgid "There was a problem uninstalling Gravity PDF. Please try again."
 msgstr ""
 
-#: src/controller/Controller_PDF.php:320
+#: src/controller/Controller_PDF.php:321
 msgid "There was a problem generating your PDF"
 msgstr ""
 
@@ -921,7 +921,7 @@ msgstr ""
 msgid "Requires Gravity PDF"
 msgstr ""
 
-#: src/helper/Helper_Templates.php:392, src/view/View_PDF.php:569
+#: src/helper/Helper_Templates.php:392, src/view/View_PDF.php:584
 msgid "Legacy"
 msgstr ""
 
@@ -997,7 +997,7 @@ msgstr ""
 msgid "The PDF could not be saved."
 msgstr ""
 
-#: src/model/Model_PDF.php:1847
+#: src/model/Model_PDF.php:1849
 msgid "Could not find PDF configuration requested"
 msgstr ""
 

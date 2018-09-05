@@ -1,10 +1,10 @@
 === WP Project Manager ===
-Contributors: tareq1988, wedevs, asaquzzaman, wpasikur, mdmamun-1, mshossain110
+Contributors: tareq1988, wedevs, asaquzzaman, mshossain110, mdmamun-1
 Donate Link: https://tareq.co/donate/
 Tags: project, manager, project manager, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
-Requires at least: 4.0
-Tested up to: 4.9.5
-Stable tag: trunk
+Requires at least: 4.4
+Tested up to: 4.9.8
+Stable tag: 2.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,6 +122,63 @@ A. Found any bugs? Please create an [issue](https://github.com/tareq1988/wp-proj
 
 == Changelog ==
 
+= v2.0.5 - August 18, 2018 =
+
+* **New** Added filters for getting custom query in all transformers.
+* **New** Project description in html format.
+* **Fix** Undefined task title from activity.
+* **Fix** Single task popup close automatically.
+* **Fix** Activity count when delete an element.
+* **Fix** Manage capability return false, when user role is not found.
+* **Fix** Some translation issues.
+* **Fix** Some compatibility issue on internet explorer.
+* **Fix** Task assignee input field is not updating when assignee user field is Empty
+* **Fix** Task list milestone input field is not updating when milestone is Empty
+
+= v2.0.4 - July 27, 2018 =
+
+ * **Fix** Download link for wedevs project manager php-5.6.
+
+= v2.0.3 - July 27, 2018 =
+
+ * **New** List drag, drop and reorder.
+ * **New** Task independently switch in task lists.
+ * **New** Added categry pagination.
+ * **Fix** Date format problem for task and overviews graph.
+ * **Update** Activity date format change.
+ * **Update** Load All Categories in select form.
+ * **Update** Load all HTTP request with GET and POST methods.
+
+= v2.0.2 - July 23, 2018 =
+ 
+ * **New** Create function for getting individual task.
+ * **New** Hook for all CRUD (Create, Read, Update and Delete)
+ * **Fix** Task complete and incomplete issues in microsoft edge browser.
+ * **Fix** Pagination set -1 for per page and its getting error.
+ * **Fix** Multisite installation and upgrade.
+ * **Fix** Translation for vue files.
+ * **Fix** Fetch project in single task page.
+ * **Fix** Reduce conflict with WPERP plugin.
+ * **Fix** JS make compitable with IE>8.
+
+= v2.0.1 - Jun 29, 2018 =
+
+ * **Fix:** Fix database migration problem upon updating the plugin.
+
+= v2.0 - Jun 28, 2018 =
+
+ * **BREAKING**: This **v2.0** release is a major version and introduces breaking changes by re-writing the whole plugin. Please test the plugin before updating from <strong>v1.x</strong>. Taking a **database backup** is adviced.
+ * **New:** REST API added. Now you can access everything of project manager via the API. Creating of mobile apps would be much easier.
+ * **New:** Moved from custom post type to custom database tables, which performs a lot faster.
+ * **New:** We have re-written the Project Management UI, powered by [Vue.js](https://vuejs.org/). This introduces a SPA (Single Page Application) with blazing fast page loading and a snappier user experience.
+ * **Bug Fixes:** We have also squashed a lot pesky bugs under the hood.
+
+= 1.6.16 - Jun 11, 2018 =
+
+ * [fixed] Project title is overlaping on RTL language.
+ * [fixed] Could not select project category while creating/editing a project.
+ * [fixed] Single task is not re-rendering
+
 = 1.6.15 - May 10, 2018 =
 
  * [fixed] Task list is not showing when using the Internet Explorer browser.
@@ -201,7 +258,7 @@ A. Found any bugs? Please create an [issue](https://github.com/tareq1988/wp-proj
  * [fix] When complete a task then this completed task shown double in the to-do list.
  * [fix] Double "New To-Do" button shown.
  * [update] 'Get porject id' function always return false.
- * [update] Design change for single task page. 
+ * [update] Design change for single task page.
 
 = 1.6.5 - July 6, 2017 =
 
@@ -484,4 +541,4 @@ Initial version released
 
 == Upgrade Notice ==
 
-Nothing here
+<strong>BREAKING CHANGE</strong>: v2.0 release is a major version and introduces breaking changes by re-writing the whole plugin. Please test the plugin before updating from <strong>v1.x</strong>. Taking a database backup is adviced.

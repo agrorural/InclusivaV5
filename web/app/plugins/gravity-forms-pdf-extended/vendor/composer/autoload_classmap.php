@@ -64,6 +64,8 @@ return array(
     'GFPDF\\Helper\\Fields\\Field_Select' => $baseDir . '/src/helper/fields/Field_Select.php',
     'GFPDF\\Helper\\Fields\\Field_Shipping' => $baseDir . '/src/helper/fields/Field_Shipping.php',
     'GFPDF\\Helper\\Fields\\Field_Signature' => $baseDir . '/src/helper/fields/Field_Signature.php',
+    'GFPDF\\Helper\\Fields\\Field_Slim' => $baseDir . '/src/helper/fields/Field_Slim.php',
+    'GFPDF\\Helper\\Fields\\Field_Slim_Post' => $baseDir . '/src/helper/fields/Field_Slim_Post.php',
     'GFPDF\\Helper\\Fields\\Field_Subtotal' => $baseDir . '/src/helper/fields/Field_Subtotal.php',
     'GFPDF\\Helper\\Fields\\Field_Survey' => $baseDir . '/src/helper/fields/Field_Survey.php',
     'GFPDF\\Helper\\Fields\\Field_Tax' => $baseDir . '/src/helper/fields/Field_Tax.php',

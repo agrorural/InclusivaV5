@@ -159,6 +159,8 @@ class ComposerStaticInitGravityPDFPlugin
         'GFPDF\\Helper\\Fields\\Field_Select' => __DIR__ . '/../..' . '/src/helper/fields/Field_Select.php',
         'GFPDF\\Helper\\Fields\\Field_Shipping' => __DIR__ . '/../..' . '/src/helper/fields/Field_Shipping.php',
         'GFPDF\\Helper\\Fields\\Field_Signature' => __DIR__ . '/../..' . '/src/helper/fields/Field_Signature.php',
+        'GFPDF\\Helper\\Fields\\Field_Slim' => __DIR__ . '/../..' . '/src/helper/fields/Field_Slim.php',
+        'GFPDF\\Helper\\Fields\\Field_Slim_Post' => __DIR__ . '/../..' . '/src/helper/fields/Field_Slim_Post.php',
         'GFPDF\\Helper\\Fields\\Field_Subtotal' => __DIR__ . '/../..' . '/src/helper/fields/Field_Subtotal.php',
         'GFPDF\\Helper\\Fields\\Field_Survey' => __DIR__ . '/../..' . '/src/helper/fields/Field_Survey.php',
         'GFPDF\\Helper\\Fields\\Field_Tax' => __DIR__ . '/../..' . '/src/helper/fields/Field_Tax.php',
