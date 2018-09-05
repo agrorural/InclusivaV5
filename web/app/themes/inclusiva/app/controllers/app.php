@@ -94,9 +94,6 @@ class App extends Controller
       $ShareContent .= '<a class="tw" href="' . $twitterURL . '" title="' . $postTitle . '" target="_blank">';
       $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-twitter fa-stack-1x fa-inverse"></i></span> <span class="shareName">Twitter</span>';
       $ShareContent .= '</a>';
-      $ShareContent .= '<a class="yt" href="' . $youtubeURL . '" title="' . $postTitle . '" target="_blank">';
-      $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-youtube fa-stack-1x fa-inverse"></i></span> <span class="shareName">youtube</span>';
-      $ShareContent .= '</a>';
       $ShareContent .= '<a class="d-block d-sm-none wa" href="' . $whatsappURL . '" title="' . $postTitle . '" target="_blank">';
       $ShareContent .= '<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-fw fa-whatsapp fa-stack-1x fa-inverse"></i></span> <span class="shareName">WhatsApp</span>';
       $ShareContent .= '</a>';
