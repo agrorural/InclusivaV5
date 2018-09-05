@@ -110,9 +110,10 @@ class App extends Controller
       $followContent = '';
 
       // Construct sharing URL without using any script
-      $twitterURL = 'https://twitter.com/agrorural';
-      $facebookURL = 'https://www.facebook.com/agroruralfans';
-      $youtubeURL = 'https://www.youtube.com/user/pnmsperu';
+      $twitterURL = 'https://twitter.com/agroruralPER';
+      $facebookURL = 'https://www.facebook.com/agroruralPER';
+      $youtubeURL = 'https://www.youtube.com/user/agroruralPER';
+      $instagramURL = 'https://www.instagram.com/agroruralPER/';
 
       $followContent .= '<nav class="entry-follow">';
       $followContent .= '<a class="fb" href="' . $facebookURL . '" target="_blank">';
@@ -123,6 +124,9 @@ class App extends Controller
       $followContent .= '</a>';
       $followContent .= '<a class="yt" href="' . $youtubeURL . '" target="_blank">';
       $followContent .= '<i class="fab fa-youtube"></i> <span class="shareName">YouTube</span>';
+      $followContent .= '</a>';
+      $followContent .= '<a class="ig" href="' . $instagramURL . '" target="_blank">';
+      $followContent .= '<i class="fab fa-instagram"></i> <span class="shareName">Instagram</span>';
       $followContent .= '</a>';
       $followContent .= '</nav>';
 

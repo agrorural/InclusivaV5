@@ -46,6 +46,16 @@
             </footer>
         </div>
       </div>
+      <!-- <div class="col socialItem instagram">
+        <div class="item-container">
+            <header class="embed-responsive">
+            </header>
+            <footer class="d-none d-lg-block">
+              <picture>
+              </picture>
+            </footer>
+        </div>
+      </div> -->
     </div>
   </div>
 </section>
