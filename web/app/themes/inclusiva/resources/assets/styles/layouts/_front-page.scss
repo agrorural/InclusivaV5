@@ -326,7 +326,7 @@
     }
 
     &#newsfeed {
-      @include section-palette($primary, $yellow-300);
+      @include section-palette($white, $primary);
 
       .news {
         article {
@@ -382,6 +382,8 @@
       .events {
         article {
           background-color: $yellow-300;
+          display: flex;
+          flex-direction: column;
 
           .entry-title,
           .entry-date {
