@@ -21,9 +21,10 @@
           </a>
         </nav>
       @endif
-  
-      {!! App::share() !!}
 
+      @if (!is_front_page())
+        {!! App::share() !!}
+      @endif
       <a href="{{ get_permalink() }}">
         <picture>
           @if( has_post_thumbnail() )

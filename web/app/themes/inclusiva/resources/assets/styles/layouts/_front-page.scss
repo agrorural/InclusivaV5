@@ -385,6 +385,18 @@
           display: flex;
           flex-direction: column;
 
+          .entry-img {
+            margin: auto;
+
+            .entry-type {
+              right: auto;
+              left: 50%;
+              top: 0;
+              bottom: 0;
+              transform: translate(-50%, 0);
+            }
+          }
+
           .entry-title,
           .entry-date {
             a {
@@ -395,7 +407,7 @@
           header {
             background-color: darken($yellow-300, 5%);
             text-align: center;
-            padding: 1.2rem 0;
+            padding: 1.5rem;
 
             .entry-date {
               @include font-family('ubuntu', 'light');
