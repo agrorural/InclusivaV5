@@ -230,6 +230,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 		$this->mergetags();
 		$this->actions();
 		$this->template_manager();
+		$this->load_core_font_handler();
 
 		/* Add localisation support */
 		$this->add_localization_support();
@@ -244,7 +245,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 		/*
 		 * Trigger action to signify Gravity PDF is now loaded
 		 *
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_fully_loaded/ for more details about this action
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_fully_loaded/ for more details about this action
 		 */
 		do_action( 'gfpdf_fully_loaded', $this );
 	}
@@ -330,7 +331,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 
 		if ( $file == PDF_PLUGIN_BASENAME ) {
 			$row_meta = [
-				'docs'           => '<a href="' . esc_url( 'https://gravitypdf.com/documentation/v4/five-minute-install/' ) . '" title="' . esc_attr__( 'View Gravity PDF Documentation', 'gravity-forms-pdf-extended' ) . '">' . esc_html__( 'Docs', 'gravity-forms-pdf-extended' ) . '</a>',
+				'docs'           => '<a href="' . esc_url( 'https://gravitypdf.com/documentation/v5/five-minute-install/' ) . '" title="' . esc_attr__( 'View Gravity PDF Documentation', 'gravity-forms-pdf-extended' ) . '">' . esc_html__( 'Docs', 'gravity-forms-pdf-extended' ) . '</a>',
 				'support'        => '<a href="' . esc_url( $this->data->settings_url . '&tab=help' ) . '" title="' . esc_attr__( 'Get Help and Support', 'gravity-forms-pdf-extended' ) . '">' . esc_html__( 'Support', 'gravity-forms-pdf-extended' ) . '</a>',
 				'extension-shop' => '<a href="' . esc_url( 'https://gravitypdf.com/extension-shop/' ) . '" title="' . esc_attr__( 'View Gravity PDF Extensions Shop', 'gravity-forms-pdf-extended' ) . '">' . esc_html__( 'Extensions', 'gravity-forms-pdf-extended' ) . '</a>',
 				'template-shop'  => '<a href="' . esc_url( 'https://gravitypdf.com/template-shop/' ) . '" title="' . esc_attr__( 'View Gravity PDF Template Shop', 'gravity-forms-pdf-extended' ) . '">' . esc_html__( 'Templates', 'gravity-forms-pdf-extended' ) . '</a>',
@@ -419,8 +420,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 		wp_register_script( 'gfpdf_js_backbone', PDF_PLUGIN_URL . 'dist/assets/js/gfpdf-backbone.min.js', $pdf_backbone_dependancies, $version ); /* @TODO - remove backbone and use React */
 		wp_register_script( 'gfpdf_js_backbone_model_binder', PDF_PLUGIN_URL . 'bower_components/backbone.modelbinder/Backbone.ModelBinder.min.js', [ 'backbone', 'underscore' ], $version );
 
-		wp_register_script( 'gfpdf_js_vendors', PDF_PLUGIN_URL . 'dist/assets/js/vendor.bundle.min.js', [ 'jquery' ], $version );
-		wp_register_script( 'gfpdf_js_entrypoint', PDF_PLUGIN_URL . 'dist/assets/js/app.bundle.min.js', [ 'jquery', 'gfpdf_js_vendors' ], $version );
+		wp_register_script( 'gfpdf_js_entrypoint', PDF_PLUGIN_URL . 'dist/assets/js/app.bundle.min.js', [ 'jquery' ], $version );
 		wp_register_script( 'gfpdf_js_entries', PDF_PLUGIN_URL . 'dist/assets/js/gfpdf-entries.min.js', [ 'jquery' ], $version );
 		wp_register_script( 'gfpdf_js_v3_migration', PDF_PLUGIN_URL . 'dist/assets/js/gfpdf-migration.min.js', [ 'gfpdf_js_settings' ], $version );
 
@@ -535,7 +535,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 			$items = array_merge( $default_scripts, $items );
 		}
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_gf_noconflict_scripts/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_gf_noconflict_scripts/ for more details about this filter */
 
 		return apply_filters( 'gfpdf_gf_noconflict_scripts', $items );
 	}
@@ -576,7 +576,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 			$items = array_merge( $default_styles, $items );
 		}
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_gf_noconflict_styles/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_gf_noconflict_styles/ for more details about this filter */
 
 		return apply_filters( 'gfpdf_gf_noconflict_styles', $items );
 	}
@@ -591,6 +591,12 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 	public function init_settings_api() {
 		/* load our options API */
 		$this->options->init();
+
+		/*
+		 * Async PDFs are conditionally loaded based of a global setting,
+		 * so required to load after the settings have been loaded
+		 */
+		$this->async_pdfs();
 	}
 
 	/**
@@ -617,7 +623,7 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 	 * @return void
 	 */
 	public function installer() {
-		$model = new Model\Model_Install( $this->gform, $this->log, $this->data, $this->misc, $this->notices );
+		$model = new Model\Model_Install( $this->gform, $this->log, $this->data, $this->misc, $this->notices, new Helper\Helper_Pdf_Queue( $this->log ) );
 		$class = new Controller\Controller_Install( $model, $this->gform, $this->log, $this->notices, $this->data, $this->misc );
 		$class->init();
 
@@ -844,6 +850,42 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
 		/* Add to our singleton controller */
 		$this->singleton->add_class( $class );
 		$this->singleton->add_class( $model );
+	}
+
+	/**
+	 * Initialise our core font AJAX handler
+	 *
+	 * @since 5.0
+	 *
+	 * @return void
+	 */
+	public function load_core_font_handler() {
+		$view  = new View\View_Save_Core_Fonts( [] );
+		$class = new Controller\Controller_Save_Core_Fonts( $view, $this->log, $this->data, $this->misc );
+
+		$class->init();
+
+		$this->singleton->add_class( $class );
+	}
+
+	/**
+	 * Initialise our background PDF processing handler
+	 *
+	 * @since 5.0
+	 *
+	 * @return void
+	 */
+	public function async_pdfs() {
+		$queue = new Helper\Helper_Pdf_Queue( $this->log );
+		$model_pdf = $this->singleton->get_class( 'Model_PDF' );
+		$class = new Controller\Controller_Pdf_Queue( $queue, $model_pdf, $this->log );
+
+		if ( $this->options->get_option( 'background_processing', 'Disable' ) === 'Enable' ) {
+			$class->init();
+		}
+
+		$this->singleton->add_class( $queue );
+		$this->singleton->add_class( $class );
 	}
 
 	/**

@@ -45,20 +45,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="gfpdf-badge"><?php printf( esc_html__( 'Version %s', 'gravity-forms-pdf-extended' ), $args['display_version'] ); ?></div>
 
+    <!-- Include Divider -->
+    <h2 class="nav-tab-wrapper wp-clearfix"></h2>
+
 	<div class="feature-section two-col">
 
 		<div class="col">
 			<h3><?php esc_html_e( 'Where to Start?', 'gravity-forms-pdf-extended' ); ?></h3>
 
+            <p>
+                <?php esc_html_e( "Before using the software, the Core PDF Fonts will need to be installed. Don't worry though: this is a one-time action that won't need to be repeated.", 'gravity-forms-pdf-extended' ); ?>
+                <a href="<?php echo esc_url( $gfpdf->data->settings_url ); ?>&tab=tools#/downloadCoreFonts"><?php esc_html_e( 'Run this step now' ); ?></a>.
+            </p>
+
 			<p>
-				<?php printf( esc_html__( "Your first step is to review %sGravity PDF's General Settings%s which can be found by navigating to %sForms -> Settings -> PDF%s in your WordPress admin area. From here you'll be able to set defaults for paper size, font face, font colour, and select a PDF template – %swe ship with four completely-free layouts%s – which will be used for all new PDFs. There's even an easy-to-use interface for installing custom fonts.", 'gravity-forms-pdf-extended' ), '<a href="' . esc_url( $gfpdf->data->settings_url ) . '">', '</a>', '<code>', '</code>', '<strong>', '</strong>' ); ?>
+				<?php printf( esc_html__( "Next, you'll want to review %sGravity PDF's General Settings%s which can be found by navigating to %sForms -> Settings -> PDF%s in your WordPress admin area. From here you'll be able to set defaults for paper size, font face, font color, and select a PDF template – %swe ship with four completely-free layouts%s – which will be used for all new PDFs. There's even an easy-to-use interface for installing custom fonts.", 'gravity-forms-pdf-extended' ), '<a href="' . esc_url( $gfpdf->data->settings_url ) . '">', '</a>', '<code>', '</code>', '<strong>', '</strong>' ); ?>
 			</p>
 
 			<a href="<?php echo esc_url( $gfpdf->data->settings_url ); ?>" class="button"><?php esc_html_e( 'Configure Settings', 'gravity-forms-pdf-extended' ); ?></a>
 		</div>
 
 		<div class="col">
-			<img class="gfpdf-image" src="<?php echo esc_url( PDF_PLUGIN_URL . 'src/assets/images/welcome-pdf-settings-page.png' ); ?>">
+			<img class="gfpdf-image" src="https://resources.gravitypdf.com/uploads/2017/11/general-pdf-settings-page-full-v5-1.png">
 		</div>
 
 	</div>
@@ -66,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="feature-section two-col">
 
 		<div class="col">
-			<img class="gfpdf-image" src="<?php echo esc_url( PDF_PLUGIN_URL . 'src/assets/images/welcome-individual-pdf-settings.png' ); ?>">
+			<img class="gfpdf-image" src="https://resources.gravitypdf.com/uploads/2017/11/add-new-pdf-page-full-v5-1.png">
 		</div>
 
 		<div class="col">
@@ -101,25 +109,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div id="gfpdf-mascot-container" class="changelog feature-section three-col">
 		<div class="col">
-			<img class="gfpdf-image" src="<?php echo esc_url( PDF_PLUGIN_URL . 'src/assets/images/welcome-download-shortcode.png' ); ?>">
+			<img class="gfpdf-image" src="https://resources.gravitypdf.com/uploads/2017/11/pdf-list-page-v5.png">
 
 			<h3><?php esc_html_e( 'Simple PDF Download Links', 'gravity-forms-pdf-extended' ); ?></h3>
 
-			<p><?php printf( esc_html__( 'The %s[gravitypdf]%s shortcode allows you to %seasily place a PDF download link%s on any of the Gravity Forms Confirmation types.', 'gravity-forms-pdf-extended' ), '<code>', '</code>', '<a href="https://gravitypdf.com/documentation/v4/user-shortcodes/">', '</a>' ); ?></p>
+			<p><?php printf( esc_html__( 'The %s[gravitypdf]%s shortcode allows you to %seasily place a PDF download link%s on any of the Gravity Forms Confirmation types.', 'gravity-forms-pdf-extended' ), '<code>', '</code>', '<a href="https://gravitypdf.com/documentation/v5/user-shortcodes/">', '</a>' ); ?></p>
 		</div>
 		<div class="col">
-			<img class="gfpdf-image" src="<?php echo esc_url( PDF_PLUGIN_URL . 'src/assets/images/welcome-notification-conditional.png' ); ?>">
+			<img class="gfpdf-image" src="https://resources.gravitypdf.com/uploads/2017/11/pdf-notifications-v5.png">
 
 			<h3><?php esc_html_e( 'Automated PDF Emails', 'gravity-forms-pdf-extended' ); ?></h3>
 
 			<p><?php esc_html_e( 'Select a Gravity Form Notification and your PDF will automatically be sent as an attachment. Powerful conditional logic can also be used to determine if a PDF will be included.', 'gravity-forms-pdf-extended' ); ?></p>
 		</div>
 		<div class="col last-feature">
-			<img class="gfpdf-image" src="<?php echo esc_url( PDF_PLUGIN_URL . 'src/assets/images/welcome-manage-fonts.png' ); ?>">
+			<img class="gfpdf-image" src="https://resources.gravitypdf.com/uploads/2017/11/welcome-manage-fonts.png">
 
 			<h3><?php esc_html_e( 'Custom Fonts', 'gravity-forms-pdf-extended' ); ?></h3>
 
-			<p><?php printf( esc_html__( 'Make your documents stand out by including your favorite fonts with our %ssimple font manager%s.', 'gravity-forms-pdf-extended' ), '<a href="https://gravitypdf.com/documentation/v4/user-custom-fonts/">', '</a>' ); ?></p>
+			<p><?php printf( esc_html__( 'Make your documents stand out by including your favorite fonts with our %ssimple font manager%s.', 'gravity-forms-pdf-extended' ), '<a href="https://gravitypdf.com/documentation/v5/user-custom-fonts/">', '</a>' ); ?></p>
 		</div>
 	</div>
 

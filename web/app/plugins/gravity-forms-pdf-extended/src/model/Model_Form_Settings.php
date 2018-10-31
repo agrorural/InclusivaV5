@@ -256,6 +256,8 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 		/* prepare our data */
 		$label = ( ! is_wp_error( $pdf ) && ! isset( $pdf['status'] ) ) ? esc_html__( 'Update PDF', 'gravity-forms-pdf-extended' ) : esc_html__( 'Add PDF', 'gravity-forms-pdf-extended' );
 
+		wp_enqueue_editor();
+
 		/* pass to view */
 		$controller->view->add_edit( [
 			'pdf_id'           => $pdf_id,
@@ -264,7 +266,6 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 			'form'             => $form,
 			'entry_meta'       => $entry_meta,
 			'pdf'              => $pdf,
-			'wp_editor_loaded' => class_exists( '_WP_Editors' ),
 		] );
 	}
 
@@ -424,7 +425,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 					/*
 					 * If string, sanitize and add error if appropriate
 					 *
-					 * See https://gravitypdf.com/documentation/v4/gfpdf_form_settings_sanitize/ for more details about this filter
+					 * See https://gravitypdf.com/documentation/v5/gfpdf_form_settings_sanitize/ for more details about this filter
 					 */
 					$value = apply_filters( 'gfpdf_form_settings_sanitize_text', $value, $key );
 					if ( empty( $value ) ) {
@@ -498,7 +499,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 						/*
 						 * General filter
 						 *
-					 * See https://gravitypdf.com/documentation/v4/gfpdf_form_settings_sanitize/ for more details about this filter
+					 * See https://gravitypdf.com/documentation/v5/gfpdf_form_settings_sanitize/ for more details about this filter
 						 */
 						$input[ $key ] = apply_filters( 'gfpdf_form_settings_sanitize', $input[ $key ], $key, $input, $settings[ $s ][ $key ] );
 
@@ -506,7 +507,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 							/*
 							 * Field type specific filter
 							 *
-						 * See https://gravitypdf.com/documentation/v4/gfpdf_form_settings_sanitize/ for more details about this filter
+						 * See https://gravitypdf.com/documentation/v5/gfpdf_form_settings_sanitize/ for more details about this filter
 							 */
 							$input[ $key ] = apply_filters( 'gfpdf_form_settings_sanitize_' . $type, $input[ $key ], $key, $input, $settings[ $s ][ $key ] );
 						}
@@ -660,7 +661,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 			'first_footer'     => [ $this->options, 'get_first_page_footer_field' ],
 		];
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_core_template_fields_list/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_core_template_fields_list/ for more details about this filter */
 		$core_fields = apply_filters( 'gfpdf_core_template_fields_list', $core_fields, $template_settings, $class );
 
 		foreach ( $core_fields as $id => $method ) {

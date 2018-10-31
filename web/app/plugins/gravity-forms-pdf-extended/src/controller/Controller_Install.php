@@ -154,9 +154,6 @@ class Controller_Install extends Helper_Abstract_Controller implements Helper_In
 
 		/* rewrite endpoints */
 		add_action( 'init', [ $this->model, 'register_rewrite_rules' ] );
-
-		/* prepare for Mpdf font removal */
-		add_action( 'gfpdf_version_changed', [ $this->model, 'copy_fonts_to_working_directory' ] );
 	}
 
 	/**
@@ -215,7 +212,7 @@ class Controller_Install extends Helper_Abstract_Controller implements Helper_In
 		}
 
 		if ( PDF_EXTENDED_VERSION !== get_option( 'gfpdf_current_version' ) ) {
-			/* See https://gravitypdf.com/documentation/v4/gfpdf_version_changed/ for more details about this action */
+			/* See https://gravitypdf.com/documentation/v5/gfpdf_version_changed/ for more details about this action */
 			do_action( 'gfpdf_version_changed', get_option( 'gfpdf_current_version' ), PDF_EXTENDED_VERSION );
 			update_option( 'gfpdf_current_version', PDF_EXTENDED_VERSION );
 		}

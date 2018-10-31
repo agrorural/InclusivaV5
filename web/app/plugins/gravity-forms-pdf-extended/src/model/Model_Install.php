@@ -7,6 +7,7 @@ use GFPDF\Helper\Helper_Data;
 use GFPDF\Helper\Helper_Misc;
 use GFPDF\Helper\Helper_Notices;
 use GFPDF\Helper\Helper_Abstract_Form;
+use GFPDF\Helper\Helper_Pdf_Queue;
 
 use Psr\Log\LoggerInterface;
 
@@ -104,6 +105,13 @@ class Model_Install extends Helper_Abstract_Model {
 	protected $notices;
 
 	/**
+	 * @var Helper_Pdf_Queue
+	 *
+	 * @since 5.0
+	 */
+	protected $queue;
+
+	/**
 	 * Setup our class by injecting all our dependancies
 	 *
 	 * @param \GFPDF\Helper\Helper_Abstract_Form $gform   Our abstracted Gravity Forms helper functions
@@ -111,10 +119,11 @@ class Model_Install extends Helper_Abstract_Model {
 	 * @param \GFPDF\Helper\Helper_Data          $data    Our plugin data store
 	 * @param \GFPDF\Helper\Helper_Misc          $misc    Our miscellaneous class
 	 * @param \GFPDF\Helper\Helper_Notices       $notices Our notice class used to queue admin messages and errors
+	 * @param \GFPDF\Helper\Helper_Pdf_Queue     $queue
 	 *
 	 * @since 4.0
 	 */
-	public function __construct( Helper_Abstract_Form $gform, LoggerInterface $log, Helper_Data $data, Helper_Misc $misc, Helper_Notices $notices ) {
+	public function __construct( Helper_Abstract_Form $gform, LoggerInterface $log, Helper_Data $data, Helper_Misc $misc, Helper_Notices $notices, Helper_Pdf_Queue $queue ) {
 
 		/* Assign our internal variables */
 		$this->gform   = $gform;
@@ -122,6 +131,7 @@ class Model_Install extends Helper_Abstract_Model {
 		$this->data    = $data;
 		$this->misc    = $misc;
 		$this->notices = $notices;
+		$this->queue   = $queue;
 	}
 
 	/**
@@ -136,7 +146,7 @@ class Model_Install extends Helper_Abstract_Model {
 		update_option( 'gfpdf_is_installed', true );
 		$this->data->is_installed = true;
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_plugin_installed/ for more details about this action */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_plugin_installed/ for more details about this action */
 		do_action( 'gfpdf_plugin_installed' );
 	}
 
@@ -159,7 +169,7 @@ class Model_Install extends Helper_Abstract_Model {
 	 * @since  4.0
 	 */
 	public function get_working_directory() {
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_working_folder_name/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_working_folder_name/ for more details about this filter */
 		return apply_filters( 'gfpdf_working_folder_name', 'PDF_EXTENDED_TEMPLATES' );
 	}
 
@@ -204,20 +214,21 @@ class Model_Install extends Helper_Abstract_Model {
 
 		/* Allow user to change directory location(s) */
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_template_location/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_template_location/ for more details about this filter */
 		$this->data->template_location = apply_filters( 'gfpdf_template_location', $this->data->template_location, $working_folder, $upload_dir ); /* needs to be accessible from the web */
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_template_location_uri/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_template_location_uri/ for more details about this filter */
 		$this->data->template_location_url = apply_filters( 'gfpdf_template_location_uri', $this->data->template_location_url, $working_folder, $upload_dir_url ); /* needs to be accessible from the web */
 
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_font_location/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_font_location/ for more details about this filter */
 		$this->data->template_font_location = apply_filters( 'gfpdf_font_location', $this->data->template_location . 'fonts/', $working_folder, $upload_dir ); /* can be in a directory not accessible via the web */
 
-		/* @todo normally font and fontdata should be kept together but it may be worth adding a filter here */
-		$this->data->template_fontdata_location = $this->data->template_font_location . 'fontdata/';
-
-		/* See https://gravitypdf.com/documentation/v4/gfpdf_tmp_location/ for more details about this filter */
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_tmp_location/ for more details about this filter */
 		$this->data->template_tmp_location = apply_filters( 'gfpdf_tmp_location', $this->data->template_location . 'tmp/', $working_folder, $upload_dir_url ); /* encouraged to move this to a directory not accessible via the web */
+
+		/* See https://gravitypdf.com/documentation/v5/gfpdf_mpdf_tmp_location/ for more details about this filter */
+		$mpdf_tmp_path = get_temp_dir() . 'gravitypdf-' . md5( home_url() ) . '/mpdf';
+		$this->data->mpdf_tmp_location = untrailingslashit( apply_filters( 'gfpdf_mpdf_tmp_location', $mpdf_tmp_path ) );
 	}
 
 	/**
@@ -247,10 +258,10 @@ class Model_Install extends Helper_Abstract_Model {
 
 			/* Global filter */
 
-			/* See https://gravitypdf.com/documentation/v4/gfpdf_multisite_template_location/ for more details about this filter */
+			/* See https://gravitypdf.com/documentation/v5/gfpdf_multisite_template_location/ for more details about this filter */
 			$this->data->multisite_template_location = apply_filters( 'gfpdf_multisite_template_location', $template_dir, $working_folder, $upload_dir, $blog_id );
 
-			/* See https://gravitypdf.com/documentation/v4/gfpdf_multisite_template_location_uri/ for more details about this filter */
+			/* See https://gravitypdf.com/documentation/v5/gfpdf_multisite_template_location_uri/ for more details about this filter */
 			$this->data->multisite_template_location_url = apply_filters( 'gfpdf_multisite_template_location_uri', $template_url, $working_folder, $upload_dir_url, $blog_id );
 
 			/* Per-blog filters */
@@ -281,8 +292,8 @@ class Model_Install extends Helper_Abstract_Model {
 		$folders = [
 			$this->data->template_location,
 			$this->data->template_font_location,
-			$this->data->template_fontdata_location,
 			$this->data->template_tmp_location,
+			$this->data->mpdf_tmp_location,
 		];
 
 		if ( is_multisite() ) {
@@ -424,6 +435,11 @@ class Model_Install extends Helper_Abstract_Model {
 			$this->remove_plugin_form_settings();
 		}
 
+		/* Removes background processes */
+		$this->queue->clear_scheduled_events();
+		$this->queue->clear_queue( true );
+		$this->queue->unlock_process();
+
 		/* Remove folder structure and deactivate */
 		$this->remove_folder_structure();
 		$this->deactivate_plugin();
@@ -527,16 +543,5 @@ class Model_Install extends Helper_Abstract_Model {
 			wp_safe_redirect( admin_url( 'index.php' ) );
 		}
 		exit;
-	}
-
-	/**
-	 * In preparation for the removal of the Mpdf fonts we'll copy them all to our
-	 * PDF Working Directory during an update
-	 *
-	 * @since 4.3
-	 */
-	public function copy_fonts_to_working_directory() {
-		$mpdf_dir = PDF_PLUGIN_DIR . 'vendor/blueliquiddesigns/mpdf/ttfonts/';
-		$this->misc->copyr( $mpdf_dir, $this->data->template_font_location );
 	}
 }

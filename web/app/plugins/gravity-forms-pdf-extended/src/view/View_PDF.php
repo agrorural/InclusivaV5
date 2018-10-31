@@ -175,9 +175,17 @@ class View_PDF extends Helper_Abstract_View {
 		$controller = $this->getController();
 		$model      = $controller->model;
 		$form       = $this->gform->get_form( $entry['form_id'] );
+		$form       = $this->add_gravity_perk_conditional_logic_date_support( $form );
 
-		$form = $this->add_gravity_perk_conditional_logic_date_support( $form );
+		/**
+		 * Set out our PDF abstraction class
+		 */
+		$pdf = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates, $this->log );
+		$pdf->set_filename( $model->get_pdf_name( $settings, $entry ) );
+
 		$this->fix_wp_external_links_plugin_conflict();
+
+		do_action( 'gfpdf_pre_pdf_generation', $form, $entry, $settings, $pdf );
 
 		/**
 		 * Load our arguments that should be accessed by our PDF template
@@ -206,12 +214,6 @@ class View_PDF extends Helper_Abstract_View {
 
 		/* Enable Multicurrency support */
 		$this->misc->maybe_add_multicurrency_support();
-
-		/**
-		 * Set out our PDF abstraction class
-		 */
-		$pdf = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates );
-		$pdf->set_filename( $model->get_pdf_name( $settings, $entry ) );
 
 		try {
 
@@ -257,7 +259,14 @@ class View_PDF extends Helper_Abstract_View {
 			] );
 
 			if ( $this->gform->has_capability( 'gravityforms_view_entries' ) ) {
-				wp_die( $e->getMessage() );
+				$message = sprintf(
+					'%s in %s on line %s',
+					$e->getMessage(),
+					$e->getFile(),
+					$e->getLine()
+				);
+
+				wp_die( $message );
 			}
 
 			wp_die( esc_html__( 'There was a problem generating your PDF', 'gravity-forms-pdf-extended' ) );
@@ -338,7 +347,7 @@ class View_PDF extends Helper_Abstract_View {
 		<div id="container">
             <?php
             /*
-             * See https://gravitypdf.com/documentation/v4/gfpdf_pre_html_fields/ for more details about this action
+             * See https://gravitypdf.com/documentation/v5/gfpdf_pre_html_fields/ for more details about this action
              * @since 4.1
              */
             do_action( 'gfpdf_pre_html_fields', $entry, $config );
@@ -348,7 +357,7 @@ class View_PDF extends Helper_Abstract_View {
 
             <?php
             /*
-             * See https://gravitypdf.com/documentation/v4/gfpdf_post_html_fields/ for more details about this action
+             * See https://gravitypdf.com/documentation/v5/gfpdf_post_html_fields/ for more details about this action
              * @since 4.1
              */
             do_action( 'gfpdf_post_html_fields', $entry, $config );
@@ -386,7 +395,7 @@ class View_PDF extends Helper_Abstract_View {
 		$config['meta'] = ( isset( $config['meta'] ) ) ? $config['meta'] : [];
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_current_pdf_configuration/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_current_pdf_configuration/ for usage
 		 * @since 4.2
 		 */
 		$config = apply_filters( 'gfpdf_current_pdf_configuration', $config, $entry, $form );
@@ -422,7 +431,7 @@ class View_PDF extends Helper_Abstract_View {
 			 *
 			 * If $middlware is true the field will not be displayed in the PDF
 			 *
-			 * See https://gravitypdf.com/documentation/v4/gfpdf_field_middleware/ for usage
+			 * See https://gravitypdf.com/documentation/v5/gfpdf_field_middleware/ for usage
 			 *
 			 * @since 4.2
 			 */

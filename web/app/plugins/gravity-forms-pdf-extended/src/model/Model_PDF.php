@@ -218,7 +218,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		 * Default middleware includes 'middle_public_access', 'middle_active', 'middle_conditional', 'middle_owner_restriction', 'middle_logged_out_timeout', 'middle_auth_logged_out_user', 'middle_user_capability'
 		 * If WP_Error is returned the PDF won't be parsed
 		 *
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_pdf_middleware/ for more details about this filter
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_pdf_middleware/ for more details about this filter
 		 */
 		$middleware = apply_filters( 'gfpdf_pdf_middleware', false, $entry, $settings );
 
@@ -650,7 +650,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		}
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_get_pdf_display_list/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_get_pdf_display_list/ for usage
 		 * @since 4.2
 		 */
 		return apply_filters( 'gfpdf_get_pdf_display_list', $args, $entry, $form );
@@ -677,7 +677,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		/*
 		 * Add filter to modify PDF name
 		 *
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_pdf_filename/ for more details about this filter
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_pdf_filename/ for more details about this filter
 		 */
 		$name = apply_filters( 'gfpdf_pdf_filename', $name, $form, $entry, $settings );
 
@@ -768,7 +768,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		}
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_get_active_pdfs/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_get_active_pdfs/ for usage
 		 * @since 4.2
 		 */
 		return apply_filters( 'gfpdf_get_active_pdfs', $filtered, $pdfs, $entry, $form );
@@ -786,7 +786,7 @@ class Model_PDF extends Helper_Abstract_Model {
 	public function process_and_save_pdf( Helper_PDF $pdf ) {
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_override_pdf_bypass/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_override_pdf_bypass/ for usage
 		 *
 		 * @since 4.2
 		 */
@@ -806,6 +806,13 @@ class Model_PDF extends Helper_Abstract_Model {
 			$settings = $pdf->get_settings();
 			$form     = $this->gform->get_form( $entry['form_id'] );
 
+			do_action( 'gfpdf_pre_pdf_generation', $form, $entry, $settings, $pdf );
+
+			/**
+			 * Load our arguments that should be accessed by our PDF template
+			 *
+			 * @var array
+			 */
 			$args = $this->templates->get_template_arguments(
 				$form,
 				$this->misc->get_fields_sorted_by_id( $form['id'] ),
@@ -844,6 +851,8 @@ class Model_PDF extends Helper_Abstract_Model {
 
 				/* Generate and save the PDF */
 				$pdf->save_pdf( $pdf->generate() );
+
+				do_action( 'gfpdf_post_pdf_generation', $form, $entry, $settings, $pdf );
 
 				return true;
 			} catch ( Exception $e ) {
@@ -902,7 +911,7 @@ class Model_PDF extends Helper_Abstract_Model {
 	 */
 	public function generate_and_save_pdf( $entry, $settings ) {
 
-		$pdf_generator = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates );
+		$pdf_generator = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates, $this->log );
 		$pdf_generator->set_filename( $this->get_pdf_name( $settings, $entry ) );
 		$pdf_generator = apply_filters( 'gfpdf_pdf_generator_pre_processing', $pdf_generator );
 
@@ -917,7 +926,7 @@ class Model_PDF extends Helper_Abstract_Model {
 
 				do_action( 'gfpdf_post_pdf_save', $form['id'], $entry['id'], $settings, $pdf_path ); /* Backwards compatibility */
 
-				/* See https://gravitypdf.com/documentation/v4/gfpdf_post_save_pdf/ for more details about these actions */
+				/* See https://gravitypdf.com/documentation/v5/gfpdf_post_save_pdf/ for more details about these actions */
 				do_action( 'gfpdf_post_save_pdf', $pdf_path, $filename, $settings, $entry, $form );
 				do_action( 'gfpdf_post_save_pdf_' . $form['id'], $pdf_path, $filename, $settings, $entry, $form );
 
@@ -1008,7 +1017,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		}
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_maybe_attach_to_notification/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_maybe_attach_to_notification/ for usage
 		 * @since 4.2
 		 */
 		return apply_filters( 'gfpdf_maybe_attach_to_notification', $attach, $notification, $settings, $entry, $form );
@@ -1047,9 +1056,15 @@ class Model_PDF extends Helper_Abstract_Model {
 	 * @since 4.0
 	 */
 	public function maybe_save_pdf( $entry, $form ) {
+
+		/* Exit early if background processing is enabled */
+		if ( $this->options->get_option( 'background_processing', 'Disable' ) === 'Enable' ) {
+			return;
+		}
+
 		$pdfs = ( isset( $form['gfpdf_form_settings'] ) ) ? $this->get_active_pdfs( $form['gfpdf_form_settings'], $entry ) : [];
 
-		if ( sizeof( $pdfs ) > 0 ) {
+		if ( count( $pdfs ) > 0 ) {
 
 			/* Loop through each PDF config */
 			foreach ( $pdfs as $pdf ) {
@@ -1145,7 +1160,7 @@ class Model_PDF extends Helper_Abstract_Model {
 				/* Only generate if the PDF wasn't during the notification process */
 				if ( ! is_wp_error( $settings ) ) {
 
-					$pdf_generator = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates );
+					$pdf_generator = new Helper_PDF( $entry, $settings, $this->gform, $this->data, $this->misc, $this->templates, $this->log );
 					$pdf_generator->set_filename( $this->get_pdf_name( $settings, $entry ) );
 
 					if ( $this->does_pdf_exist( $pdf_generator ) ) {
@@ -1192,49 +1207,6 @@ class Model_PDF extends Helper_Abstract_Model {
 		}
 
 		return $form;
-	}
-
-	/**
-	 * Changes mPDF's tmp folder
-	 *
-	 * @param  string $path The current path
-	 *
-	 * @return string       The new path
-	 */
-	public function mpdf_tmp_path( $path ) {
-		return $this->data->template_tmp_location;
-	}
-
-	/**
-	 * Changes mPDF's fontdata folders
-	 *
-	 * @param  string $path The current path
-	 *
-	 * @return string       The new path
-	 */
-	public function mpdf_tmp_font_path( $path ) {
-		return $this->data->template_fontdata_location;
-	}
-
-	/**
-	 * An mPDF filter that checks if mPDF has the font currently installed, otherwise
-	 * will look in the Gravity PDF font folder for an alternative.
-	 *
-	 * @param string $path The current path to the font mPDF is trying to load
-	 * @param string $font The current font name trying to be loaded
-	 *
-	 * @since 4.0
-	 *
-	 * @return string
-	 */
-	public function set_current_pdf_font( $path, $font ) {
-
-		/* If the current font doesn't exist in mPDF core we'll look in our font folder */
-		if ( ! is_file( $path ) && is_file( $this->data->template_font_location . $font ) ) {
-			$path = $this->data->template_font_location . $font;
-		}
-
-		return $path;
 	}
 
 	/**
@@ -1407,7 +1379,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		}
 
 		/**
-		 * See https://gravitypdf.com/documentation/v4/gfpdf_form_data/ for usage
+		 * See https://gravitypdf.com/documentation/v5/gfpdf_form_data/ for usage
 		 * @since 4.2
 		 */
 		return apply_filters( 'gfpdf_form_data', $data, $entry, $form );
@@ -1784,7 +1756,7 @@ class Model_PDF extends Helper_Abstract_Model {
 				}
 
 				/*
-				 * See https://gravitypdf.com/documentation/v4/gfpdf_field_class/ for more details about these filters
+				 * See https://gravitypdf.com/documentation/v5/gfpdf_field_class/ for more details about these filters
 				 */
 				$class = apply_filters( 'gfpdf_field_class', $class, $field, $entry, $form );
 				$class = apply_filters( 'gfpdf_field_class_' . $field->type, $class, $field, $entry, $form );
